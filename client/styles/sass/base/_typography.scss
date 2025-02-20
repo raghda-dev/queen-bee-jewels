@@ -1,0 +1,53 @@
+
+h1,
+h2 {
+  font-family: "Josefin Sans" sans-serif;
+}
+
+
+.queen__bee__jewels span {
+  background: linear-gradient(
+    70deg,
+    #c75e1d 0%,
+    #704264 30%,
+    #754560 60%,
+    #d6a181 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* Ensures gradient is applied properly */
+  margin: 0 auto;
+  letter-spacing: 2px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  width: fit-content;
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Min: 2rem, Preferred: 4vw, Max: 3.5rem */
+
+}
+
+
+.elegancy span {
+  background: linear-gradient(to right, #1c1c1c 0%, #b0b0b0 80%, #f1f1f1 100%);
+  background-size: 200% 100%; /* Extra space to move the gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 auto;
+  display: inline-block; /* Ensures gradient is applied properly */
+  width: fit-content;
+  line-height: 1.2;
+  padding: 0 .2rem 0;
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Min: 2rem, Preferred: 4vw, Max: 3.5rem */
+  animation: slideUpFade 1.5s ease-out forwards;
+}
+
+@keyframes slideUpFade {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,129 @@
+// styles/sass/modules/button.module.scss
+@use '../abstracts/mixins' as *; // Add this to use the mixin
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  transition: all 0.3s ease-in-out;
+  text-transform: capitalize;
+  border: 2px solid var(--navy-dark);
+  box-sizing: border-box !important;
+  // transition: all .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.arrow-down {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all .7s ease;
+}
+
+.button:hover .arrow-down {
+  opacity: 1;
+  transform: translateY(0);
+  padding-right: .1rem;
+}
+
+
+.primary {
+  background-color: var(--navy-dark);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--navy-medium);
+  }
+}
+
+.gradient {
+  background-color: transparent;
+  color: var(--gradient-color, var(--gradient-start));
+  border: 2px solid transparent; // Ensures border is visible
+  border-image-source: linear-gradient(
+    to right,
+    var(--gradient-color, var(--gradient-start)),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+  border-image-slice: 1;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  border: 2px solid var(--navy-dark);
+  color: var(--navy-dark);
+}
+
+
+
+.textButton {
+  background-color: transparent;
+  color: var(--black);
+  border: none;
+}
+
+// Button Shapes
+.rounded {
+  border-radius: 12px;
+}
+
+.pill {
+  border-radius: 50px;
+}
+
+.square {
+  border-radius: 2px;
+}
+
+.large {
+  padding: 11px 15px;
+  font-weight: 500;
+  font-size: 1.2rem;
+
+  @include responsive($size: medium) {
+    padding: 9px 12px;
+    font-size: 1.1rem;
+  }
+
+  @include responsive($size: small) {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+}
+
+.medium {
+  padding: 13px 13px;
+  font-size: 1.2rem;
+  font-weight: 400;
+
+  @include responsive($size: small) {
+    padding: 7px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+.small {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 300;
+
+  @include responsive($size: small) {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
+
+  @include responsive($size: x-small){
+    padding: 1px 4px;
+    font-size: .5rem;
+  }
+}
+
+

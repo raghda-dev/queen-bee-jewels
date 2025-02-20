@@ -1,0 +1,14 @@
+ /* styles/tailwind.css */
+/* @import '../styles/sass/abstracts/_colors.scss';
+ 
+ @import "tailwindcss/preflight";
+  */
+
+
+ @tailwind components;
+ @tailwind utilities;
+ @tailwind base;
+
+
+
+

@@ -1,0 +1,14 @@
+// styles/sass/abstracts/_mixins.scss
+
+@use '../abstracts/variables' as breakpoints;
+@use 'sass:map'; // Import the map module
+
+@mixin responsive($size){
+  @each $label, $value in breakpoints.$breakpoints {
+    @if $size == $label {
+      @media (max-width: $value){
+        @content;
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+//client/tsconfig.ts
+
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve", // Updated for React 17+ JSX transform
+    "incremental": true,
+    "baseUrl": ".", // Ensure base path for resolving imports
+    "paths": {
+      "@/*": [
+        "./*"
+      ] // Alias to project root
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "styles.d.ts", // Add declaration for SCSS modules
+    "tailwind.config.ts",
+    "postcss.config.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

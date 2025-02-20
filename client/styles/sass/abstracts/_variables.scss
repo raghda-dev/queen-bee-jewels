@@ -1,0 +1,12 @@
+// styles/sass/abstracts/_variables.scss
+
+@use 'sass:map';
+
+
+$breakpoints: (
+ large: 1024px, //desktop
+ medium: 768px, //mobile screens
+ small: 640px, //mobile screens
+ x-small: 360,
+);
+
