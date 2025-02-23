@@ -21,7 +21,7 @@ export default function LandingPage() {
       </Head>
         <main className="main__container w-full max-w-[1200px] mx-auto px-4">
         <Hero></Hero>
-          <section className="__categories bg-blue">
+          <section className="__categories">
            <Categories></Categories>
           </section>
           <section className="__one__piece">

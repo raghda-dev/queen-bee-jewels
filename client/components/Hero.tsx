@@ -17,7 +17,7 @@ import btnStyles from '../styles/sass/modules/button.module.scss';
 
 const Hero = () => {
   return (
-    <div className="__hero h-[65vh] bg-red flex flex-col px-6 py-4 overflow-visible">
+    <div className="__hero h-[65vh] flex flex-col px-10 py-4 overflow-visible">
       {/* Top Navigation  */}
       <nav className="__hero nav top__nav w-full flex items-center justify-between">
         {/* <Link href="#" id="logo" className="text-4xl font-bold">

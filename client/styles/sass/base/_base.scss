@@ -35,15 +35,16 @@ html, body {
 
 body .main__container {
   display: grid;
-  grid-template-rows: 
-  65vh  /* hero */
-  65vh  /* categories */
-  40vh  /* one piece */
-  50vh  /* features */
-  35vh  /* best selling */
-  60vh;  /* signup/signin */
-  // 40vh;  /* footer */
-  // gap: 1rem;
+  grid-template-rows: auto;
+  // grid-template-rows: 
+  // 65vh  /* hero */
+  // 80vh  /* categories */
+  // 40vh  /* one piece */
+  // 50vh  /* features */
+  // 35vh  /* best selling */
+  // 60vh;  /* signup/signin */
+  // // 40vh;  /* footer */
+  // // gap: 1rem;
   margin: 0 auto;
   max-width: 100%;
   width: 100vw;
@@ -54,9 +55,21 @@ body .main__container {
 //   // background-color: bisque;
 // }
 
-// body .main__container .__categories {
-//   // background-color: rgb(184, 248, 250);
-// }
+body .main__container .__categories {
+ display: flex; //Ensures that it rounds aroud the content
+ align-items: center; //centers the items vertically
+ justify-content: center;
+ height: auto; /* Let it expand dynamically */
+ width: 100vw;  // Use viewport width to eliminate extra margins
+ max-width: 100%;  // Prevents any max-width constraints
+ min-height: 80vh; // Ensure the background covers enough space
+ overflow: hidden;
+ padding: 5rem auto;
+ /* Adjust height for larger screens */
+ @media (min-width: 1024px) { /* For lg and larger screens */
+   max-height: 70vh; /* Reduce the height on larger screens */
+ }
+}
 
 body .main__container .__one__piece {
  background-color:rgb(236, 189, 189);

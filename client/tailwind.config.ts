@@ -17,6 +17,7 @@ const config = {
         orangeRich: "var(--orange-rich)",
         orangeBrown: "var(--orange-brown)",
         deepBrown: "var(--deep-brown)",
+        orangeMain: "var(--orange-main)",
 
         purpleLight: "var(--purple-light)",
         purpleMedium: "var(--purple-medium)",
@@ -29,6 +30,8 @@ const config = {
         grayMedium: "var(--gray-medium)",
         grayDark: "var(--gray-dark)",
         black: "var(--black)",
+        lightCyan: "var(--light-cyan)",
+        cyanMedium: "var(--cyan-medium)",
 
         navyDark: "var(--navy-dark)",
         navyMedium: "var(--navy-medium)",
@@ -41,6 +44,15 @@ const config = {
         gradientStart: "var(--gradient-start)",
         gradientMid: "var(--gradient-mid)",
         gradientEnd: "var(--gradient-end)",
+      },
+      fontFamily: {
+        'josefin': ['Josefin Sans', 'sans-serif'],  // Add Josefin Sans to Tailwind's font stack
+        'popins':['Poppins', 'sans-serif']
+
+      },
+      screens: {
+       xs: '360px',
+       start: '0px',
       },
     },
   },
