@@ -2,7 +2,7 @@
 
 
 @use 'sass/abstracts/colors' as colors;
-@use 'sass/abstracts/variables' as breakpoints;
+@use 'sass/abstracts/variables' as *;
 @use 'sass/abstracts/functions' as *;
 @use 'sass/abstracts/mixins' as *;
 
@@ -14,7 +14,6 @@
 
 @use 'sass/pages/home' as *;
 
-@use 'sass/components/button' as *;
 @use 'sass/components/icons' as *;
 
 

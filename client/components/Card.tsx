@@ -14,11 +14,11 @@ const Card: React.FC<CardProps> = ({ img, collectionName, description }) => {
 
       <div className="relative z-10 inline-flex flex-col 
       start:max-w-96 start:gap-y-4 md:max-w-[25rem] md:h-[38rem] md:max-h-[40rem]
-      lg:max-h-[100em]
+      lg:max-h-[100em] mb-2
     items-center justify-between 
-    overflow-hidden rounded-lg 
+    overflow-hidden rounded-xl
     bg-grayLight bg-opacity-80 
-    px-4 py-6 border-2 border-lightCyan">
+    px-4 py-4 border-2 border-lightCyan">
       {/* Image Wrapper */}
       <div className="relative flex h-[17rem] w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
         {/* Placeholder (Always Visible) */}
