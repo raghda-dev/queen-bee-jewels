@@ -14,6 +14,8 @@ type ButtonProps = {
  disabled?: boolean;
  isLoading?: boolean;
  color?:string;
+ animation?: "pulse" | "slide-in-bottom" | "shadow-expand" | "text-underline" | "bounce" | "flip" | "wave"; // Add animation prop
+
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   isLoading = false,
   color,
+  animation
 }) => {
 
    // Set CSS variables dynamically
@@ -50,6 +53,7 @@ const Button: React.FC<ButtonProps> = ({
           styles[variant], 
           styles[shape],
           styles[size],
+          animation && styles[animation], // Add animation class dynamically
             {
               'cursor-not-allowed opacity-50': disabled || isLoading,
             },

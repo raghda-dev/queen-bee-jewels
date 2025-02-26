@@ -72,7 +72,12 @@ body .main__container .__categories {
 }
 
 body .main__container .__one__piece {
- background-color:rgb(236, 189, 189);
+ display: flex;
+ justify-content: space-evenly;
+ width: 100vw;
+//  min-height: 60vh;
+
+ border-top: .5px solid var(--gray-light);
 }
 
 body .main__container .__features {

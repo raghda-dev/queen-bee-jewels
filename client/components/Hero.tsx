@@ -17,16 +17,16 @@ import btnStyles from '../styles/sass/modules/button.module.scss';
 
 const Hero = () => {
   return (
-    <div className="__hero h-[65vh] flex flex-col px-10 py-4 overflow-visible">
+    <div className="__hero h-[65vh] flex flex-col px-5 md:px-7 lg:px-10 py-4 overflow-visible">
       {/* Top Navigation  */}
       <nav className="__hero nav top__nav w-full flex items-center justify-between">
         {/* <Link href="#" id="logo" className="text-4xl font-bold">
           <Image src={LogoShort} alt="logo-short" width={90} height={70} />
         </Link> */}
-        <Link href="#" id="logo" className="text-4xl font-bold">
-          <Image src={QBeeSmall} alt="logo-short" width={90} height={70} />
+        <Link href="#" id="logo">
+          <Image src={QBeeSmall} alt="logo-short" width={70} height={70} className="sm:w-[8rem] lg:w-[9rem]" />
         </Link>
-        <div className="flex gap-1 md:gap-2 sm:gap-1">
+        <div className="flex gap-1 md:gap-2 sm:gap-1 ">
           <Link href="#" id="register">
             <Button rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>}>register</Button>
           </Link>

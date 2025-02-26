@@ -20,9 +20,9 @@ const Card: React.FC<CardProps> = ({ img, collectionName, description }) => {
     bg-grayLight bg-opacity-80 
     px-4 py-4 border-2 border-lightCyan">
       {/* Image Wrapper */}
-      <div className="relative flex h-[17rem] w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
+      <div className="relative flex h-[20rem] w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
         {/* Placeholder (Always Visible) */}
-        <div className="absolute inset-0 flex items-center justify-center rounded-t-3xl bg-grayLight text-sm text-grayDark">
+        <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-grayLight text-sm text-grayDark">
           No Image Available
         </div>
 
@@ -53,9 +53,10 @@ const Card: React.FC<CardProps> = ({ img, collectionName, description }) => {
       {description && <span className="text-xl">{description}</span>}
 
       {/* Button */}
-      <Button
+      <Button size='medium'
         variant="textButton"
         color="var(--deep-brown)"
+        animation='bounce'
         rightIcon={<span>→</span>}
       >
         See More

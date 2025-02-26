@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import Categories from '../components/Categories';
 import '../styles/global.scss';
 import "../styles/tailwind.css";
+import OnePiece from "@/components/OnePiece";
 
 
 export default function LandingPage() {
@@ -25,16 +26,7 @@ export default function LandingPage() {
            <Categories></Categories>
           </section>
           <section className="__one__piece">
-            <div className="one__piece one__piece__text">
-              <h2 className="one_special_piece">one special piece</h2>
-              <p className="find_piece">
-                you will difinitly find some special piece that looks like you.
-              </p>
-              <button>go find out</button>
-            </div>
-            <div className="one__piece one__piece__img">
-              {/* <img src="#" alt="image"></img> */}
-            </div>
+              <OnePiece></OnePiece>
           </section>
           <section className="__features">
             <div className="__features features__card--1">one platform</div>
