@@ -5,6 +5,7 @@ import Categories from '../components/Categories';
 import '../styles/global.scss';
 import "../styles/tailwind.css";
 import OnePiece from "@/components/OnePiece";
+import Features from "@/components/Features";
 
 
 export default function LandingPage() {
@@ -29,10 +30,7 @@ export default function LandingPage() {
               <OnePiece></OnePiece>
           </section>
           <section className="__features">
-            <div className="__features features__card--1">one platform</div>
-            <div className="__features features__card--2">secure payment</div>
-            <div className="__features features__card--3 ">gift boxes</div>
-            <div className="__features features__card--4">special products</div>
+            <Features></Features>
           </section>
           <section className="__best__selling">
             <div className="best__selling__img__scroller">

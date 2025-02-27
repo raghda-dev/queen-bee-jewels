@@ -12,13 +12,15 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ img, collectionName, description }) => {
   return (
 
-      <div className="relative z-10 inline-flex flex-col 
-      start:max-w-96 start:gap-y-4 md:max-w-[25rem] md:h-[38rem] md:max-h-[40rem]
-      lg:max-h-[100em] mb-2
-    items-center justify-between 
-    overflow-hidden rounded-xl
-    bg-grayLight bg-opacity-80 
-    px-4 py-4 border-2 border-lightCyan">
+      <div className="relative z-10 inline-flex flex-col w-[80vw] min-w-[10rem] max-w-[20rem] h-[50vh] text-center
+      xs:w-[60vw] xs:min-w-[10rem] xs:max-w-[22rem]
+      gap-y-4 md:max-w-[25rem] md:h-[56vh] md:max-h-[60vh]
+      lg:h-[65vh] lg:w-[25vw]
+       mb-2 mt-5
+     items-center justify-between 
+     overflow-hidden rounded-xl
+     bg-grayLight bg-opacity-80 
+     px-4 py-4 border-2 border-lightCyan">
       {/* Image Wrapper */}
       <div className="relative flex h-[20rem] w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
         {/* Placeholder (Always Visible) */}
