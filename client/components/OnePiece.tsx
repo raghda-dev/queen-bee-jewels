@@ -20,6 +20,7 @@ const OnePiece = () => {
           size="large"
           variant="textButton"
           color="var(--pinkish)"
+          hoverTextColor="green"
           animation='text-underline'
           rightIcon={<span>→</span>}
         >

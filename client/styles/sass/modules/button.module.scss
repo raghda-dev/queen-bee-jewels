@@ -9,6 +9,19 @@
   text-transform: capitalize;
   border: 2px solid var(--navy-dark);
   box-sizing: border-box !important;
+
+    // Add these dynamic hover color changes
+    &.hover-text-color {
+      &:hover {
+        color: var(--hover-text-color);
+      }
+    }
+  
+    &.hover-bg-color {
+      &:hover {
+        background-color: var(--hover-bg-color);
+      }
+    }
   
   &.pulse {
     animation: pulse .6s ease-in-out infinite;
@@ -226,17 +239,18 @@
 
 .small {
   padding: 8px 12px;
-  font-size: 0.9rem;
+  font-size: .9rem;
   font-weight: 300;
 
   @include responsive($size: small) {
     padding: 3px 6px;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   @include responsive($size: x-small){
     padding: 1px 4px;
-    font-size: .5rem;
+    font-size: 1rem;
+    font-weight: 500;
   }
 }
 

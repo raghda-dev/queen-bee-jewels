@@ -15,7 +15,8 @@ type ButtonProps = {
  isLoading?: boolean;
  color?:string;
  animation?: "pulse" | "slide-in-bottom" | "shadow-expand" | "text-underline" | "bounce" | "flip" | "wave"; // Add animation prop
-
+ hoverTextColor?: string;
+ hoverBgColor?: string; 
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -30,7 +31,9 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   isLoading = false,
   color,
-  animation
+  animation,
+  hoverTextColor,
+  hoverBgColor,
 }) => {
 
    // Set CSS variables dynamically
@@ -39,6 +42,9 @@ const Button: React.FC<ButtonProps> = ({
     color: variant === "primary" ? "white" : color,
     borderColor: variant === "secondary" ? color : undefined,
     "--gradient-color": color, // Pass color to CSS
+    "--hover-text-color": hoverTextColor || "inherit", // Pass hoverTextColor to CSS as a variable
+    "--hover-bg-color": hoverBgColor || "transparent", // Pass hoverBgColor to CSS as a variable
+
   } as React.CSSProperties;
 
   // Icon styles (for secondary and textButton)
@@ -54,6 +60,8 @@ const Button: React.FC<ButtonProps> = ({
           styles[shape],
           styles[size],
           animation && styles[animation], // Add animation class dynamically
+          hoverTextColor && styles[hoverTextColor], // Add hover text color class dynamically
+          hoverBgColor && styles[hoverBgColor], // Add hover background color class dynamically
             {
               'cursor-not-allowed opacity-50': disabled || isLoading,
             },

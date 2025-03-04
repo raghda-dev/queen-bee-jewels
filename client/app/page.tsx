@@ -6,6 +6,7 @@ import '../styles/global.scss';
 import "../styles/tailwind.css";
 import OnePiece from "@/components/OnePiece";
 import Features from "@/components/Features";
+import BestSellingScroller from "@/components/BestSellingScroller";
 
 
 export default function LandingPage() {
@@ -33,13 +34,7 @@ export default function LandingPage() {
             <Features></Features>
           </section>
           <section className="__best__selling">
-            <div className="best__selling__img__scroller">
-              {/* <img src="" alt="" />
-      <img src="" alt="" />
-      <img src="" alt="" />
-      <img src="" alt="" />
-      <img src="" alt="" /> */}
-            </div>
+               <BestSellingScroller></BestSellingScroller>
           </section>
           <section className="__signin__signup__form"></section>
         </main>

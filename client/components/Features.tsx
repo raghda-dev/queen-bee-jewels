@@ -7,7 +7,7 @@ import giftBoxIcon from '../public/staticAssets/icons/gift-box_.svg';
 
 const Features = () => {
     return (
-        <div className="bg-grayLight grid grid-cols-1 place-items-center sm:gap-7 sm:grid-cols-2 md:grid-cols-4 md:gap-10 p-36 md:px-5 h-auto w-[100vw]">
+        <div className="bg-grayLight grid grid-cols-1 place-items-center sm:gap-28 sm:grid-cols-2 md:grid-cols-4 md:gap-10 p-36 md:px-5 h-auto w-[100vw]">
           <div>
             <FeatureCard icon={squaresIcon} feature="one platform." description="one platform for all accessories that you might need."></FeatureCard>
           </div>

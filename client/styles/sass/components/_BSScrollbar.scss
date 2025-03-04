@@ -1,0 +1,17 @@
+/* Hide Scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* Hide scrollbar for IE/Edge */
+    scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  }
+  
+
+  .heart-icon {
+    width: 24px;
+    height: 24px;
+    color: red;
+  }
+  
