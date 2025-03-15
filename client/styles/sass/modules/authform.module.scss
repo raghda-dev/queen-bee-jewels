@@ -1,0 +1,150 @@
+@use '../abstracts/mixins' as *;
+
+.authForm {
+  position: relative;
+  width: 40rem;
+  min-width: 35rem;
+  max-width: 50rem;
+  // max-width: 50rem;
+  height: 70vh;
+  min-height: 50rem; 
+  margin: auto;
+  padding: 5rem 2rem 3rem;
+  background: white;
+  text-align: center;
+  border-radius: 0.5rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1.6px;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      var(--orange-main),
+      var(--purple-medium),
+      var(--pinkish)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  @include responsive($size: large){
+    width: 38rem; // Instead of min-width
+    padding: 3rem 2rem 0;
+  }
+
+    // Medium screens
+    @include responsive($size: medium) {
+      width: 35rem; // Reduce width
+      min-width: 30rem;
+    }
+
+  @include responsive($size: small){
+    width: 29rem;
+    min-height: 20rem;
+  }
+
+  @include responsive($size: x-small){
+    width: 19rem;
+  }
+
+
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+  width: 100%;
+
+  label {
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 1rem;
+    display: flex;
+    color: var(--black);
+    margin: 0.4rem 0;
+    padding: 0.2rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1.3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @include responsive($size: small) {
+    label {
+      font-size: 1.1rem;
+    }
+    input {
+      font-size: 1.2rem;
+      padding: 0.8rem;
+      height: 3rem;
+    }
+  }
+
+  // @media (min-width: 768px) {
+  //   label {
+  //     font-size: 1.3rem;
+  //   }
+  //   input {
+  //     font-size: 1.4rem;
+  //     padding: 1rem;
+  //   }
+  // }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 1.5rem 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-light);
+  }
+
+  span {
+    padding: 0 0.8rem;
+    color: #888;
+    font-size: 0.9rem;
+    background: var(--background-color, #fff);
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 480px) {
+    span {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    span {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.signupButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}

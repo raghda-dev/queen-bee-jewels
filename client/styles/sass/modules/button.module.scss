@@ -11,11 +11,11 @@
   box-sizing: border-box !important;
 
     // Add these dynamic hover color changes
-    &.hover-text-color {
-      &:hover {
-        color: var(--hover-text-color);
-      }
-    }
+    // &.hover-text-color {
+    //   &:hover {
+    //     color: var(--hover-text-color);
+    //   }
+    // }
   
     &.hover-bg-color {
       &:hover {
@@ -160,7 +160,6 @@
 .primary {
   background-color: var(--navy-dark);
   color: var(--white);
-
   &:hover {
     background-color: var(--navy-medium);
   }
@@ -190,7 +189,6 @@
 }
 
 
-
 .textButton {
   background-color: transparent;
   color: var(--black);
@@ -210,6 +208,16 @@
   border-radius: 2px;
 }
 
+.rectangle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: .5rem;
+  height: 3.3rem;
+  border: 2px solid currentColor;
+}
+
 .large {
   padding: 11px 15px;
   font-weight: 500;
@@ -221,37 +229,38 @@
   }
 
   @include responsive($size: small) {
-    padding: 10px 15px;
+    padding: 8px 10px;
     font-size: 1rem;
   }
 }
 
+
+
 .medium {
-  padding: 10px 13px;
-  font-size: 1.2rem;
+  padding: 8px 8px;
+  font-size: 1.16rem;
   font-weight: 400;
+  border-radius: .7rem;
 
   @include responsive($size: small) {
     padding: 7px 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 2rem;
   }
+
 }
 
 .small {
-  padding: 8px 12px;
+  padding: 5px 8px;
   font-size: .9rem;
   font-weight: 300;
 
+
   @include responsive($size: small) {
     padding: 3px 6px;
-    font-size: 1rem;
+    font-size: .7rem;
   }
 
-  @include responsive($size: x-small){
-    padding: 1px 4px;
-    font-size: 1rem;
-    font-weight: 500;
-  }
 }
 
 

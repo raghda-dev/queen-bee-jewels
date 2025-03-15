@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <main className="flex-grow">
+        <div className="flex-grow">
        {children}
-       </main>
+       </div>
        <Footer year={new Date().getFullYear()}/>
        </body>
     </html>

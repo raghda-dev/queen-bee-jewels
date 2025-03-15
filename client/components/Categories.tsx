@@ -11,8 +11,8 @@ const Categories = () => {
     return (
         <div className="categories bg-mutedRed flex flex-col w-full justify-center gap-6 p-6 cursor-pointer">
 
-            <h1 className="text-center mb-9 text-5xl sm:ml-16 md:ml-16 sm:text-left sm:text-6xl font-extrabold font-josefin mt-20 lg:mt-60
-                 inline-block bg-gradient-to-r from-cyanMedium via-lightCyan to-purpleLight lg:text-6xl
+            <h1 className="text-center capitalize mb-9 text-5xl sm:ml-16 md:ml-16 sm:text-left sm:text-6xl font-extrabold font-josefin mt-20 lg:mt-60
+                 inline-block bg-gradient-to-r from-white via-mainOrange to-grayDark lg:text-6xl
                  bg-clip-text text-transparent slide-in-left delay-0.2s">
             check our main categories
             </h1>

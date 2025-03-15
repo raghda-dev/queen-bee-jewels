@@ -4,7 +4,7 @@ import styles from '../styles/sass/modules/button.module.scss';
 
 type ButtonProps = {
  variant?: "primary" | "secondary" | "textButton" | "gradient";
- shape?: "square" | "pill" | "rounded" ;
+ shape?: "square" | "pill" | "rounded" | "rectangle" ;
  size?: 'small' | 'medium' | 'large';
  leftIcon?: ReactNode;
  rightIcon?: ReactNode;
@@ -17,9 +17,11 @@ type ButtonProps = {
  animation?: "pulse" | "slide-in-bottom" | "shadow-expand" | "text-underline" | "bounce" | "flip" | "wave"; // Add animation prop
  hoverTextColor?: string;
  hoverBgColor?: string; 
+ type?: "button" | "submit" | "reset"
 }
 
 const Button: React.FC<ButtonProps> = ({
+  type = "button",
   variant = 'primary',
   shape = "square",
   size = 'large',
@@ -54,7 +56,7 @@ const Button: React.FC<ButtonProps> = ({
 
 
     return (
-        <button className={cn(
+        <button type={type} className={cn(
           styles.button,
           styles[variant], 
           styles[shape],
@@ -71,9 +73,9 @@ const Button: React.FC<ButtonProps> = ({
          disabled = {disabled || isLoading}
          style={dynamicStyles}
         >
-        {leftIcon && <span className="size-min mr-2" style={iconStyles}>{leftIcon}</span>}
+        {leftIcon && <span className="mr-2" style={iconStyles}>{leftIcon}</span>}
         {isLoading? <span>...Loading</span> : children}
-        {rightIcon && <span className="size-min ml-2" style={iconStyles}>{rightIcon}</span>}
+        {rightIcon && <span className="ml-2" style={iconStyles}>{rightIcon}</span>}
 
         </button>
     )

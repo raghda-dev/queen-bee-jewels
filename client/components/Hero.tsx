@@ -7,7 +7,8 @@ import Image from "next/image";
 // import LogoShort from "../public/staticAssets/images/logoShort.svg";
 import Bee from '../public/staticAssets/images/Bee.svg';
 import Button from "./Button";
-import QBeeSmall from '../public/staticAssets/images/QBeeSmall.svg'
+// import QBeeSmall from '../public/staticAssets/images/QBeeSmall.svg'
+import Logo from '../public/staticAssets/images/logo.svg';
 // import QBeelittle from '../public/staticAssets/images/QBeelittle.svg'
 import '../styles/global.scss';
 import '../styles/tailwind.css';
@@ -24,7 +25,8 @@ const Hero = () => {
           <Image src={LogoShort} alt="logo-short" width={90} height={70} />
         </Link> */}
         <Link href="#" id="logo">
-          <Image src={QBeeSmall} alt="logo-short" width={70} height={70} className="sm:w-[8rem] lg:w-[9rem]" />
+          {/* <Image src={QBeeSmall} alt="logo-short" width={70} height={70} className="sm:w-[8rem] lg:w-[9rem]" /> */}
+          <Image src={Logo} alt="Logo" width={100} height={70} />
         </Link>
         <div className="flex gap-1 md:gap-2 sm:gap-1 ">
           <Link href="#" id="register">
