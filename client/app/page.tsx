@@ -1,4 +1,5 @@
-// app/page.tsx
+// client/app/page.tsx
+
 import Head from 'next/head';
 import Hero from '../components/Hero';
 import Categories from '../components/Categories';

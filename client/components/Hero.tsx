@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import "../styles/global.scss";
 import "../styles/tailwind.css";
@@ -5,10 +7,10 @@ import { Mail, Phone, Globe } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 // import LogoShort from "../public/staticAssets/images/logoShort.svg";
-import Bee from '../public/staticAssets/images/Bee.svg';
+const Bee = '/staticAssets/images/Bee.svg';
 import Button from "./Button";
 // import QBeeSmall from '../public/staticAssets/images/QBeeSmall.svg'
-import Logo from '../public/staticAssets/images/logo.svg';
+const Logo = '/staticAssets/images/logo.svg';
 // import QBeelittle from '../public/staticAssets/images/QBeelittle.svg'
 import '../styles/global.scss';
 import '../styles/tailwind.css';
@@ -17,6 +19,17 @@ import styles from '../styles/sass/modules/hero.module.scss';
 import btnStyles from '../styles/sass/modules/button.module.scss';
 
 const Hero = () => {
+
+  const handleScrollerToSignUpIn = (mode: 'signup' | 'login') => {
+
+    const section = document.getElementById('signupin');
+
+    if(section) {
+      window.history.pushState(null, ' ',`#signupin?mode=${mode}`); //update url
+      section.scrollIntoView({behavior: "smooth"})
+    }
+  }
+
   return (
     <div className="__hero h-[65vh] flex flex-col px-5 md:px-7 lg:px-10 py-4 overflow-visible">
       {/* Top Navigation  */}
@@ -24,17 +37,17 @@ const Hero = () => {
         {/* <Link href="#" id="logo" className="text-4xl font-bold">
           <Image src={LogoShort} alt="logo-short" width={90} height={70} />
         </Link> */}
-        <Link href="#" id="logo">
+        <Link href="/" id="logo">
           {/* <Image src={QBeeSmall} alt="logo-short" width={70} height={70} className="sm:w-[8rem] lg:w-[9rem]" /> */}
           <Image src={Logo} alt="Logo" width={100} height={70} />
         </Link>
         <div className="flex gap-1 md:gap-2 sm:gap-1 ">
-          <Link href="#" id="register">
-            <Button rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>}>register</Button>
-          </Link>
-          <Link href="#" id="login">
-            <Button variant='gradient' rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>}>login</Button>
-          </Link>
+          {/* <Link href="#" id="register"> */}
+            <Button  onClick={() => {handleScrollerToSignUpIn('signup')}} rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>}>register</Button>
+          {/* </Link> */}
+          {/* <Link href="#" id="login"> */}
+            <Button  onClick={() => {handleScrollerToSignUpIn('login')}} variant='gradient' rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>}>login</Button>
+          {/* </Link> */}
         </div>
       </nav>
 

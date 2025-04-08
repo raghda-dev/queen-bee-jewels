@@ -37,7 +37,7 @@ const BestSellingScroller = () => {
     <div className="border-b-2 border-grayLight bg-grayDark p-16 lg:p-24">
       <div className="mb-5 pb-2">
         <h2 className="bg-gradient-to-r 
-        from-white via-mainOrange to-grayDark
+         from-orangeMain via-grayLight to-white
          bg-clip-text font-josefin text-4xl 
          font-bold capitalize text-transparent sm:text-5xl lg:text-6xl">
           Best selling items

@@ -1,6 +1,9 @@
+//client/app/layout.tsx
+
 import type { Metadata } from "next";
 import React from "react";
 import '../styles/global.scss';
+import '../styles/tailwind.css';
 import Footer from '../components/Footer';
 
 

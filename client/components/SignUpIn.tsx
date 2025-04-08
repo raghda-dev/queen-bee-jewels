@@ -1,6 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 const dottedSquares = '/staticAssets/images/dottedSquares.svg';
 const columns = '/staticAssets/images/columns.svg';
 const downAboveRec = '/staticAssets/images/downAboveRec.svg';
@@ -9,10 +10,19 @@ import Signup from './Signup';
 import Login from './Login';
 
 const SignUpIn = () => {
-  const [isLogin, setIsLogin] = useState(false); // Default to Signup
+
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode'); //read the mode from the url
+  const [isLogin, setIsLogin] = useState(mode === 'login'); // Default based on URL
+
+  //sync with URL changes
+
+  useEffect(() => {
+    setIsLogin(mode === 'login');
+  },[mode])
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-white px-2 sm:px-12 md:px-16 lg:px-24 xl:px-32">
+    <section id="signupin" className="relative flex min-h-screen w-full flex-col items-center justify-center bg-white px-2 sm:px-12 md:px-16 lg:px-24 xl:px-32">
       {/* Top Decoration */}
       <div className="absolute top-0 w-full">
         <Image
@@ -80,7 +90,7 @@ const SignUpIn = () => {
           className="w-full"
         />
       </div>
-    </div>
+    </section>
   );
 };
 

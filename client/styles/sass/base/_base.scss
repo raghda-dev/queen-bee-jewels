@@ -22,7 +22,7 @@ body {
 font-family: 'Poppins', sans-serif;
 font-weight: 400;
 line-height: 1.7;
-
+overflow-x: hidden;
 }
 
 html, body {
@@ -36,15 +36,6 @@ html, body {
 body .main__container {
   display: grid;
   grid-template-rows: auto;
-  // grid-template-rows: 
-  // 65vh  /* hero */
-  // 80vh  /* categories */
-  // 40vh  /* one piece */
-  // 50vh  /* features */
-  // 35vh  /* best selling */
-  // 60vh;  /* signup/signin */
-  // // 40vh;  /* footer */
-  // // gap: 1rem;
   margin: 0 auto;
   max-width: 100%;
   width: 100vw;
@@ -62,7 +53,7 @@ body .main__container .__categories {
  height: auto; /* Let it expand dynamically */
  width: 100vw;  // Use viewport width to eliminate extra margins
  max-width: 100%;  // Prevents any max-width constraints
- min-height: 80vh; // Ensure the background covers enough space
+ min-height: 100vh; // Ensure the background covers enough space
  overflow: hidden;
  padding: 5rem auto;
  /* Adjust height for larger screens */
@@ -94,24 +85,27 @@ body .main__container .__one__piece {
 body .main__container > section {
   width: 100%;
 }
-// .__Footer {
-//   background-color: #1C1C1C;
-//   color: white;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: space-evenly;
-// }
 
 
-.__Footer .__Footer__item--list .__Footer__item--list--item {
-  font-size: 1.3em;
-  // background-color: aqua;
-}
+.__Footer {
+ &__item--list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+ }
 
-.__Footer__item--list--item:hover {
-  color: rgb(225, 216, 216);
-  transition: ease-in all .2s;
+ &--item {
+  font-size: 1.3rem;
+ }
+
+ &--item:hover {
+  color: var(--pinkish);
+  transition: ease-in all 0.2s;
   cursor: pointer;
 }
+}
+
+
+
 

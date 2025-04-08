@@ -2,6 +2,7 @@ import React from "react";
 import { ChevronRight } from "lucide-react";
 import AuthForm from "./AuthForm";
 
+
 interface LoginProps {
   setIsLogin: (value: boolean) => void;
 }

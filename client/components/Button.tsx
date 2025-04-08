@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import { cn } from "../utils/helpers"; // Utility for merging class names
 import styles from '../styles/sass/modules/button.module.scss';

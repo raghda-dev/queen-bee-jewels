@@ -138,7 +138,17 @@ const AuthForm: React.FC<AuthFormProps> = ({
         {isLogin && (
           <div className="mt-5 flex items-center justify-center">
             <p className="text-lg">Don’t have an account?</p>
-            <Button variant="textButton" color="var(--purple-medium)" size='small' shape='square'>
+            <Button variant="textButton" 
+            color="var(--purple-medium)" 
+            size='small' shape='square'
+            onClick={() => {
+             //Ensure topLeftIcon is a valid React element and has an onclick function
+             if(React.isValidElement(topLeftIcon) && topLeftIcon.props?.onClick){
+              topLeftIcon.props.onClick();
+             }
+            }
+            } // ✅ Call the function passed from `Login.tsx`
+            >
               <span className="underline text-lg">Sign up</span>
             </Button>
           </div>
