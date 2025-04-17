@@ -22,9 +22,7 @@
     "incremental": true,
     "baseUrl": ".", // Ensure base path for resolving imports
     "paths": {
-      "@/*": [
-        "./*"
-      ] // Alias to project root
+      "@/*": ["./*",]
     },
     "plugins": [
       {

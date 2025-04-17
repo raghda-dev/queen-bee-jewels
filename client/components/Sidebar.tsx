@@ -18,7 +18,7 @@ const Sidebar = () => {
       {/* Filter Options */}
       <ul className="space-y-2 mb-24">
         {[
-          { name: "all", icon: <Users size={24} className="w-9 sm:w-11" />, href: "/home/view-all" },
+          { name: "all", icon: <Users size={24} className="w-9 sm:w-11" />, href: "/home/" },
           { name: "men", icon: <ShoppingBag size={24} className="w-9 sm:w-11" />, href: "/home/men" },
           { name: "women", icon: <Star size={24} className="w-9 sm:w-11" />, href: "/home/women" },
         ].map(({ name, icon, href }) => (

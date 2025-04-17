@@ -20,7 +20,7 @@ type FeatureCardProps = {
           {icon ? (
             <Image src={icon as string | StaticImageData} alt="icon-image" width={50} height={40} />
           ) : (
-            <div className="default-icon">🚀</div> // Fallback icon
+            <div className="default-icon">-</div> // Fallback icon
           )}
         </div>
   
