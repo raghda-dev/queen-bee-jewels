@@ -1,4 +1,4 @@
-// app/silver/page.tsx
+// app/(main)/home/silver/page.tsx
 import Card from "../../components/Card";
 import { products } from "../data/products";
 import Button from "../../components/Button";

@@ -24,6 +24,7 @@ const config = {
         purpleDark: "var(--purple-dark)",
         pinkish: "var(--pinkish)",
         pinkTint: "var(--pink-tint)",
+        pinkLight: "var(--pink-light)",
 
         white: "var(--white)",
         grayLight: "var(--gray-light)",

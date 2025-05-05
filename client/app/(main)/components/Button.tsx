@@ -16,7 +16,7 @@ type ButtonProps = {
  disabled?: boolean;
  isLoading?: boolean;
  color?:string;
- animation?: "pulse" | "slide-in-bottom" | "shadow-expand" | "text-underline" | "bounce" | "flip" | "wave"; // Add animation prop
+ animation?: "pulse" | "slide-in-bottom" | "shadow-expand" | "text-underline" | "bounce" | "flip" | "wave" | "none"; // Add animation prop
  hoverTextColor?: string;
  hoverBgColor?: string; 
  type?: "button" | "submit" | "reset"

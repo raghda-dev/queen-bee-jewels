@@ -1,10 +1,11 @@
-// app/home/page.tsx
+// app/(main)/home/page.tsx
+
 import Card from "../components/Card";
 import { products } from "./data/products";
 import Button from "../components/Button";
 import Link from "next/link";
 
-export default function viewAll() {
+export default function HomePage() {
 
   // const filteredSilverProducts = products.filter((product) => product.types.includes("classic"));
 

@@ -26,7 +26,12 @@
   &.pulse {
     animation: pulse .6s ease-in-out infinite;
   }
-
+  &.none {
+    background-color: transparent;
+    border: none;
+    color: currentColor;
+  }
+  
   &.slide-in-bottom {
     transform: translateY(0);
     transition: all .3s ease;
@@ -216,6 +221,7 @@
   border-radius: .5rem;
   height: 3.3rem;
   border: 2px solid currentColor;
+  font-size:1.3rem;
 }
 
 .large {

@@ -1,26 +1,37 @@
-import React from 'react';
-import { FooterProps } from '../types/types';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-// import Logo from '../../public/staticAssets/images/logo.svg';
 import { Mail, Phone, Locate } from 'lucide-react';
 import Link from 'next/link';
 
-const Footer: React.FC<FooterProps> = ({ year }) => {
+const Footer: React.FC = () => {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
+  if (year === null) {
+    // Render a fallback until the year is set
+    return <footer className="__Footer">Loading...</footer>;
+  }
+
   return (
     <footer className="__Footer flex min-h-[55vh] flex-col justify-between bg-black px-6 py-10 text-white md:px-16 lg:px-20">
       <div className="__Footer __Footer__item Footer__item--logo mx-auto flex max-w-7xl flex-col items-center justify-between gap-y-12 md:gap-y-0">
         {/* Logo */}
         <div className="my-7 flex items-center space-x-3">
           <Link href="/">
-            <Image src='/staticAssets/images/logo.svg' alt="Logo" width={100} height={70} className='w-32 sm:w-40' />
+            <Image src="/staticAssets/images/logo.svg" alt="Logo" width={100} height={70} className="w-32 sm:w-40" />
           </Link>
         </div>
 
         {/* Navigation */}
         <nav className="text-center">
           <ul className="flex flex-col items-center gap-y-10">
-                        {/* Contact Info */}
-                        <div className="flex flex-col items-center gap-7 md:flex-row">
+            {/* Contact Info */}
+            <div className="flex flex-col items-center gap-7 md:flex-row">
               <li className="flex cursor-pointer gap-2 text-md sm:text-xl transition-all duration-300 ease-in hover:text-pinkish">
                 <Phone size={17} />
                 <span>+970569737826</span>
@@ -34,36 +45,16 @@ const Footer: React.FC<FooterProps> = ({ year }) => {
                 al irsal st. Ramallah - Palestine
               </li>
             </div>
+
             {/* Social Icons */}
             <div className="flex justify-center pt-6">
               <li className="icon_wrapper icon--instagram">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <linearGradient
-                      id="instagramGradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop
-                        offset="0%"
-                        style={{ stopColor: '#feda75', stopOpacity: 1 }}
-                      />
-                      <stop
-                        offset="50%"
-                        style={{ stopColor: '#d62976', stopOpacity: 1 }}
-                      />
-                      <stop
-                        offset="100%"
-                        style={{ stopColor: '#4f5bd5', stopOpacity: 1 }}
-                      />
+                    <linearGradient id="instagramGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#feda75', stopOpacity: 1 }} />
+                      <stop offset="50%" style={{ stopColor: '#d62976', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: '#4f5bd5', stopOpacity: 1 }} />
                     </linearGradient>
                   </defs>
                   <path
@@ -74,13 +65,7 @@ const Footer: React.FC<FooterProps> = ({ year }) => {
               </li>
 
               <li className="icon_wrapper icon--facebook">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="blue"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="blue" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 8H7V11H9V21H12V11H14.8L15 8H12V7C12 6.5 12.5 6 13 6H15V3H12C10 3 9 4.5 9 6V8Z" />
                 </svg>
               </li>

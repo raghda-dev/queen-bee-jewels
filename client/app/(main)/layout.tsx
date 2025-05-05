@@ -1,30 +1,25 @@
-//client/app/layout.tsx
 
-import type { Metadata } from "next";
-import React from "react";
+
+// app/(main)/layout.tsx
+
 import '../styles/global.scss';
 import '../styles/tailwind.css';
 import Footer from './components/Footer';
 
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Queen Bee Jewels",
   description: "Elegant jewelry for everyone.",
 };
 
-export default function RootLayout({
+export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col">
-        <div className="flex-grow">
-       {children}
-       </div>
-       <Footer year={new Date().getFullYear()}/>
-       </body>
-    </html>
+    <>
+      <main className="flex-grow">{children}</main>
+      <Footer />
+    </>
   );
 }

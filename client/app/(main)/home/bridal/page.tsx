@@ -1,4 +1,4 @@
-// app/bridal/page.tsx
+// app/(main)/home/bridal/page.tsx
 
 import Card from "../../components/Card";
 import { products } from "../data/products";

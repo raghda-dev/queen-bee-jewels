@@ -1,9 +1,6 @@
 import React from "react";
 import FeatureCard from "./FeatureCard";
-// import squaresIcon from '../../public/staticAssets/icons/squares-icon_.svg';
-// import featureHeartIcon from '../../public/staticAssets/icons/feature-heart_.svg';
-// import lockIcon from '../../public/staticAssets/icons/lock-icon_.svg';
-// import giftBoxIcon from '../../public/staticAssets/icons/gift-box_.svg';
+
 
 const Features = () => {
     return (
