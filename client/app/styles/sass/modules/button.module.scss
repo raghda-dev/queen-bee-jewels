@@ -29,7 +29,7 @@
   &.none {
     background-color: transparent;
     border: none;
-    color: currentColor;
+    // color: currentColor;
   }
   
   &.slide-in-bottom {
@@ -259,7 +259,7 @@
 .small {
   padding: 5px 8px;
   font-size: .9rem;
-  font-weight: 300;
+  font-weight: 500;
 
 
   @include responsive($size: small) {

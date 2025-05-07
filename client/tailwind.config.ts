@@ -7,6 +7,7 @@ const config = {
     "./layouts/**/*.{js,ts,jsx,tsx,mdx}",
     "./styles/**/*.{css,scss}",
   ],
+  safelist: ['border-orangeMedium'],
   theme: {
     extend: {
       colors: {
