@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Trash2 } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import Button from '../../../../../components/Button'
 // import Card1 from '../../../../../../../public/staticAssets/images/visa.png';
 import Card2 from '../../../../../../../public/staticAssets/images/CreditCard.png';
@@ -33,8 +33,11 @@ const CardItem = ({ card, onDelete, onSetDefault }: Props) => (
       >
         default
       </Button>
-      <button onClick={onDelete}>
-        <Trash2 className="text-orangeDark w-6 h-6 md:w-8 md:h-8" />
+      <button
+        onClick={onDelete}
+        className="text-gray-500 hover:text-orangeDark"
+      >
+        <Trash size={18} />
       </button>
     </div>
   </div>

@@ -246,11 +246,17 @@
   padding: 8px 8px;
   font-size: 1.16rem;
   font-weight: 400;
-  border-radius: .7rem;
+  // border-radius: .7rem;'
+
+  @include responsive($size: medium) {
+    padding: 7px 7px;
+    font-size: 1rem;
+    line-height: 2rem;
+  }
 
   @include responsive($size: small) {
-    padding: 7px 10px;
-    font-size: 1rem;
+    padding: 5px 7px;
+    font-size: .9rem;
     line-height: 2rem;
   }
 
@@ -264,7 +270,7 @@
 
   @include responsive($size: small) {
     padding: 3px 6px;
-    font-size: .7rem;
+    font-size: .8rem;
   }
 
 }

@@ -30,3 +30,32 @@
  .custom-scrollbar::-webkit-scrollbar-track {
   background-color: transparent;
  }
+
+
+ /* Custom Scrollbar Styles */
+.scrollable-messages {
+  max-height: 90vh; /* 90% of viewport height */
+  overflow-y: auto;
+  overflow-x: hidden;
+  // padding-right: 0.25rem; /* match your pr-1 */
+  scrollbar-gutter: stable; /* prevents layout shift */
+}
+
+.scrollable-messages::-webkit-scrollbar {
+  width: 6px; /* thinner than 8px or default */
+}
+
+.scrollable-messages::-webkit-scrollbar-thumb {
+  background-color: var(--gray-light); /* use your color */
+  border-radius: 10px;
+}
+
+.scrollable-messages::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Firefox */
+.scrollable-messages {
+  scrollbar-width: thin; /* makes it thinner in Firefox */
+  scrollbar-color: var(--gray-light) transparent;
+}

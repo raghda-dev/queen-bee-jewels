@@ -2,9 +2,8 @@
 
 import React, { useCallback, useState } from 'react'
 import { Plus } from 'lucide-react'
-import Avatar from '../../../../../../public/staticAssets/images/Avatar.png'
 
-import UserInfo from './components/UserInfo'
+import UserHeader from '../components/UserHeader'
 import EmptyState from './components/EmptyState'
 import AddCardForm from './components/AddCardForm'
 import CardItem from './components/CardItem'
@@ -42,8 +41,7 @@ const CardsSettings = () => {
 
   return (
     <section className="flex flex-col items-center justify-start max-h-[85vh] px-4">
-      <UserInfo name="Raghda Mazhar" username="@raghda-dev" avatar={Avatar} />
-
+      <UserHeader/>
       <div className="w-full mt-10">
         {cards.length === 0 && !showAddCardForm && (
           <EmptyState onAdd={() => setShowAddCardForm(true)} />

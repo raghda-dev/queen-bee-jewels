@@ -3,13 +3,13 @@
 // import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Button from '../../../../components/Button';
-import UserHeader from '../../../../components/UserHeader';
-import Avatar from '../../../../../../public/staticAssets/images/Avatar.png';
+import UserHeader from '../components/UserHeader';
 // import { Trash, PlusCircle, Pen } from 'lucide-react';
 import AvatarModal from 'app/(main)/components/modals/avatarModal/AvatarModal';
 
+
+
 export default function AccountPage() {
-  const [hasImage, setHasImage] = useState(true);
   const [newPassword, setNewPassword] = useState('');
   const [showRetype, setShowRetype] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -31,15 +31,11 @@ export default function AccountPage() {
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-start max-h-[85vh]">
+    <section className="flex flex-col items-center justify-start max-h-[87vh]">
       
       {/* User Header with avatar + actions */}
-      <div className='w-full border-b border-gray-300 pb-6'>
+      <div className='w-full'>
         <UserHeader
-          name={name}
-          username={username}
-          hasImage={hasImage}
-          imageSrc={Avatar}
           onEdit={() => setAvatarAction('edit')}
           onRemove={() => setAvatarAction('remove')}
           onAdd={() => setAvatarAction('add')}
@@ -47,7 +43,7 @@ export default function AccountPage() {
       </div>
 
       {/* Forms */}
-      <div className='grid grid-cols-1 max-h-[55%] w-full xs:w-[90%] sm:w-[80%] md:w-[90%] transition-all p-0'>
+      <div className='grid grid-cols-1 max-h-[50%] w-full xs:w-[90%] sm:w-[80%] md:w-[90%] transition-all p-0 mt-[-1rem]'>
 
         {/* Account Info Form */}
         <form className="w-[80%] md:w-full px-4 py-10 grid md:grid-cols-2 gap-x-6 gap-y-5">
@@ -96,7 +92,7 @@ export default function AccountPage() {
             />
           </div>
           <div className="flex justify-center w-[70%]">
-            <Button shape="rectangle" size="small" type="submit" color='var(--purple-medium)'>
+            <Button shape="rectangle" size="medium" type="submit" color='var(--purple-medium)'>
               Update my information
             </Button>
           </div>
@@ -140,7 +136,7 @@ export default function AccountPage() {
             )}
 
             <div className="flex justify-center w-[70%]">
-              <Button shape="rectangle" size="small" type="submit" color='var(--purple-medium)'>
+              <Button shape="rectangle" size="medium" type="submit" color='var(--purple-medium)'>
                 Set my password
               </Button>
             </div>

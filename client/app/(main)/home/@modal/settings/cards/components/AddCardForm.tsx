@@ -14,8 +14,8 @@ interface AddCardFormProps {
 const AddCardForm: React.FC<AddCardFormProps> = ({
   onSave,
   onCancel,
-  saveCard,
-  toggleSaveCard,
+  // saveCard,
+  // toggleSaveCard,
 }) => {
   const [formData, setFormData] = useState<CardFormData>({
     fullName: '',
@@ -39,8 +39,8 @@ const AddCardForm: React.FC<AddCardFormProps> = ({
       <form className="flex flex-col w-full space-y-8">
         {/* Full Name */}
         <div>
-          <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700">
-            Full Name
+          <label htmlFor="fullName" className="block text-md sm:text-lg md:text-xl lg:text-2xl font-medium text-grayDark">
+            full name
           </label>
           <input
             id="fullName"
@@ -54,8 +54,8 @@ const AddCardForm: React.FC<AddCardFormProps> = ({
 
         {/* Card Number */}
         <div>
-          <label htmlFor="cardNumber" className="block text-sm font-semibold text-gray-700">
-            Card Number
+          <label htmlFor="cardNumber" className="block text-md sm:text-lg md:text-xl lg:text-2xl font-medium text-grayDark">
+            card number
           </label>
           <input
             id="cardNumber"
@@ -70,8 +70,8 @@ const AddCardForm: React.FC<AddCardFormProps> = ({
         {/* Expiry */}
         <div className='flex justify-between gap-1 w-[90%]'>
         <div>
-          <label htmlFor="expiry" className="block text-sm font-semibold text-gray-700">
-            Expiry
+          <label htmlFor="expiry" className="block text-md sm:text-lg md:text-xl lg:text-2xl font-medium text-grayDark">
+            expiry
           </label>
           <input
             id="expiry"
@@ -85,7 +85,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({
 
         {/* CVV */}
         <div>
-          <label htmlFor="cvv" className="block text-sm font-semibold text-gray-700">
+          <label htmlFor="cvv" className="block text-md sm:text-lg md:text-xl lg:text-2xl font-medium text-grayDark">
             CVV
           </label>
           <input
@@ -99,10 +99,10 @@ const AddCardForm: React.FC<AddCardFormProps> = ({
         </div>
         </div>
         {/* Save Card Checkbox */}
-        <div className="col-span-2 flex items-center space-x-2">
+        {/* <div className="col-span-2 flex items-center space-x-2">
           <input type="checkbox" checked={saveCard} onChange={toggleSaveCard} id="saveCard" />
           <label htmlFor="saveCard" className="text-sm text-gray-700">Save this card</label>
-        </div>
+        </div> */}
 
         {/* Buttons */}
         <div className="col-span-2 flex gap-3">

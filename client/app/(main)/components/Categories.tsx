@@ -2,10 +2,7 @@ import React from 'react';
 import Card from './Card';
 import '../../styles/global.scss';
 import Button from './Button';
-// import img1 from '../../public/staticAssets/images/category_img-1.svg';
-// import img2 from '../../public/staticAssets/images/category_img-2.svg';
-// import img3 from '../../public/staticAssets/images/category_img-3.svg';
-// import img4 from '../../public/staticAssets/images/category_img-4.svg';
+
 
 const Categories = () => {
   return (

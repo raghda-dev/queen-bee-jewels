@@ -3,41 +3,41 @@
 
 'use client';
 
-import Image, { StaticImageData } from 'next/image';
+import React, {useState} from 'react';
+import Image from 'next/image';
 import Avatar from 'public/staticAssets/images/Avatar.png';
 import { Pen, Trash, PlusCircle } from 'lucide-react';
-import Button from './Button';
+import Button from '../../../../components/Button';
 
 type Props = {
-  name: string;
-  username: string;
-  hasImage: boolean;
-  imageSrc?: string | StaticImageData;
   onEdit?: () => void;
   onRemove?: () => void;
   onAdd?: () => void;
 };
 
+
 export default function UserHeader({
-  name,
-  username,
-  hasImage,
   onEdit,
   onRemove,
   onAdd,
 }: Props) {
+
+  const [hasImage, setHasImage] = useState(true);
+  const name = 'Raghda Mazhar';
+  const username = '@raghda-dev';
+
   return (
     <div className="flex flex-col items-center gap-0 mb-6 w-full mt-[-1rem] pb-5 border-b">
-      <div className="relative h-28 w-28 lg:h-36 lg:w-36 overflow-hidden rounded-full">
+      <div className="relative h-24 w-24 md:w-28 md:h-28 lg:h-32 lg:w-32 overflow-hidden rounded-full transition-all">
         {hasImage ? (
-          <Image src={Avatar} alt="User Avatar" fill className="object-cover" />
+          <Image src={Avatar} alt="User Avatar" fill className="object-fit" />
         ) : (
           <div className="h-full w-full bg-gray-200 rounded-full" />
         )}
       </div>
 
       <div className="mt-4 text-center">
-        <h2 className="text-lg md:text-xl lg:text-xl font-semibold">{name}</h2>
+        <h2 className="text-lg md:text-xl lg:text-xl font-semibold font-josefin">{name}</h2>
         <p className="text-sm md:text-md lg:text-lg text-gray-500">{username}</p>
       </div>
 
