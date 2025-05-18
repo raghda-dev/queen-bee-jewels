@@ -45,10 +45,10 @@ export default function UserHeader({
         <div className={`mt-6 ${hasImage ? 'flex gap-4' : 'flex justify-center'}`}>
           {hasImage ? (
             <>
-              <Button onClick={onEdit} rightIcon={<Pen width={15} height={15} />} color="var(--black)" shape="rectangle" size="small">
+              <Button onClick={onEdit} rightIcon={<Pen width={14} height={14} />} color="var(--black)" shape="rectangle" size="small">
                 edit my photo
               </Button>
-              <Button onClick={onRemove} rightIcon={<Trash width={15} height={16} />} variant="secondary" shape="rectangle" size="small">
+              <Button onClick={onRemove} rightIcon={<Trash width={14} height={14} />} color="var(--black)" variant="secondary" shape="rectangle" size="small">
                 remove photo
               </Button>
             </>

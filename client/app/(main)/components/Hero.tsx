@@ -35,8 +35,8 @@ const Hero = () => {
           <Image alt="Logo" src='/staticAssets/images/logo.svg' width={100} height={70}/>
         </Link>
         <div className="flex gap-1 md:gap-2 sm:gap-1 ">
-            <Button  onClick={() => {handleScrollerToSignUpIn('signup')}} rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>}>register</Button>
-            <Button  onClick={() => {handleScrollerToSignUpIn('login')}} variant='gradient' rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>}>login</Button>
+            <Button  onClick={() => {handleScrollerToSignUpIn('signup')}} rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>} shape="square">register</Button>
+            <Button  onClick={() => {handleScrollerToSignUpIn('login')}} variant='gradient' rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>} shape="square">login</Button>
         </div>
       </nav>
 

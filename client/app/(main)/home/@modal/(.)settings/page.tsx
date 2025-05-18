@@ -1,9 +1,11 @@
+// client/app/(main)/home/@modal/(.)settings/page.tsx
+
 'use client';
 
 // import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import Button from '../../../../components/Button';
-import UserHeader from '../components/UserHeader';
+import Button from '../../../components/Button';
+import UserHeader from './components/UserHeader';
 // import { Trash, PlusCircle, Pen } from 'lucide-react';
 import AvatarModal from 'app/(main)/components/modals/avatarModal/AvatarModal';
 
@@ -121,8 +123,8 @@ export default function AccountPage() {
             </div>
 
             {showRetype && (
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm sm:text-md md:text-lg lg:text-xl text-grayDark font-semibold mb-1">
+              <div>                                         
+                <label htmlFor="confirmPassword" className="block text-sm sm:text-md md:text-lg lg:text-xl text-grayDark font-semibold">
                   Retype your password
                 </label>
                 <input

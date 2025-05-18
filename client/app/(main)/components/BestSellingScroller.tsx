@@ -31,7 +31,7 @@ const BestSellingScroller = () => {
             {bestSellingImages.map((img, index) => (
               <div
                 key={index}
-                className="relative w-[50%] flex-shrink-0 snap-start sm:w-[40%] md:w-[30%] lg:w-[20%] xl:w-[15%]"
+                className="relative w-[46%] xs:w-[40%] flex-shrink-0 snap-start sm:w-[35%] md:w-[25%] lg:w-[18%]"
               >
                 <Image
                   src={img}

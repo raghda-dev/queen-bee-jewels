@@ -35,7 +35,7 @@ const Header = () => {
           <div className="relative w-full max-w-[25rem] sm:max-w-[35rem] h-10 md:max-w-[55rem]">
             <input
               type="text"
-              className="placeholder-grayLight/60 focus:ring-grayLight/30 smooth mt-4 w-full rounded-full bg-grayLight md:px-5 py-1 md:py-2 text-2xl text-black opacity-55 outline-none transition focus:bg-white focus:ring-2"
+              className="placeholder-grayLight/60 focus:ring-grayLight/30 smooth mt-4 w-full rounded-full bg-grayLight md:px-5 py-1 md:py-2 text-md md:text-lg lg:text-2xl text-black opacity-55 outline-none focus:bg-white focus:ring-2 transition-all"
               placeholder="Search..."
             />
             <Search
@@ -56,7 +56,7 @@ const Header = () => {
         </button>
         <button
           className="p-2 border-r-2 text-black hover:bg-grayLight transition"
-          onClick={() => router.push('/home/settings/account', { scroll: false })}
+          onClick={() => router.push('/home/settings/', { scroll: false })}
         >
           <Settings size={24} className="w-7 sm:w-9 md:w-11" />
         </button>
