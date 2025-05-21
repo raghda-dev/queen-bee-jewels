@@ -24,22 +24,22 @@ export default function ProductDetailsClient({
   return (
     <div>
       {/* Main Product Section */}
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-6 py-12">
+      <div className="flex min-h-screen transition-all w-fit md:w-[92%] lg:w-[95%] xl:w-full px-10 py-6 flex-col items-center justify-center bg-gray-100">
         <div className="w-full max-w-6xl overflow-hidden rounded-2xl bg-white shadow-md lg:min-h-[50rem] lg:max-w-[70vw]">
           {/* Upper Section - Images */}
-          <div className="grid grid-cols-1 gap-4 border-b border-grayLight p-6 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 border-b border-grayLight p-6 sm:grid-cols-3 place-items-center">
             {viewImages.map((imageSrc, index) => (
               <div
                 key={index}
-                className="h-64 w-full overflow-hidden rounded-xl lg:h-96 lg:w-[90%]"
+                className="h-72 w-fit overflow-hidden rounded-xl lg:h-96 lg:w-[90%]"
               >
                 {imageSrc ? (
                   <Image
                     src={imageSrc}
                     alt={`Product view ${index + 1}`}
-                    width={500}
-                    height={500}
-                    className="h-full w-full object-cover"
+                    width={400}
+                    height={400}
+                    className="h-[30vh] w-fit object-cover "
                   />
                 ) : (
                   <div className="bg-gray-200 h-full w-full flex items-center justify-center">
@@ -108,7 +108,7 @@ export default function ProductDetailsClient({
       </div>
 
       {/* Related Products Section */}
-      <div className="flex w-[90%] flex-col items-center overflow-hidden px-4 py-8 md:px-8">
+      <div className="flex w-[80vw] md:w-[67vw] lg:w-[77vw] max-w-fit flex-col items-center overflow-hidden px-3 space-y-12">
         <RelatedProductsScroller
           currentProduct={product}
           recommendedProducts={recommendedProducts}

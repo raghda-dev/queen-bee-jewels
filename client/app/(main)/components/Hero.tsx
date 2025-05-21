@@ -32,7 +32,7 @@ const Hero = () => {
       {/* Top Navigation  */}
       <nav className="__hero nav top__nav w-full flex items-center justify-between">
         <Link href="/" id="logo">
-          <Image alt="Logo" src='/staticAssets/images/logo.svg' width={100} height={70}/>
+          <Image alt="Logo" src='/staticAssets/images/logo.svg' width={100} height={50} className="w-32 h-16 md:h-20 lg:w-44 lg:h-24 transition-all"/>
         </Link>
         <div className="flex gap-1 md:gap-2 sm:gap-1 ">
             <Button  onClick={() => {handleScrollerToSignUpIn('signup')}} rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>} shape="square">register</Button>
@@ -50,8 +50,8 @@ const Hero = () => {
            width={50} height={50} />
            Jewels</span>
         </h2>
-        <h1 className="elegancy text-5xl font-bold mt-2 mb-2 text-center w-full z-100 border-solid">
-          <span>let pieces you choose talk about your elegancy</span>
+        <h1 className="elegancy text-2xl font-medium xl:font-semibold mt-2 mb-2 text-center w-full z-100 border-solid">
+          <span>Let pieces you choose talk about your elegancy</span>
         </h1>
       </div>
       {/* Bottom Navigation */}

@@ -1,8 +1,8 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import React from "react";
 import "../../styles/global.scss";
-import CompactCard from "./CompactCard"; // Assuming CompactCard is used for rendering products
+import CompactCard from "./CompactCard";
 import { Product } from "../home/data/products";
 
 interface RelatedProductsScrollerProps {
@@ -16,34 +16,29 @@ const RelatedProductsScroller: React.FC<RelatedProductsScrollerProps> = ({
   recommendedProducts,
   onProductClick,
 }) => {
-  // Debugging currentProduct
-  console.log("currentProduct:", currentProduct);
-
-  // Validate currentProduct
   if (!currentProduct) {
     return <p className="text-gray-500">No current product available.</p>;
   }
 
   return (
-    <div className="w-full flex flex-col items-start overflow-hidden py-8 px-4 md:px-8">
+    <div className="w-[90%] h-fit flex flex-col items-start overflow-hidden px-4 py-7 md:px-8">
       <h2 className="mb-6 text-center font-josefin text-2xl font-bold text-black sm:text-3xl lg:text-4xl">
         Related Products
       </h2>
 
-      {/* Scrollable container */}
-      <div className="relative w-full overflow-x-auto scrollbar-hide custom-scrollbar">
-        <div className="flex gap-2 px-2 sm:px-4 md:gap-6 lg:gap-8">
+      <div className="relative w-full overflow-x-auto scrollbar-hide custom-scrollbar py-8">
+        <div className="flex px-2 sm:px-4">
           {recommendedProducts.length > 0 ? (
             recommendedProducts.map((product) => (
               <div
                 key={product.id}
-                className="flex-shrink-0 w-[60vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] mb-5 mr-5"
+                className="flex-shrink-0 w-[20vw] min-w-[20rem] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-[3/4] mb-5 mr-5"
               >
                 <CompactCard
-                  img={product.viewImage1 || '/staticAssets/images/fallback.jpeg'} // Use fallback image
+                  img={product.viewImage1 || "/staticAssets/images/fallback.jpeg"}
                   collectionName={product.collectionName}
                   price={product.price}
-                  onClick={() => onProductClick(product)} // Handle click event
+                  onClick={() => onProductClick(product)}
                 />
               </div>
             ))
@@ -57,4 +52,3 @@ const RelatedProductsScroller: React.FC<RelatedProductsScrollerProps> = ({
 };
 
 export default RelatedProductsScroller;
-

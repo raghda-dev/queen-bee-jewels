@@ -48,28 +48,6 @@ export default function HomeLayout({
 }, [pathname, children, router]);
 
 
-  // useEffect(() => {
-  //   const isModal = pathname.startsWith('/home/settings') || pathname.startsWith('/home/cart');
-  //   const childCount = Children.count(children);
-
-  //   // 1) If we’re _not_ in a modal route, stash the last “main” page.
-  //   if (!isModal) {
-  //     previousPageRef.current = pathname;
-  //     localStorage.setItem('previousPath', pathname);
-  //   }
-
-  //   // 2) **On a hard-refresh** in a modal route, children will be empty — so
-  //   //    detect that and rehydrate the main slot by pushing a composed URL:
-  //   if (isModal && childCount === 0) {
-  //     const saved = localStorage.getItem('previousPath');
-  //     if (saved) {
-  //       // strip the leading `/home` off our modal path, then re-append it
-  //       const modalSuffix = pathname.replace(/^\/home/, '');
-  //       router.replace(saved + modalSuffix);
-  //     }
-  //   }
-  // }, [pathname, children, router]);
-
   return (
     <div className="min-h-screen min-w-fit flex flex-col">
       <Header/>

@@ -15,6 +15,7 @@ export type CardProps = {
   secondaryButton?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
   context?: string; // Add this to check layout context
+  showHeart?: boolean; // Add this prop to control heart icon visibility
 };
 
 const Card: React.FC<CardProps> = ({
@@ -27,14 +28,15 @@ const Card: React.FC<CardProps> = ({
   secondaryButton,
   size = 'large',
   context,
+  showHeart = false, // Default to false so heart is hidden unless explicitly set
 }) => {
-  const sizeClasses = {
+  const cardSize = {
     small:
       'w-[50vw] h-[40vh] xs:w-[30vh] xs:h-[45vh] md:w-[20rem] md:h-[45vh] md:max-w-[26rem]',
     medium:
       'w-[60vw] max-w-[21rem] h-[50vh] xs:w-[60vw] md:h-[48vh] md:w-[23rem] md:h-[50vh] lg:max-w-[22rem] lg:h-[50vh]',
     large:
-      'w-[80vw] min-w-[10rem] max-w-[20rem] h-[50vh] text-center xs:w-[60vw] xs:min-w-[10rem] xs:max-w-[22rem] gap-y-4 md:max-w-[23rem] md:h-[56vh] md:max-h-[60vh] lg:w-[25vw] lg:max-w-[25rem] xl:h-[53vh]',
+      'w-[60vw] min-w-[8rem] max-w-[20rem] h-[49vh] text-center xs:w-[57vw] xs:min-w-[10rem] xs:max-w-[22rem] xs:h-[53vh] gap-y-4 md:max-w-[23rem] md:h-[56vh] md:max-h-[60vh] lg:w-[23vw] lg:max-w-[23.5rem] xl:max-w-[25rem] xl:h-[53vh]',
   };
 
   if (context === 'related') {
@@ -51,9 +53,9 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`relative z-10 inline-flex flex-col ${sizeClasses[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl border-2 border-lightCyan bg-grayLight bg-opacity-80 px-4 py-4 transition-transform duration-700 hover:scale-105 hover:shadow-lg`}
+      className={`shadow-md relative z-10 inline-flex flex-col ${cardSize[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl bg-grayLight bg-opacity-80 px-4 py-4 transition-transform duration-700 hover:scale-105 hover:shadow-lg`}
     >
-      <div className="relative flex h-[20rem] w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
+      <div className="relative flex h-[20rem] mb-6 w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
         <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-grayLight text-sm text-grayDark">
           No Image Available
         </div>
@@ -68,18 +70,22 @@ const Card: React.FC<CardProps> = ({
         ) : null}
       </div>
 
-      <span className="relative z-10 my-2">
-        <Image
-          src='/staticAssets/icons/HeartIcon.svg'
-          alt="heart icon"
-          width={24}
-          height={24}
-          className="w-[2rem]"
-        />
-      </span>
+      {/* Conditionally render heart icon based on showHeart prop */}
+      {showHeart && (
+        <span className="relative z-10 my-1">
+          <Image
+            src='/staticAssets/icons/HeartIcon.svg'
+            alt="heart icon"
+            width={24}
+            height={24}
+            className="w-[2rem]"
+          />
+        </span>
+      )}
 
       {collectionName && (
-        <span className="bg-gradient-to-r from-orangeBrown via-orangeLight to-orangeRich bg-clip-text font-josefin text-xl text-transparent sm:text-2xl">
+        //bg-gradient-to-r from-orangeBrown via-orangeLight to-orangeRich bg-clip-text text-transparent
+        <span className=" font-josefin text-xl text-orangeMain font-semibold sm:text-2xl capitalize">
           {collectionName}
         </span>
       )}

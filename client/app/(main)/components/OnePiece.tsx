@@ -11,10 +11,10 @@ const OnePiece = () => {
   return (
     <div className="__one__piece flex flex-col-reverse md:flex-row p-9 bg-grayDark h-[65vh] sm:h-[70vh] md:h-[55vh] lg:h-[60vh]">
       <div className="one__piece one__piece__text flex h-[21vh] md:h-[30vh] md:w-[75vw] md:text-center md:mt-24 flex-col items-center justify-between text-white ml-7">
-        <h2 className="one_special_piece via-deepOrange bg-gradient-to-r from-deepPurpleRed to-grayMedium bg-clip-text font-josefin text-5xl md:text-6xl capitalize text-transparent font-bold">
-          one special piece.
+        <h2 className="one_special_piece via-deepOrange bg-gradient-to-r from-deepPurpleRed to-grayMedium bg-clip-text font-josefin text-4xl xs:text-5xl font-bold text-transparent transition-all">
+          One special piece
         </h2>
-        <p className="find_piece text-xl xs:text-2xl text-center lg:text-3xl font-semibold">
+        <p className="find_piece text-xl xs:text-2xl sm:text-3xl text-center lg:text-3xl font-normal">
           you will difinitly find some special piece that looks like you.
         </p>
         <Button
@@ -57,7 +57,7 @@ const OnePiece = () => {
     height={250}
     width={300}
     alt="a watch image"
-    className="rounded-lg border-2 border-grayLight h-[31vh] sm:h-[40vh] w-[100vw] md:w-[55vw] md:h-[45]"  
+    className="rounded-lg border border-grayLight h-[31vh] sm:h-[40vh] w-[80vw] md:w-[55vw] md:h-[45]"  
   />
 </div>
 </div>

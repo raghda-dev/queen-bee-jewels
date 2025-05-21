@@ -20,7 +20,7 @@ export default function CartItem({
   onWishlist,
 }: CartItemProps) {
   return (
-    <div className="flex gap-4 rounded-xl p-2 bg-white shadow-sm border border-grayMedium sm:h-56 xl:h-64 lg:mb-5">
+    <div className="flex gap-4 rounded-xl p-2 bg-white shadow-sm border border-grayMedium sm:h-56 xl:h-64 lg:mb-5 transition-transform duration-700 hover:scale-105 hover:shadow-lg">
       {/* Image */}
       <div className="relative w-[90%] xs:w-[50%] sm:w-[98%] min-w-[9rem] h-56 xl:h-64 rounded-lg overflow-hidden border border-gray-200">
         <Image

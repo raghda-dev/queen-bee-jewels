@@ -31,7 +31,9 @@ const CompactCard: React.FC<CompactCardProps> = ({
   return (
     <div
       onClick={onClick} // Handle click event
-      className="relative z-10 inline-flex h-[25rem] w-[16rem] lg:w-[19rem] lg:h-[28rem] flex-col cursor-pointer items-center justify-start overflow-hidden rounded-xl border border-lightCyan bg-grayLight bg-opacity-80 p-2 transition-transform duration-700 hover:scale-105 hover:shadow-md"
+      className="relative z-10 inline-flex h-[25rem] w-[16rem] lg:w-[19rem] lg:h-[28rem] flex-col
+       cursor-pointer items-center justify-start overflow-hidden rounded-xl bg-grayLight bg-opacity-80 p-2 transition-transform
+        duration-700 hover:scale-105 hover:shadow-md"
     >
       {/* Image Section */}
       <div className="relative h-[60%] w-full overflow-hidden rounded-xl bg-grayLight">
@@ -46,7 +48,7 @@ const CompactCard: React.FC<CompactCardProps> = ({
       {/* Content Section */}
       <div className="flex h-[40%] w-full flex-col items-center justify-center gap-1 pt-3">
         {collectionName && (
-          <span className="bg-gradient-to-r from-orangeBrown via-orangeLight to-orangeRich bg-clip-text font-josefin text-base text-transparent sm:text-lg md:text-xl lg:text-2xl">
+          <span className="text-orangeMain font-josefin text-lg font-medium sm:text-lg md:text-xl lg:text-2xl">
             {collectionName}
           </span>
         )}

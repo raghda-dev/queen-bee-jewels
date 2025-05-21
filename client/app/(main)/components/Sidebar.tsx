@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import "../../styles/global.scss";
-import { ChevronDown, Users, ShoppingBag, Star, Gift, Percent } from "lucide-react";
+import { ChevronDown, Users, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
+
 import Button from "./Button";
 
 const Sidebar = () => {
@@ -18,9 +19,9 @@ const Sidebar = () => {
       {/* Filter Options */}
       <ul className="space-y-2 mb-24">
         {[
-          { name: "all", icon: <Users size={24} className="w-9 sm:w-11" />, href: "/home/" },
-          { name: "men", icon: <ShoppingBag size={24} className="w-9 sm:w-11" />, href: "/home/men" },
-          { name: "women", icon: <Star size={24} className="w-9 sm:w-11" />, href: "/home/women" },
+          { name: "all", icon: <Users size={24} className="text-grayDark w-11 sm:w-11" />, href: "/home/" },
+          { name: "men", icon: <Mars className="text-grayDark w-11 h-11" />, href: "/home/men" },
+          { name: "women", icon: <Venus className="text-grayDark w-11 h-11" />, href: "/home/women" },
         ].map(({ name, icon, href }) => (
           <Link key={name} href={href}>
             <li className="flex items-center md:text-lg lg:text-xl xl:text-2xl cursor-pointer space-x-3 rounded-lg px-4 py-2 text-black font-semibold transition hover:bg-grayLight">
@@ -79,10 +80,10 @@ const Sidebar = () => {
 
         <ul className="space-y-5 mb-16">
           {[
-            { name: "New In", icon: <Star size={24} className="w-9 sm:w-11" />, href: "/home/new-in" },
-            { name: "Brands", icon: <ShoppingBag size={24} className="w-9 sm:w-11" />, href: "/home/brands" },
-            { name: "On Sale Items", icon: <Percent size={24} className="w-9 sm:w-11" />, href: "/home/sale" },
-            { name: "Gift Boxes", icon: <Gift size={24} className="w-9 sm:w-11" />, href: "/home/gifts" },
+            { name: "New In", icon: <Star size={24} className="text-grayDark w-9 sm:w-11" />, href: "/home/new-in" },
+            { name: "Brands", icon: <ShoppingBag size={24} className="text-grayDark w-9 sm:w-11" />, href: "/home/brands" },
+            { name: "On Sale Items", icon: <Percent size={24} className="text-grayDark w-9 sm:w-11" />, href: "/home/sale" },
+            { name: "Gift Boxes", icon: <Gift size={24} className="text-grayDark w-9 sm:w-11" />, href: "/home/gifts" },
           ].map(({ name, icon, href }) => (
             <Link key={name} href={href}>
               <li className="px-4 py-2 text-black font-semibold transition underline cursor-pointer flex items-center space-x-3">

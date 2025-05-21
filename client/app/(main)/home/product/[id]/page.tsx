@@ -1,4 +1,3 @@
-
 import { products } from '../../data/products'; // Import the Product type
 import ProductDetailsClient from '../[id]/ProductDetailsClient'; // Import the Client Component
 
@@ -12,13 +11,19 @@ async function fetchProductData(productId: string) {
 
   // Find related products (exclude the current product)
   const recommendedProducts = products.filter(
-    (prod) => prod.id !== product.id && prod.types.some((type) => product.types.includes(type))
+    (prod) =>
+      prod.id !== product.id &&
+      prod.types.some((type) => product.types.includes(type))
   );
 
   return { product, recommendedProducts };
 }
 
-export default async function ProductDetails({ params }: { params: { id: string } }) {
+export default async function ProductDetails({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
 
   // Fetch product and related products
@@ -39,10 +44,12 @@ export default async function ProductDetails({ params }: { params: { id: string 
 
   // Pass data to the Client Component
   return (
-    <ProductDetailsClient
-      product={product}
-      recommendedProducts={recommendedProducts}
-      viewImages={viewImages}
-    />
+    <div className="min-h-screen">
+      <ProductDetailsClient
+        product={product}
+        recommendedProducts={recommendedProducts}
+        viewImages={viewImages}
+      />
+    </div>
   );
 }

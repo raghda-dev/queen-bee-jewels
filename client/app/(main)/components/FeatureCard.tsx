@@ -11,14 +11,14 @@ type FeatureCardProps = {
   
   const FeatureCard: React.FC<FeatureCardProps> = ({ icon, feature, description }) => {
     return (
-      <div className="feature-card bg-white flex flex-col items-center justify-center px-4 py-4 h-[42vh] lg:h-[44vh] w-[100vw] min-w-[20rem] max-w-[5rem] xs:w-[70vw]
-       xs:min-w-[22rem] xs:max-w-[10rem] md:w-[20vw] md:min-w-[19.2rem] lg:w-[50vw] lg:max-w-[25rem] lg:min-w-[23rem] rounded-md mb-5
+      <div className="feature-card bg-white flex flex-col space-x-1 space-y-3 items-center justify-center px-4 py-4 h-[42vh] lg:h-[44vh] w-[100vw] min-w-[20rem] max-w-[5rem] xs:w-[60vw]
+       xs:min-w-[22rem] xs:max-w-[10rem] md:w-[29vw] md:min-w-[21rem] lg:w-[50vw] lg:max-w-[22rem] lg:min-w-[23rem] rounded-md mb-5
          transition-transform duration-700 hover:scale-105 hover:shadow-lg cursor-pointer">
-        <div className="flex flex-col items-center justify-evenly h-[70%] w-[90%] text-center">
+        <div className="flex flex-col items-center justify-evenly h-[70%] w-[70%] text-center">
         {/* Ensure icon exists before rendering Image */}
         <div>
           {icon ? (
-            <Image src={icon as string | StaticImageData} alt="icon-image" width={50} height={40} />
+            <Image src={icon as string | StaticImageData} alt="icon-image" width={50} height={40} className="w-20 h-20"/>
           ) : (
             <div className="default-icon">-</div> // Fallback icon
           )}
