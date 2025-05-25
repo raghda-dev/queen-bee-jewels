@@ -1,6 +1,10 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['cdn.shopify.com'],
+  },
+
   webpack(config, { isServer }) {
     if (!isServer) {
       config.module.rules.push({

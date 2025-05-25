@@ -2,33 +2,48 @@
 
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
-// import heartIcon from '../../public/staticAssets/icons/HeartIcon.svg';
 import CompactCard from './CompactCard';
 
+
 export type CardProps = {
-  img?: StaticImageData | string;
-  collectionName?: string;
+  id?: string;
+  title?: string;
+  handle?: string;
   description?: string;
-  type?: string;
+  image?: StaticImageData | string;
+  images?: (StaticImageData | string)[];
   price?: string;
+  currencyCode?: string;
+  productType?: string;
+  vendor?: string;
+  tags?: string[];
+  collectionName?: string;
+  type?: string;
   primaryButton?: React.ReactNode;
   secondaryButton?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
-  context?: string; // Add this to check layout context
-  showHeart?: boolean; // Add this prop to control heart icon visibility
+  context?: string;
+  showHeart?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
-  img,
-  collectionName,
+  title,
+  // handle,
   description,
-  type,
+  image,
+  images,
   price,
+  currencyCode,
+  productType,
+  // vendor,
+  // tags,
+  collectionName,
+  // type,
   primaryButton,
   secondaryButton,
   size = 'large',
   context,
-  showHeart = false, // Default to false so heart is hidden unless explicitly set
+  showHeart = false,
 }) => {
   const cardSize = {
     small:
@@ -42,39 +57,39 @@ const Card: React.FC<CardProps> = ({
   if (context === 'related') {
     return (
       <CompactCard
-        img={img}
-        collectionName={collectionName}
-        price={price}
+        img={image}
+        collectionName={collectionName || title}
+        price={`${price ?? ''} ${currencyCode ?? ''}`}
         context={context}
       />
     );
   }
 
+  const finalImage = image || (images && images.length > 0 ? images[0] : '');
 
   return (
     <div
       className={`shadow-md relative z-10 inline-flex flex-col ${cardSize[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl bg-grayLight bg-opacity-80 px-4 py-4 transition-transform duration-700 hover:scale-105 hover:shadow-lg`}
     >
-      <div className="relative flex h-[20rem] mb-6 w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
-        <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-grayLight text-sm text-grayDark">
-          No Image Available
-        </div>
-
-        {img && img !== '' ? (
+      <div className="relative flex h-[20rem] mb-6 w-[26rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
+        {!finalImage ? (
+          <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-grayLight text-sm text-grayDark">
+            No Image Available
+          </div>
+        ) : (
           <Image
-            src={img}
-            alt="category-image"
+            src={finalImage}
+            alt={title || 'Product Image'}
             layout="fill"
             objectFit="cover"
           />
-        ) : null}
+        )}
       </div>
 
-      {/* Conditionally render heart icon based on showHeart prop */}
       {showHeart && (
         <span className="relative z-10 my-1">
           <Image
-            src='/staticAssets/icons/HeartIcon.svg'
+            src="/staticAssets/icons/HeartIcon.svg"
             alt="heart icon"
             width={24}
             height={24}
@@ -83,19 +98,21 @@ const Card: React.FC<CardProps> = ({
         </span>
       )}
 
-      {collectionName && (
-        //bg-gradient-to-r from-orangeBrown via-orangeLight to-orangeRich bg-clip-text text-transparent
-        <span className=" font-josefin text-xl text-orangeMain font-semibold sm:text-2xl capitalize">
-          {collectionName}
+      {title && (
+        <span className="font-josefin text-xl text-orangeMain font-semibold sm:text-2xl capitalize">
+          {title}
         </span>
       )}
 
-      {type && <span className="text-lg font-medium">{type}</span>}
+      {productType && <span className="text-md text-grayDark">{productType}</span>}
+
       {price && (
-        <span className="text-lg font-bold text-orangeRich">{price}</span>
+        <span className="text-lg font-bold text-orangeRich">
+          {price} {currencyCode}
+        </span>
       )}
 
-      {description && <span className="text-md sm:text-xl">{description}</span>}
+      {description && <span className="text-md sm:text-base">{description}</span>}
 
       <div className="mt-4 flex w-full flex-col gap-2">
         {primaryButton && (

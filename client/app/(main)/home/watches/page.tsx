@@ -1,32 +1,68 @@
-// app/watches/page.tsx
-  
+// app/(main)/home/watches/page.tsx
+
+import { shopifyQuery } from "../../utils/shopify";
+import { GET_PRODUCTS_QUERY } from "../../utils/shopify";
+
 import Card from "../../components/Card";
-import { products } from "../data/products";
 import Button from "../../components/Button";
 import Link from "next/link";
 
-export default function Watches() {
+import { ShopifyProduct } from "../../types/shopifyTypes"; // adjust path if needed
 
-  const filteredWatches = products.filter((product) => product.types.includes("watches"));
+export default async function Watches() {
+
+  const data = await shopifyQuery(GET_PRODUCTS_QUERY);
+
+ const products: ShopifyProduct[] = data.products.edges.map(
+  (edge: { node: ShopifyProduct }) => edge.node
+);
+
+
+  const filteredWatches = products.filter((product) =>
+    product.tags?.some((tag) => tag.toLowerCase() === "watch")
+  );
 
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredWatches.map((product) => (
-          <Link key={product.id} href={`/home/product/${product.id}`} legacyBehavior>
-          <Card
-            {...product}
-            primaryButton={
-              <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
-                Add to Cart
-              </Button>
-            }
-            secondaryButton={
-              <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
-                Add to Wishlist
-              </Button>
-            }
-          />
+          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
+            <Card
+              size="medium"
+              id={product.id}
+              title={product.title}
+              handle={product.handle}
+              description={product.description ?? undefined}
+              image={product.featuredImage?.url ?? undefined}
+              price={product.priceRange.minVariantPrice.amount}
+              currencyCode={product.priceRange.minVariantPrice.currencyCode}
+              images={
+                product.images?.edges?.map((img) => img.node.url) ?? []
+              }
+              productType={product.productType ?? undefined}
+              vendor={product.vendor ?? undefined}
+              tags={product.tags}
+              primaryButton={
+                <Button
+                  size="small"
+                  variant="primary"
+                  color="var(--purple-light)"
+                  animation="bounce"
+                >
+                  Add to Cart
+                </Button>
+              }
+              secondaryButton={
+                <Button
+                  size="small"
+                  variant="primary"
+                  color="var(--purple-light)"
+                  animation="bounce"
+                >
+                  Add to Wishlist
+                </Button>
+              }
+            />
           </Link>
         ))}
       </div>

@@ -1,22 +1,33 @@
-// app/(main)/home/page.tsx
+import { shopifyQuery } from "../utils/shopify";
+import { GET_PRODUCTS_QUERY } from "../utils/shopify";
 
 import Card from "../components/Card";
-import { products } from "./data/products";
 import Button from "../components/Button";
 import Link from "next/link";
+import { ShopifyProduct } from "../types/shopifyTypes"; // Adjust path if needed
 
-export default function HomePage() {
+export default async function HomePage() {
+  const data = await shopifyQuery(GET_PRODUCTS_QUERY);
+  const products: ShopifyProduct[] = data.products.edges.map((edge: { node: ShopifyProduct }) => edge.node);
 
-  // const filteredSilverProducts = products.filter((product) => product.types.includes("classic"));
-
-  console.log("products", products)
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
-          <Link key={product.id} href={`/home/product/${product.id}`} legacyBehavior>
+          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
             <Card
-              {...product}
+              size="small"
+              id={product.id}
+              title={product.title}
+              handle={product.handle}
+              description={product.description ?? undefined}
+              image={product.featuredImage?.url ?? undefined}
+              price={product.priceRange.minVariantPrice.amount}
+              currencyCode={product.priceRange.minVariantPrice.currencyCode}
+              images={product.images?.edges?.map((img) => img.node.url) || []}
+              productType={product.productType ?? undefined}
+              vendor={product.vendor ?? undefined}
+              tags={product.tags}
               primaryButton={
                 <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
                   Add to Cart
