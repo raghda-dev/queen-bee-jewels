@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import "../../styles/global.scss";
-import { ChevronDown, Users, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
+import { LayoutGrid } from 'lucide-react';
+import { ChevronDown, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
 
 import Button from "./Button";
 
@@ -19,12 +20,12 @@ const Sidebar = () => {
       {/* Filter Options */}
       <ul className="space-y-2 mb-24">
         {[
-          { name: "all", icon: <Users size={24} className="text-grayDark w-11 sm:w-11" />, href: "/home/" },
+          { name: "all", icon: <LayoutGrid size={26} color="var(--gray-dark)"/>, href: "/home/" },
           { name: "men", icon: <Mars className="text-grayDark w-11 h-11" />, href: "/home/men" },
           { name: "women", icon: <Venus className="text-grayDark w-11 h-11" />, href: "/home/women" },
         ].map(({ name, icon, href }) => (
           <Link key={name} href={href}>
-            <li className="flex items-center md:text-lg lg:text-xl xl:text-2xl cursor-pointer space-x-3 rounded-lg px-4 py-2 text-black font-semibold transition hover:bg-grayLight">
+            <li className="flex items-center justify-start md:text-lg lg:text-xl xl:text-2xl cursor-pointer space-x-3 rounded-lg px-4 py-2 text-black font-semibold transition hover:bg-grayLight">
               {icon}
               <span className="capitalize hidden md:block">{name === "all" ? "View All" : `${name} Only`}</span>
             </li>

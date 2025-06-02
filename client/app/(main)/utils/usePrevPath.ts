@@ -22,3 +22,5 @@ export default function usePreviousPath(defaultPath = '/home') {
 
   return previousPath;
 }
+
+

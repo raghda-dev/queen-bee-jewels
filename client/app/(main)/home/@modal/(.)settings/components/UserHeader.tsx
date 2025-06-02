@@ -1,5 +1,5 @@
 
-//app/(main)/components/userHeader.tsx
+//app/(main)/home/@modal/(.)settings/components/userHeader.tsx
 
 'use client';
 

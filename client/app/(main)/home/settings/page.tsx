@@ -1,4 +1,5 @@
 // app/(main)/home/settings/page.tsx
+
 'use client';
 
 import { useEffect } from 'react';

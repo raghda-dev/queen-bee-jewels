@@ -1,4 +1,4 @@
-// types/shopifyTypes.ts
+// app/(main)/lib/shopify/types/index.ts
 
 export interface ShopifyImage {
   url: string;
@@ -33,4 +33,32 @@ export interface ShopifyProductsResponse {
       node: ShopifyProduct;
     }[];
   };
+}
+
+export interface ShopifySelectedOption {
+  name: string;
+  value: string;
+}
+
+export interface ShopifyVariant {
+  id: string;
+  title: string;
+  price: {
+    amount: string;
+    currencyCode: string;
+  };
+  availableForSale: boolean;
+  selectedOptions: ShopifySelectedOption[];
+}
+
+export interface ShopifyProductByHandle extends ShopifyProduct {
+  variants: {
+    edges: {
+      node: ShopifyVariant;
+    }[];
+  };
+}
+
+export interface ShopifyProductByHandleResponse {
+  productByHandle: ShopifyProductByHandle | null;
 }

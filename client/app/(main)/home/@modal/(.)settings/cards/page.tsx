@@ -1,3 +1,5 @@
+//client/app/(main)/home/@modal/(.)settings/cards/page.tsx
+
 'use client'
 
 import React, { useCallback, useState } from 'react'

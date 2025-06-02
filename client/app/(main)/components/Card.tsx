@@ -29,6 +29,7 @@ export type CardProps = {
 const Card: React.FC<CardProps> = ({
   title,
   // handle,
+  collectionName,
   description,
   image,
   images,
@@ -37,7 +38,6 @@ const Card: React.FC<CardProps> = ({
   productType,
   // vendor,
   // tags,
-  collectionName,
   // type,
   primaryButton,
   secondaryButton,
@@ -46,12 +46,9 @@ const Card: React.FC<CardProps> = ({
   showHeart = false,
 }) => {
   const cardSize = {
-    small:
-      'w-[50vw] h-[40vh] xs:w-[30vh] xs:h-[45vh] md:w-[20rem] md:h-[45vh] md:max-w-[26rem]',
-    medium:
-      'w-[60vw] max-w-[21rem] h-[50vh] xs:w-[60vw] md:h-[48vh] md:w-[23rem] md:h-[50vh] lg:max-w-[22rem] lg:h-[50vh]',
-    large:
-      'w-[60vw] min-w-[8rem] max-w-[20rem] h-[49vh] text-center xs:w-[57vw] xs:min-w-[10rem] xs:max-w-[22rem] xs:h-[53vh] gap-y-4 md:max-w-[23rem] md:h-[56vh] md:max-h-[60vh] lg:w-[23vw] lg:max-w-[23.5rem] xl:max-w-[25rem] xl:h-[53vh]',
+    small:'w-[20rem] h-[50vh] md:min-h-[20rem] md:max-h-[33rem] min-w-[18rem] max-w-[20rem] md:min-w-[21rem]',
+    medium:'w-[20rem] h-[53vh] min-h-[50vh] min-w-[21rem] max-w-[20rem] xs:min-w-[23rem] xs:max-w-[24rem] lg:min-w-[26rem] lg:max-w-[70rem] lg:min-h-[40rem]',
+    large:'w-[60vw] min-w-[8rem] max-w-[20rem] h-[49vh] text-center xs:w-[57vw] xs:min-w-[10rem] xs:max-w-[22rem] xs:h-[53vh] gap-y-4 md:max-w-[23rem] md:h-[56vh] md:max-h-[60vh] lg:w-[23vw] lg:max-w-[23.5rem] xl:max-w-[25rem] xl:h-[53vh]',
   };
 
   if (context === 'related') {
@@ -69,11 +66,12 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`shadow-md relative z-10 inline-flex flex-col ${cardSize[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl bg-grayLight bg-opacity-80 px-4 py-4 transition-transform duration-700 hover:scale-105 hover:shadow-lg`}
+      className={`relative z-10 flex flex-col shadow-md ${cardSize[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl bg-grayLight
+       bg-opacity-80 px-4 py-4 transition-all duration-700 hover:scale-105 hover:shadow-lg`}
     >
-      <div className="relative flex h-[20rem] mb-6 w-[26rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
+      <div className="relative mb-6 h-[18rem] w-full overflow-hidden rounded-t-xl bg-grayLight">
         {!finalImage ? (
-          <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-grayLight text-sm text-grayDark">
+          <div className="absolute inset-0 flex items-center justify-center bg-grayLight text-sm text-grayDark">
             No Image Available
           </div>
         ) : (
@@ -85,7 +83,6 @@ const Card: React.FC<CardProps> = ({
           />
         )}
       </div>
-
       {showHeart && (
         <span className="relative z-10 my-1">
           <Image
@@ -99,12 +96,14 @@ const Card: React.FC<CardProps> = ({
       )}
 
       {title && (
-        <span className="font-josefin text-xl text-orangeMain font-semibold sm:text-2xl capitalize">
+        <span className="font-josefin text-xl font-semibold capitalize text-orangeMain sm:text-2xl">
           {title}
         </span>
       )}
 
-      {productType && <span className="text-md text-grayDark">{productType}</span>}
+      {productType && (
+        <span className="text-md text-grayDark">{productType}</span>
+      )}
 
       {price && (
         <span className="text-lg font-bold text-orangeRich">
@@ -112,7 +111,9 @@ const Card: React.FC<CardProps> = ({
         </span>
       )}
 
-      {description && <span className="text-md sm:text-base">{description}</span>}
+      {description && (
+        <span className="text-md sm:text-base">{description}</span>
+      )}
 
       <div className="mt-4 flex w-full flex-col gap-2">
         {primaryButton && (

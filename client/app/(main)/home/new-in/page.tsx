@@ -1,22 +1,14 @@
 // app/(main)/home/new-in/page.tsx
 
-import { shopifyQuery } from "../../utils/shopify";
-import { GET_PRODUCTS_QUERY } from "../../utils/shopify";
-
+import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify"; // Barrel import
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Link from "next/link";
 
-import {
-  ShopifyProductsResponse,
-  ShopifyProduct,
-} from "../../types/shopifyTypes";
 
 export default async function NewIn() {
-  const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map(
-    (edge) => edge.node
-  );
+
+  const products: ShopifyProduct[] = await fetchAllProducts();
 
   const filteredNewInProducts = products.filter((product) =>
     product.tags?.some((tag) => tag.toLowerCase().includes("new-in"))
@@ -32,7 +24,7 @@ export default async function NewIn() {
             legacyBehavior
           >
             <Card
-              size="medium"
+              size="small"
               id={product.id}
               title={product.title}
               handle={product.handle}

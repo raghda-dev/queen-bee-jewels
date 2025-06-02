@@ -1,22 +1,15 @@
 // app/(main)/home/brands/page.tsx
 
-import { shopifyQuery } from "../../utils/shopify";
-import { GET_PRODUCTS_QUERY } from "../../utils/shopify";
 
+import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify"; // Barrel import
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Link from "next/link";
 
-import {
-  ShopifyProductsResponse,
-  ShopifyProduct,
-} from "../../types/shopifyTypes";
 
 export default async function SilverPage() {
-  const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map(
-    (edge) => edge.node
-  );
+  
+  const products: ShopifyProduct[] = await fetchAllProducts();
 
   // Adjust the tag or condition based on how "classic silver" is categorized
   const filteredSilverProducts = products.filter((product) =>

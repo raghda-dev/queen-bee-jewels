@@ -1,18 +1,16 @@
-import { shopifyQuery } from "../utils/shopify";
-import { GET_PRODUCTS_QUERY } from "../utils/shopify";
+// app/(main)/home/page.tsx
 
+import { fetchAllProducts, ShopifyProduct } from "../lib/shopify/"; // Using barrel file
 import Card from "../components/Card";
 import Button from "../components/Button";
 import Link from "next/link";
-import { ShopifyProduct } from "../types/shopifyTypes"; // Adjust path if needed
 
 export default async function HomePage() {
-  const data = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map((edge: { node: ShopifyProduct }) => edge.node);
+  const products: ShopifyProduct[] = await fetchAllProducts();
 
   return (
     <div className="flex justify-evenly py-14">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
             <Card

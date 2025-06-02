@@ -1,38 +1,27 @@
 // app/(main)/home/silver/page.tsx
 
-import { shopifyQuery } from "../../utils/shopify";
-import { GET_PRODUCTS_QUERY } from "../../utils/shopify";
-
+import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify"; // Barrel import
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Link from "next/link";
 
-import { ShopifyProduct } from "../../types/shopifyTypes"; // Update the path if needed
-
 export default async function SilverOnly() {
-  const data = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map(
-    (edge: { node: ShopifyProduct }) => edge.node
-  );
+  const products: ShopifyProduct[] = await fetchAllProducts();
 
-  // Filter silver items
+  // Filter silver items by productType or tags
   const filteredSilverProducts = products.filter(
     (product) =>
       product.productType?.toLowerCase() === "silver" ||
-      product.tags?.map((t) => t.toLowerCase()).includes("silver")
+      product.tags?.some((tag) => tag.toLowerCase() === "silver")
   );
 
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredSilverProducts.map((product) => (
-          <Link
-            key={product.id}
-            href={`/home/product/${product.handle}`}
-            legacyBehavior
-          >
+          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
             <Card
-              size="medium"
+              size="small"
               id={product.id}
               title={product.title}
               handle={product.handle}
@@ -45,22 +34,12 @@ export default async function SilverOnly() {
               vendor={product.vendor ?? undefined}
               tags={product.tags}
               primaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
+                <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
                   Add to Cart
                 </Button>
               }
               secondaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
+                <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
                   Add to Wishlist
                 </Button>
               }

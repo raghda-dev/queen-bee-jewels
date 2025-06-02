@@ -1,17 +1,14 @@
-import { shopifyQuery } from "../../utils/shopify";
-import { GET_PRODUCTS_QUERY } from "../../utils/shopify";
+//client/app/(main)/home/men/page.tsx
 
+import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Link from "next/link";
 
-import { ShopifyProductsResponse, ShopifyProduct } from "../../types/shopifyTypes";
 
 export default async function MenOnly() {
-  const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map(
-    (edge) => edge.node
-  );
+
+  const products: ShopifyProduct[] = await fetchAllProducts();
 
   const filteredMenProducts = products.filter((product) =>
     product.tags?.some((tag) => tag.toLowerCase() === "men")
@@ -27,7 +24,7 @@ export default async function MenOnly() {
             legacyBehavior
           >
             <Card
-              size="medium"
+              size="small"
               id={product.id}
               title={product.title}
               handle={product.handle}
