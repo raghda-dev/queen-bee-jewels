@@ -38,7 +38,7 @@
     "styles.d.ts", // Add declaration for SCSS modules
     "tailwind.config.ts",
     "app/(main)/postcss.config.js"
-, "app/settings/page.jsx", "next.config.js"  ],
+, "app/settings/page.jsx", "next.config.js", "app/(main)/home/api/test-shopify/route.ts"  ],
   "exclude": [
     "node_modules"
   ]

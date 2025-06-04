@@ -1,12 +1,21 @@
+<<<<<<< Updated upstream
 // app/(main)/home/classic/page.tsx
 
 import { shopifyQuery } from "../../utils/shopify";
 import { GET_PRODUCTS_QUERY } from "../../utils/shopify";
+=======
+// client/app/(main)/home/classic/page.tsx
+
+import { shopifyQuery } from "../../lib/shopify/client";
+import { GET_PRODUCTS_QUERY } from "../../lib/shopify/products/queries";
+import { ShopifyProductsResponse, ShopifyProduct } from "../../lib/shopify/products/types";
+>>>>>>> Stashed changes
 
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Link from "next/link";
 
+<<<<<<< Updated upstream
 import { ShopifyProduct } from "../../types/shopifyTypes"; // adjust if path differs
 
 export default async function Classic() {
@@ -21,16 +30,33 @@ export default async function Classic() {
       product.productType?.toLowerCase() === "classic" ||
       product.tags?.map((t) => t.toLowerCase()).includes("classic")
   );
+=======
+export default async function classicOnlyPage() {
+  const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
+  const allProducts: ShopifyProduct[] = data.products.edges.map((edge) => edge.node);
+
+  // ✅ Safely handle null/undefined types or tags
+  const classicProducts = allProducts.filter((product) => {
+    const productType = product.productType?.toLowerCase() || "";
+    // const tags = product.tags || [];
+    return productType.includes("classic");
+  });
+>>>>>>> Stashed changes
 
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<<<<<<< Updated upstream
         {filteredClassics.map((product) => (
           <Link
             key={product.id}
             href={`/home/product/${product.handle}`}
             legacyBehavior
           >
+=======
+        {classicProducts.map((product) => (
+          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
+>>>>>>> Stashed changes
             <Card
               size="medium"
               id={product.id}

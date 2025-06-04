@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import "../../styles/global.scss";
-import { ChevronDown, Users, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
+import { ChevronDown, Grid, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
 
 import Button from "./Button";
 
@@ -19,7 +19,7 @@ const Sidebar = () => {
       {/* Filter Options */}
       <ul className="space-y-2 mb-24">
         {[
-          { name: "all", icon: <Users size={24} className="text-grayDark w-11 sm:w-11" />, href: "/home/" },
+          { name: "all", icon: <Grid size={24} className="text-grayDark w-11 sm:w-11" />, href: "/home/" },
           { name: "men", icon: <Mars className="text-grayDark w-11 h-11" />, href: "/home/men" },
           { name: "women", icon: <Venus className="text-grayDark w-11 h-11" />, href: "/home/women" },
         ].map(({ name, icon, href }) => (

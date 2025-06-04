@@ -1,10 +1,16 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+<<<<<<< Updated upstream
   images: {
     domains: ['cdn.shopify.com'],
   },
 
+=======
+    images: {
+    domains: ['cdn.shopify.com'],
+  },
+>>>>>>> Stashed changes
   webpack(config, { isServer }) {
     if (!isServer) {
       config.module.rules.push({

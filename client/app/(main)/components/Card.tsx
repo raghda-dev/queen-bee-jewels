@@ -1,24 +1,18 @@
-// components/Card.tsx
+// client/app/(main)/components/Card.tsx
+
+// client/app/(main)/components/Card.tsx
 
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
 import CompactCard from './CompactCard';
 
-
 export type CardProps = {
-  id?: string;
-  title?: string;
-  handle?: string;
+  img?: StaticImageData | string;
+  collectionName?: string;
   description?: string;
-  image?: StaticImageData | string;
-  images?: (StaticImageData | string)[];
-  price?: string;
+  price?: string | number;
   currencyCode?: string;
   productType?: string;
-  vendor?: string;
-  tags?: string[];
-  collectionName?: string;
-  type?: string;
   primaryButton?: React.ReactNode;
   secondaryButton?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
@@ -27,18 +21,12 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
-  title,
-  // handle,
+  img,
+  collectionName,
   description,
-  image,
-  images,
   price,
   currencyCode,
   productType,
-  // vendor,
-  // tags,
-  collectionName,
-  // type,
   primaryButton,
   secondaryButton,
   size = 'large',
@@ -57,29 +45,27 @@ const Card: React.FC<CardProps> = ({
   if (context === 'related') {
     return (
       <CompactCard
-        img={image}
-        collectionName={collectionName || title}
-        price={`${price ?? ''} ${currencyCode ?? ''}`}
+        img={img}
+        collectionName={collectionName}
+        price={price}
         context={context}
       />
     );
   }
 
-  const finalImage = image || (images && images.length > 0 ? images[0] : '');
-
   return (
     <div
       className={`shadow-md relative z-10 inline-flex flex-col ${cardSize[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl bg-grayLight bg-opacity-80 px-4 py-4 transition-transform duration-700 hover:scale-105 hover:shadow-lg`}
     >
-      <div className="relative flex h-[20rem] mb-6 w-[26rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
-        {!finalImage ? (
+      <div className="relative flex h-[20rem] mb-6 w-[24rem] items-center justify-center overflow-hidden rounded-t-xl bg-grayLight">
+        {!img ? (
           <div className="absolute inset-0 flex items-center justify-center rounded-t-2xl bg-grayLight text-sm text-grayDark">
             No Image Available
           </div>
         ) : (
           <Image
-            src={finalImage}
-            alt={title || 'Product Image'}
+            src={img}
+            alt="Product Image"
             layout="fill"
             objectFit="cover"
           />
@@ -98,17 +84,17 @@ const Card: React.FC<CardProps> = ({
         </span>
       )}
 
-      {title && (
+      {collectionName && (
         <span className="font-josefin text-xl text-orangeMain font-semibold sm:text-2xl capitalize">
-          {title}
+          {collectionName}
         </span>
       )}
 
       {productType && <span className="text-md text-grayDark">{productType}</span>}
 
-      {price && (
+      {price !== undefined && (
         <span className="text-lg font-bold text-orangeRich">
-          {price} {currencyCode}
+          {price} {currencyCode || ''}
         </span>
       )}
 
@@ -119,7 +105,7 @@ const Card: React.FC<CardProps> = ({
           <div className="flex w-full justify-center">
             <div className="flex w-full justify-center gap-2">
               {primaryButton}
-              {secondaryButton && secondaryButton}
+              {secondaryButton}
             </div>
           </div>
         )}
