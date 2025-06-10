@@ -1,21 +1,15 @@
-import { shopifyQuery } from "../utils/shopify";
-import { GET_PRODUCTS_QUERY } from "../utils/shopify";
 
-import { shopifyQuery } from "../lib/shopify/client";
-import { GET_PRODUCTS_QUERY } from "../lib/shopify/products/queries";
-import { ShopifyProductsResponse, ShopifyProduct } from "../lib/shopify/products/types";
+// client/app/(main)/home/page.tsx
 
-import Card from "../components/Card";
-import Button from "../components/Button";
-import Link from "next/link";
-import { ShopifyProduct } from "../types/shopifyTypes"; // Adjust path if needed
-
-<<<<<<< Updated upstream
-export default async function HomePage() {
-  const data = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map((edge: { node: ShopifyProduct }) => edge.node);
-
-=======
+import Link from 'next/link';
+import Card from '../components/Card';
+import Button from '../components/Button';
+import { shopifyQuery } from '../lib/shopify/client';
+import { GET_PRODUCTS_QUERY } from '../lib/shopify/products/queries';
+import {
+  ShopifyProductsResponse,
+  ShopifyProduct,
+} from '../lib/shopify/products/types';
 
 export default async function HomePage() {
   const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
@@ -23,56 +17,53 @@ export default async function HomePage() {
     (edge) => edge.node
   );
 
->>>>>>> Stashed changes
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
-<<<<<<< Updated upstream
-          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
-            <Card
-              size="small"
-=======
           <Link
             key={product.id}
             href={`/home/product/${product.handle}`}
             legacyBehavior
           >
-            <Card
-              size="medium"
->>>>>>> Stashed changes
-              id={product.id}
-              title={product.title}
-              handle={product.handle}
-              description={product.description ?? undefined}
-              image={product.featuredImage?.url ?? undefined}
-              price={product.priceRange.minVariantPrice.amount}
-              currencyCode={product.priceRange.minVariantPrice.currencyCode}
-              images={product.images?.edges?.map((img) => img.node.url) || []}
-              productType={product.productType ?? undefined}
-              vendor={product.vendor ?? undefined}
-              tags={product.tags}
-              primaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
-                  Add to Cart
-                </Button>
-              }
-              secondaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
-                  Add to Wishlist
-                </Button>
-              }
-            />
+            <a>
+              <Card
+                size="medium"
+                id={product.id}
+                handle={product.handle}
+                title={product.title}
+                description={product.description ?? undefined}
+                img={product.featuredImage?.url ?? undefined}
+                price={product.priceRange.minVariantPrice.amount}
+                currencyCode={product.priceRange.minVariantPrice.currencyCode}
+                images={
+                  product.images?.edges?.map((img) => img.node.url) || []
+                }
+                productType={product.productType ?? undefined}
+                vendor={product.vendor ?? undefined}
+                tags={product.tags}
+                primaryButton={
+                  <Button
+                    size="small"
+                    variant="primary"
+                    color="var(--purple-light)"
+                    animation="bounce"
+                  >
+                    Add to Cart
+                  </Button>
+                }
+                secondaryButton={
+                  <Button
+                    size="small"
+                    variant="primary"
+                    color="var(--purple-light)"
+                    animation="bounce"
+                  >
+                    Add to Wishlist
+                  </Button>
+                }
+              />
+            </a>
           </Link>
         ))}
       </div>

@@ -1,18 +1,20 @@
-// client/app/(main)/components/Card.tsx
-
-// client/app/(main)/components/Card.tsx
-
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
 import CompactCard from './CompactCard';
 
 export type CardProps = {
+  id?: string;
+  handle?: string;
+  title?: string;
   img?: StaticImageData | string;
   collectionName?: string;
   description?: string;
   price?: string | number;
   currencyCode?: string;
   productType?: string;
+  vendor?: string;
+  tags?: string[];
+  images?: string[];
   primaryButton?: React.ReactNode;
   secondaryButton?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
@@ -21,12 +23,18 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
+  id,
+  handle,
+  title,
   img,
   collectionName,
   description,
   price,
   currencyCode,
   productType,
+  vendor,
+  tags,
+  images,
   primaryButton,
   secondaryButton,
   size = 'large',
@@ -46,7 +54,7 @@ const Card: React.FC<CardProps> = ({
     return (
       <CompactCard
         img={img}
-        collectionName={collectionName}
+        collectionName={collectionName || title}
         price={price}
         context={context}
       />
@@ -84,9 +92,9 @@ const Card: React.FC<CardProps> = ({
         </span>
       )}
 
-      {collectionName && (
+      {(collectionName || title) && (
         <span className="font-josefin text-xl text-orangeMain font-semibold sm:text-2xl capitalize">
-          {collectionName}
+          {collectionName || title}
         </span>
       )}
 
