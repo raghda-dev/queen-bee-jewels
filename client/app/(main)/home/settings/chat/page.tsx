@@ -4,20 +4,15 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-export default function CardsRefreshRedirect() {
+export default function SettingsRefreshRedirect() {
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
-    const previousPath = localStorage.getItem('previousPath') || '/home';
-
-    // Only redirect if we're here due to a browser refresh
-    if (pathname === '/home/settings/chat') {
-      router.replace(previousPath);
-    }
-  }, [pathname, router]);
-
+    const prev = localStorage.getItem('previousPath') || '/home';
+    router.replace(prev);
+  }, [router]);
+  
   return null;
 }

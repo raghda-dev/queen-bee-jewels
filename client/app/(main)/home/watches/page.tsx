@@ -27,7 +27,7 @@ export default async function Watches() {
               title={product.title}
               handle={product.handle}
               description={product.description ?? undefined}
-              image={product.featuredImage?.url ?? undefined}
+              img={product.featuredImage?.url ?? undefined}
               price={product.priceRange.minVariantPrice.amount}
               currencyCode={product.priceRange.minVariantPrice.currencyCode}
               images={

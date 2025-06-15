@@ -1,32 +1,37 @@
 // app/(main)/home/silver/page.tsx
 
-import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify"; // Barrel import
+import Link from "next/link";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
-import Link from "next/link";
+import { shopifyQuery } from "../../lib/shopify/client";
+import { GET_PRODUCTS_QUERY } from "../../lib/shopify/products/queries";
+import {
+  ShopifyProductsResponse,
+  ShopifyProduct,
+} from "../../lib/shopify/products/types";
 
-export default async function SilverOnly() {
-  const products: ShopifyProduct[] = await fetchAllProducts();
+export default async function SilverOnlyPage() {
+  const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
+  const products: ShopifyProduct[] = data.products.edges.map((edge) => edge.node);
 
-  // Filter silver items by productType or tags
-  const filteredSilverProducts = products.filter(
-    (product) =>
-      product.productType?.toLowerCase() === "silver" ||
-      product.tags?.some((tag) => tag.toLowerCase() === "silver")
-  );
+  const silverProducts = products.filter((product) => {
+    const productType = product.productType?.toLowerCase() || "";
+    const tags = product.tags?.map((tag) => tag.toLowerCase()) || [];
+    return productType.includes("silver") || tags.includes("silver");
+  });
 
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filteredSilverProducts.map((product) => (
-          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
+        {silverProducts.map((product) => (
+          <Link key={product.id} href={`/home/product/${product.handle}`}>
             <Card
               size="small"
               id={product.id}
-              title={product.title}
               handle={product.handle}
+              title={product.title}
               description={product.description ?? undefined}
-              image={product.featuredImage?.url ?? undefined}
+              img={product.featuredImage?.url ?? undefined}
               price={product.priceRange.minVariantPrice.amount}
               currencyCode={product.priceRange.minVariantPrice.currencyCode}
               images={product.images?.edges?.map((img) => img.node.url) || []}
@@ -34,12 +39,22 @@ export default async function SilverOnly() {
               vendor={product.vendor ?? undefined}
               tags={product.tags}
               primaryButton={
-                <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
+                <Button
+                  size="small"
+                  variant="primary"
+                  color="var(--purple-light)"
+                  animation="bounce"
+                >
                   Add to Cart
                 </Button>
               }
               secondaryButton={
-                <Button size="small" variant="primary" color="var(--purple-light)" animation="bounce">
+                <Button
+                  size="small"
+                  variant="primary"
+                  color="var(--purple-light)"
+                  animation="bounce"
+                >
                   Add to Wishlist
                 </Button>
               }

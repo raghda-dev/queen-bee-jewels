@@ -1,10 +1,9 @@
-// app/(main)/home/classic/page.tsx
 
 import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify"; // Barrel import
 
+import Link from "next/link";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
-import Link from "next/link";
 
 
 export default async function Classic() {
@@ -33,7 +32,7 @@ export default async function Classic() {
               title={product.title}
               handle={product.handle}
               description={product.description ?? undefined}
-              image={product.featuredImage?.url ?? undefined}
+              img={product.featuredImage?.url ?? undefined}
               price={product.priceRange.minVariantPrice.amount}
               currencyCode={product.priceRange.minVariantPrice.currencyCode}
               images={product.images?.edges?.map((img) => img.node.url) || []}

@@ -1,10 +1,12 @@
+
+//client/app/(main)/components/Sidebar.tsx
+
 "use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
 import "../../styles/global.scss";
-import { LayoutGrid } from 'lucide-react';
-import { ChevronDown, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
+import { LayoutGrid, ChevronDown, ShoppingBag, Star, Gift, Percent, Venus, Mars } from "lucide-react";
 
 import Button from "./Button";
 
@@ -20,11 +22,11 @@ const Sidebar = () => {
       {/* Filter Options */}
       <ul className="space-y-2 mb-24">
         {[
-          { name: "all", icon: <LayoutGrid size={26} color="var(--gray-dark)"/>, href: "/home/" },
+          { name: "all", icon: <LayoutGrid size={26} color="var(--gray-dark)" />, href: "/home/" },
           { name: "men", icon: <Mars className="text-grayDark w-11 h-11" />, href: "/home/men" },
           { name: "women", icon: <Venus className="text-grayDark w-11 h-11" />, href: "/home/women" },
         ].map(({ name, icon, href }) => (
-          <Link key={name} href={href}>
+          <Link key={href} href={href}>
             <li className="flex items-center justify-start md:text-lg lg:text-xl xl:text-2xl cursor-pointer space-x-3 rounded-lg px-4 py-2 text-black font-semibold transition hover:bg-grayLight">
               {icon}
               <span className="capitalize hidden md:block">{name === "all" ? "View All" : `${name} Only`}</span>
@@ -86,7 +88,7 @@ const Sidebar = () => {
             { name: "On Sale Items", icon: <Percent size={24} className="text-grayDark w-9 sm:w-11" />, href: "/home/sale" },
             { name: "Gift Boxes", icon: <Gift size={24} className="text-grayDark w-9 sm:w-11" />, href: "/home/gifts" },
           ].map(({ name, icon, href }) => (
-            <Link key={name} href={href}>
+            <Link key={href} href={href}>
               <li className="px-4 py-2 text-black font-semibold transition underline cursor-pointer flex items-center space-x-3">
                 {icon}
                 <span className="hidden md:block md:text-lg lg:text-xl xl:text-2xl">{name}</span>
@@ -100,4 +102,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
