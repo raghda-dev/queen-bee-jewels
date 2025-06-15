@@ -1,68 +1,100 @@
+
+//client/app/(main)/home/product/[handle]/ProductDetailsClient.tsx
+
 'use client';
 
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Button from '../../../components/Button';
 import RelatedProductsScroller from './RelatedProductsScroller';
-import { ShopifyProductByHandle } from '../../../types/shopifyTypes';
+import { ShopifyProduct } from '../../../lib/shopify/products/types';
+import { useRouter } from 'next/navigation';
+
 
 interface ProductDetailsClientProps {
-  product: ShopifyProductByHandle;
-  recommendedProducts: ShopifyProductByHandle[];
+  product: ShopifyProduct;
+  recommendedProducts: ShopifyProduct[];
 }
 
 export default function ProductDetailsClient({
   product,
   recommendedProducts,
 }: ProductDetailsClientProps) {
-  const [selectedProduct, setSelectedProduct] = useState<ShopifyProductByHandle>(product);
+  const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct>(product);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleProductClick = async (clickedProduct: ShopifyProduct) => {
+    setLoading(true);
+    try {
+      // const res = await fetch(`/api/shopify/product/${clickedProduct.handle}`);
+      const res = await fetch(`${window.location.origin}/api/shopify/product/${clickedProduct.handle}`);
+      if (!res.ok) throw new Error('Failed to fetch product');
+      const fullProduct = await res.json();
+
+      if (fullProduct) {
+        setSelectedProduct(fullProduct);
+          router.push(`/home/product/${clickedProduct.handle}`, { scroll: false });
+      } else {
+        console.warn('No product found with handle:', clickedProduct.handle);
+      }
+    } catch (error) {
+      console.error('Error fetching product by handle:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const images =
     selectedProduct.images?.edges?.map((img) => img.node.url) ||
     (selectedProduct.featuredImage?.url ? [selectedProduct.featuredImage.url] : []);
 
-  const selectedOptions = selectedProduct.variants?.edges[0]?.node?.selectedOptions || [];
-
   return (
-    <div className="flex flex-col items-center justify-center py-12 space-y-5 transition-all
-      w-[26rem] xs:min-w-[30rem] sm:min-w-[50rem] md:min-w-[55rem] lg:min-w-[85rem]">
-      <div className="transition w-full overflow-hidden rounded-2xl 
-                     bg-white shadow-md border-t lg:min-h-[50rem] lg:max-w-[60vw]">
-        {/* Images Section */}
-        <div className="grid grid-cols-1 gap-4 border-b border-grayLight p-6 sm:grid-cols-3">
-          {images.map((imageSrc, index) => (
-            <div
-              key={index}
-              className="h-64 w-full overflow-hidden rounded-xl lg:h-96 lg:w-[90%]"
-            >
-              <Image
-                src={imageSrc}
-                alt={`Product view ${index + 1}`}
-                width={500}
-                height={500}
-                className="h-full object-cover"
-              />
+    <div className="min-h-screen w-[80vw] xs:w-[70vw] px-4 py-8 flex flex-col items-center justify-center">
+      <div className="w-[90%] bg-white rounded-2xl shadow-md overflow-hidden">
+        {/* Top: Images */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 border-b border-gray-300">
+          {images.length > 0 ? (
+            images.map((imageSrc, index) => (
+              <div
+                key={index}
+                    className={`w-full h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden rounded-xl
+                  ${index === 2 ? 'col-span-1 sm:col-span-2 lg:col-span-1' : ''}`}
+                >
+                <Image
+                  src={imageSrc}
+                  alt={`Product view ${index + 1}`}
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))
+          ) : (
+            <div className="w-full h-64 bg-gray-200 flex items-center justify-center rounded-xl col-span-full">
+              No image available
             </div>
-          ))}
+          )}
         </div>
 
-        {/* Details */}
-        <div className="flex flex-col gap-8 p-6 lg:flex-row">
-          <div className="flex-1 space-y-6 md:space-y-8 lg:space-y-12">
-            <div className="flex flex-wrap items-center justify-center gap-12 text-center font-josefin text-xl font-extrabold lg:text-3xl">
+        {/* Bottom: Details */}
+        <div className="flex flex-col lg:flex-row gap-8 p-6">
+          {/* Text & Buttons */}
+          <div className="flex-1 space-y-6">
+            <div className="flex flex-wrap justify-center items-center gap-6 text-center text-xl sm:text-2xl lg:text-3xl font-josefin font-bold">
               <span>{selectedProduct.vendor}</span>
               <span>{selectedProduct.productType}</span>
-              <span className='text-xl sm:text-2xl md:text-3xl font-bold font-josefin text-purpleDark'>
+              <span className="text-purpleDark">
                 ${selectedProduct.priceRange.minVariantPrice.amount}{' '}
                 {selectedProduct.priceRange.minVariantPrice.currencyCode}
               </span>
             </div>
 
-            <p className="text-center text-lg sm:text-xl lg:text-2xl leading-relaxed text-navyDark">
+            <p className="text-center text-base sm:text-lg md:text-xl leading-relaxed text-navyDark">
               {selectedProduct.description}
             </p>
 
-            <div className="flex justify-center gap-x-14">
+            <div className="flex justify-center gap-6">
               <Button variant="primary" size="medium" color="var(--purple-light)" animation="bounce">
                 Add to Cart
               </Button>
@@ -72,16 +104,11 @@ export default function ProductDetailsClient({
             </div>
           </div>
 
-          {/* Product Options / Tags */}
+          {/* Tags Box */}
           <div className="w-full max-w-md self-center rounded-xl border bg-gray-50 p-4 shadow-inner">
             <h3 className="mb-4 text-xl font-bold lg:text-2xl">Product Details</h3>
-            <ul className="space-y-4 text-orangeMain md:text-lg lg:text-xl">
-              {selectedOptions.map((opt, idx) => (
-                <li key={idx}>
-                  <strong>{opt.name}:</strong> {opt.value}
-                </li>
-              ))}
-              {selectedProduct.tags.length > 0 && (
+            <ul className="space-y-4 text-orangeMain text-sm sm:text-base md:text-lg lg:text-xl">
+              {selectedProduct.tags?.length > 0 && (
                 <li>
                   <strong>Tags:</strong> {selectedProduct.tags.join(', ')}
                 </li>
@@ -92,13 +119,16 @@ export default function ProductDetailsClient({
       </div>
 
       {/* Related Products */}
-      <div className="w-full flex flex-col items-center px-4 py-8 md:px-8">
+      <div className="w-full max-w-7xl px-4 md:px-8 py-10">
+        {loading && (
+          <p className="mb-4 text-center text-purpleDark text-lg font-semibold">
+            Loading product...
+          </p>
+        )}
         <RelatedProductsScroller
           currentProduct={product}
           recommendedProducts={recommendedProducts}
-          onProductClick={(clickedProduct) => {
-            setSelectedProduct(clickedProduct);
-          }}
+          onProductClick={handleProductClick}
         />
       </div>
     </div>

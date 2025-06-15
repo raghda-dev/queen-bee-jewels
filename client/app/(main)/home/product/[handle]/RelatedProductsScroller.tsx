@@ -1,14 +1,17 @@
+
+//client/app/(main)/home/product/[handle]/RelatedProductsScroller.tsx
+
 'use client';
 
 import React from 'react';
+import "../../../../styles/global.scss";
 import CompactCard from '../../../components/CompactCard';
-import { ShopifyProductByHandle } from '../../../types/shopifyTypes';
-import { useRouter } from 'next/navigation';
+import { ShopifyProduct } from '../../../lib/shopify/products/types';
 
 interface RelatedProductsScrollerProps {
-  currentProduct: ShopifyProductByHandle;
-  recommendedProducts: ShopifyProductByHandle[];
-  onProductClick?: (clickedProduct: ShopifyProductByHandle) => void; // ✅ added
+  currentProduct: ShopifyProduct;
+  recommendedProducts: ShopifyProduct[];
+  onProductClick: (product: ShopifyProduct) => void;
 }
 
 const RelatedProductsScroller: React.FC<RelatedProductsScrollerProps> = ({
@@ -16,9 +19,9 @@ const RelatedProductsScroller: React.FC<RelatedProductsScrollerProps> = ({
   recommendedProducts,
   onProductClick,
 }) => {
-  const router = useRouter();
-
-  if (!currentProduct) return <p className="text-gray-500">No current product available.</p>;
+  if (!currentProduct) {
+    return <p className="text-gray-500">No current product available.</p>;
+  }
 
   return (
     <div className="w-[90%] h-fit flex flex-col items-start overflow-hidden px-4 py-7 md:px-8">
@@ -35,12 +38,14 @@ const RelatedProductsScroller: React.FC<RelatedProductsScrollerProps> = ({
                 className="flex-shrink-0 w-[20vw] min-w-[20rem] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-[3/4] mb-5 mr-5"
               >
                 <CompactCard
-                  img={product.featuredImage?.url || '/staticAssets/images/fallback.jpeg'}
-                  collectionName={product.handle || 'Unknown'}
-                  price={product.priceRange.minVariantPrice.amount}
-                  onClick={() =>
-                    onProductClick ? onProductClick(product) : router.push(`/home/product/${product.handle}`)
+                  img={
+                    product.featuredImage?.url ||
+                    product.images?.edges?.[0]?.node?.url ||
+                    "/staticAssets/images/fallback.jpeg"
                   }
+                  collectionName={product.productType || 'Unknown'}
+                  price={`${product.priceRange.minVariantPrice.amount} ${product.priceRange.minVariantPrice.currencyCode}`}
+                  onClick={() => onProductClick(product)}
                 />
               </div>
             ))

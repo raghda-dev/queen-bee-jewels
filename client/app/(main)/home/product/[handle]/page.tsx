@@ -26,9 +26,10 @@ export default async function ProductDetails({
   return (
     <div className="min-h-screen flex items-center justify-center">
       <ProductDetailsClient
-        product={product}
-        recommendedProducts={recommendedProducts}
-      />
+       product={product}
+       recommendedProducts={recommendedProducts}
+/>
+
     </div>
   );
 }

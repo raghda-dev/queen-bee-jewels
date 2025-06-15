@@ -39,7 +39,7 @@ const Categories = () => {
         ].map((item, index) => (
           <div className="card-item" key={index}>
             <Card
-              image={item.image}
+              img={item.image}
               collectionName={item.collectionName}
               title={item.title}
               description={item.description}
