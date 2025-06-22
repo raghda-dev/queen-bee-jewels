@@ -1,3 +1,5 @@
+// client/app/(main)/components/SignUpIn.tsx
+
 'use client';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';

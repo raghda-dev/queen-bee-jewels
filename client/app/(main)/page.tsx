@@ -1,4 +1,4 @@
-// client/app/page.tsx
+// client/app/(main)/page.tsx
 
 import Head from 'next/head';
 import Hero from './components/Hero';

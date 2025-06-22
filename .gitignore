@@ -1,0 +1,20 @@
+# Node
+node_modules
+.env
+.env.local
+npm-debug.log
+
+# Logs
+logs
+*.log
+
+# Next.js
+.next
+out
+dist
+
+# OS
+.DS_Store
+
+# VS Code
+.vscode

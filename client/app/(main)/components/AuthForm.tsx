@@ -1,11 +1,13 @@
-import React, { ReactNode } from 'react';
+// client/app/(main)/components/AuthForm.tsx
+
+'use client';
+
+import React, { ReactNode, useState } from 'react';
 import styles from '../../styles/sass/modules/authform.module.scss';
 import Button from '../components/Button';
 import Image from 'next/image';
 import { FaCheckCircle } from 'react-icons/fa';
-
-// import G from '/staticAssets/icons/Google.svg';
-// import F from '/staticAssets/icons/Facebook.svg';
+import { Eye, EyeOff } from 'lucide-react';
 
 type FormField = {
   name: string;
@@ -37,48 +39,63 @@ const AuthForm: React.FC<AuthFormProps> = ({
       (title.left.toLowerCase().includes('sign in') ||
         title.right.toLowerCase().includes('sign in')));
 
+  const [visiblePasswords, setVisiblePasswords] = useState<{ [key: string]: boolean }>({});
+
   return (
     <div className={`${styles.authForm} relative`}>
-      {/* Top Icons */}
-      {topLeftIcon && (
-        <div className="absolute left-4 top-4">{topLeftIcon}</div>
-      )}
-      {topRightIcon && (
-        <div className="absolute right-4 top-4">{topRightIcon}</div>
-      )}
+      {topLeftIcon && <div className="absolute left-4 top-4">{topLeftIcon}</div>}
+      {topRightIcon && <div className="absolute right-4 top-4">{topRightIcon}</div>}
 
-      {/* Dynamic Titles */}
       {typeof title === 'string' ? (
         <h2 className="mb-5 text-center font-josefin text-3xl md:text-4xl xl:text-[2.5rem] font-semibold text-purpleMedium">
           {title}
         </h2>
       ) : (
         <div className="mb-6 mt-9 text-center flex items-center justify-between font-josefin text-[1.8rem] md:text-4xl font-semibold text-purpleMedium">
-          <h2>
-            {title.left}
-          </h2>
-          <h2>
-            {title.right}
-          </h2>
+          <h2>{title.left}</h2>
+          <h2>{title.right}</h2>
         </div>
       )}
 
-      {/* Form */}
       <form onSubmit={onSubmit}>
         {fields.map((field, index) => (
           <div key={index} className={styles.formGroup}>
             <label>{field.label}</label>
-            <input
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
-              required
-              className={styles.input}
-            />
+
+            {field.type === 'password' ? (
+              <div className="relative">
+                <input
+                  type={visiblePasswords[field.name] ? 'text' : 'password'}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  required
+                  className={styles.input}
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                  onClick={() =>
+                    setVisiblePasswords((prev) => ({
+                      ...prev,
+                      [field.name]: !prev[field.name],
+                    }))
+                  }
+                >
+                  {visiblePasswords[field.name] ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            ) : (
+              <input
+                type={field.type}
+                name={field.name}
+                placeholder={field.placeholder}
+                required
+                className={styles.input}
+              />
+            )}
           </div>
         ))}
 
-        {/* Remember Me & Forgot Password (Only for Login) */}
         {isLogin && (
           <div className="my-3 flex justify-between">
             <div className="flex items-center gap-2">
@@ -98,61 +115,36 @@ const AuthForm: React.FC<AuthFormProps> = ({
           </div>
         )}
 
-        {/* Submit Button */}
         <Button type="submit" shape="rectangle" color="var(--purple-medium)">
           {buttonText}
         </Button>
 
-        {/* OR Separator */}
         <div className={styles.separator}>
           <span> Or </span>
         </div>
 
-        {/* Social Login Buttons (Visible in Both Login & Signup) */}
-        <div>
-          <div className={styles.signupButtons}>
-            <Button
-              variant="secondary"
-              shape='rectangle'
-              size="medium"
-              rightIcon={
-                <Image src='/staticAssets/icons/Google.svg' alt="google icon" width={11} height={10} />
-              }
-            >
-              {isLogin ? 'Log in with' : 'Sign up with'}
-            </Button>
-            <Button
-              variant="secondary"
-              shape='rectangle'
-              size="medium"
-              rightIcon={
-                <Image src='/staticAssets/icons/Facebook.svg' alt="facebook icon" width={7} height={10} />
-              }
-            >
-              {isLogin ? 'Log in with' : 'Sign up with'}
-            </Button>
-          </div>
-        </div>
-
-        {/* "Don't Have an Account? Sign Up" (Only for Login) */}
-        {/* {isLogin && (
-          <div className="mt-5 flex items-center justify-center">
-            <p className="text-lg">Don’t have an account?</p>
-            <Button variant="textButton" 
-            color="var(--purple-medium)" 
-            size='small' shape='square'
-            onClick={() => {
-             //Ensure topLeftIcon is a valid React element and has an onclick function
-             if(React.isValidElement(topLeftIcon) && topLeftIcon.props?.onClick){
-              topLeftIcon.props.onClick();
-             }
+        <div className={styles.signupButtons}>
+          <Button
+            variant="secondary"
+            shape="rectangle"
+            size="medium"
+            rightIcon={
+              <Image src="/staticAssets/icons/Google.svg" alt="google icon" width={11} height={10} />
             }
-            } // ✅ Call the function passed from `Login.tsx`
-            >
-              <span className="underline text-lg">Sign up</span>
-            </Button>
-          </div>
-        )} */}
+          >
+            {isLogin ? 'Log in with' : 'Sign up with'}
+          </Button>
+          <Button
+            variant="secondary"
+            shape="rectangle"
+            size="medium"
+            rightIcon={
+              <Image src="/staticAssets/icons/Facebook.svg" alt="facebook icon" width={7} height={10} />
+            }
+          >
+            {isLogin ? 'Log in with' : 'Sign up with'}
+          </Button>
+        </div>
       </form>
     </div>
   );

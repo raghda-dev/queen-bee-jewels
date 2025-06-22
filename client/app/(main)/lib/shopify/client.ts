@@ -4,6 +4,11 @@
 const SHOPIFY_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN;
 const STOREFRONT_API_TOKEN = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
+
+console.log('SHOPIFY_DOMAIN:', SHOPIFY_DOMAIN);
+console.log('STOREFRONT_API_TOKEN:', STOREFRONT_API_TOKEN);
+
+
 if (!SHOPIFY_DOMAIN || !STOREFRONT_API_TOKEN) {
   throw new Error(
     'Missing Shopify credentials. Please check your environment variables.'

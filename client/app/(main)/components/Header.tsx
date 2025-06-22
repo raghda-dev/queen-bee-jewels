@@ -1,3 +1,5 @@
+//client/app/(main)/components/Header.tsx
+
 'use client';
 
 import React from 'react';
@@ -5,9 +7,21 @@ import '../../styles/global.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Search, ShoppingCart, Settings, LogOut } from 'lucide-react';
+import axiosInstance from '../lib/axios/axios';
+
 
 const Header = () => {
   const router = useRouter();
+
+const handleLogout = async () => {
+  try {
+    await axiosInstance.post('/auth/logout'); // ✅ Send logout request to clear cookie
+    router.push('/?mode=login'); // Redirect after logout
+  } catch (err) {
+    console.error("Logout failed", err);
+  }
+};
+
 
   return (
     <header className="__header min-w-[70vw] md:max-w-[100vw]">
@@ -62,7 +76,7 @@ const Header = () => {
         </button>
         <button
           className="p-2 border-r-2 text-black hover:bg-grayLight transition"
-          onClick={() => router.push('/')}
+          onClick={handleLogout}
         >
           <LogOut size={24} className="w-7 sm:w-9 md:w-11" />
         </button>

@@ -9,6 +9,7 @@ import {
   ShopifyProductsResponse,
   ShopifyProduct,
 } from '../lib/shopify/products/types';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 export default async function HomePage() {
   const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
@@ -17,6 +18,7 @@ export default async function HomePage() {
   );
 
   return (
+    <ProtectedRoute>
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
@@ -67,5 +69,6 @@ export default async function HomePage() {
         ))}
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
