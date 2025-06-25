@@ -1,61 +1,60 @@
 /* Hide Scrollbar */
 .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .hide-scrollbar {
-    -ms-overflow-style: none;  /* Hide scrollbar for IE/Edge */
-    scrollbar-width: none;  /* Hide scrollbar for Firefox */
-  }
-  
+  display: none;
+}
 
-  .heart-icon {
-    width: 24px;
-    height: 24px;
-    color: red;
-  }
+.hide-scrollbar {
+  -ms-overflow-style: none;      /* IE/Edge */
+  scrollbar-width: none;         /* Firefox */
+}
 
+/* Heart Icon */
+.heart-icon {
+  width: 24px;
+  height: 24px;
+  color: red;
+}
 
+/* Custom Cart/Product Grid Scrollbar */
+.custom-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: thin;                        /* Firefox */
+  scrollbar-color: var(--gray-light) transparent;
+}
 
-  .custom-scrollbar::-webkit-scrollbar {
-    height: 4px;
-  }
-  
- .custom-scrollbar::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;                                    /* Thin scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: var(--gray-light);
   border-radius: 10px;
-  width: 2rem;
- }
+  min-height: 20px;                              /* Shorter thumb */
+}
 
- .custom-scrollbar::-webkit-scrollbar-track {
+.custom-scrollbar::-webkit-scrollbar-track {
   background-color: transparent;
- }
+}
 
-
- /* Custom Scrollbar Styles */
+/* Scrollable Messages (e.g. Chat, History) */
 .scrollable-messages {
-  max-height: 90vh; /* 90% of viewport height */
+  max-height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
-  // padding-right: 0.25rem; /* match your pr-1 */
-  scrollbar-gutter: stable; /* prevents layout shift */
+  scrollbar-gutter: stable;                      /* Prevents layout shift */
+  scrollbar-width: thin;                         /* Firefox */
+  scrollbar-color: var(--gray-light) transparent;
 }
 
 .scrollable-messages::-webkit-scrollbar {
-  width: 6px; /* thinner than 8px or default */
+  width: 6px;
 }
 
 .scrollable-messages::-webkit-scrollbar-thumb {
-  background-color: var(--gray-light); /* use your color */
+  background-color: var(--gray-light);
   border-radius: 10px;
 }
 
 .scrollable-messages::-webkit-scrollbar-track {
   background-color: transparent;
-}
-
-/* Firefox */
-.scrollable-messages {
-  scrollbar-width: thin; /* makes it thinner in Firefox */
-  scrollbar-color: var(--gray-light) transparent;
 }

@@ -1,16 +1,17 @@
-// app/(main)/home/@modals/cart/page.tsx
+// app/(main)/home/@modals/(.)cart/page.tsx
 
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import CartItem from './components/CartItem';
 import Button from '../../../components/Button';
-import cartImg from '../../../../../public/staticAssets/images/fallback.jpeg';
-import { StaticImageData } from 'next/image';
 import '../../../../styles/global.scss';
 import usePreviousPath from '../../../utils/usePrevPath';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from 'app/(main)/lib/redux/store';
+
 
 export type CartItemType = {
   id: string;
@@ -20,91 +21,30 @@ export type CartItemType = {
   description: string;
   type: string;
   quantity: number;
-  imageUrl: StaticImageData;
+  imageUrl: string;
 };
 
 export default function CartModal() {
   const router = useRouter();
   const previousPath = usePreviousPath();
 
-  const [cartItems, setCartItems] = useState<CartItemType[]>([
-    {
-      id: '1',
-      name: 'Silver Ring',
-      price: 20,
-      oldPrice: 29.5,
-      description: 'A timeless silver piece for elegance.',
-      type: 'Silver',
-      quantity: 1,
-      imageUrl: cartImg,
-    },
-    {
-      id: '2',
-      name: 'Gold Necklace',
-      price: 45,
-      description: 'Elegant necklace with a modern touch.',
-      type: 'Gold',
-      quantity: 2,
-      imageUrl: cartImg,
-    },
-     {
-      id: '3',
-      name: 'Silver Ring',
-      price: 20,
-      oldPrice: 29.5,
-      description: 'A timeless silver piece for elegance.',
-      type: 'Silver',
-      quantity: 1,
-      imageUrl: cartImg,
-    },
-    {
-      id: '4',
-      name: 'Gold Necklace',
-      price: 45,
-      description: 'Elegant necklace with a modern touch.',
-      type: 'Gold',
-      quantity: 2,
-      imageUrl: cartImg,
-    },
-     {
-      id: '5',
-      name: 'Silver Ring',
-      price: 20,
-      oldPrice: 29.5,
-      description: 'A timeless silver piece for elegance.',
-      type: 'Silver',
-      quantity: 1,
-      imageUrl: cartImg,
-    },
-    {
-      id: '6',
-      name: 'Gold Necklace',
-      price: 45,
-      description: 'Elegant necklace with a modern touch.',
-      type: 'Gold',
-      quantity: 2,
-      imageUrl: cartImg,
-    },
-     {
-      id: '7',
-      name: 'Silver Ring',
-      price: 20,
-      oldPrice: 29.5,
-      description: 'A timeless silver piece for elegance.',
-      type: 'Silver',
-      quantity: 1,
-      imageUrl: cartImg,
-    },
-    {
-      id: '8',
-      name: 'Gold Necklace',
-      price: 45,
-      description: 'Elegant necklace with a modern touch.',
-      type: 'Gold',
-      quantity: 2,
-      imageUrl: cartImg,
-    },
-  ]);
+  // ✅ Moved useSelector inside the component
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  // ❌ OLD: Mocked local cart state – no longer needed with Redux
+  // const [cartItems, setCartItems] = useState<CartItemType[]>([
+  //   {
+  //     id: '1',
+  //     name: 'Silver Ring',
+  //     price: 20,
+  //     oldPrice: 29.5,
+  //     description: 'A timeless silver piece for elegance.',
+  //     type: 'Silver',
+  //     quantity: 1,
+  //     imageUrl: cartImg,
+  //   },
+  //   ...
+  // ]);
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -114,32 +54,33 @@ export default function CartModal() {
   const shipping = 10;
   const totalPrice = subtotal - discount + shipping;
 
-  const incrementQuantity = (id: string) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
+  // ❌ OLD: Local state logic (no longer used with Redux)
+  // const incrementQuantity = (id: string) => {
+  //   setCartItems((prev) =>
+  //     prev.map((item) =>
+  //       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+  //     )
+  //   );
+  // };
 
-  const decrementQuantity = (id: string) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
+  // const decrementQuantity = (id: string) => {
+  //   setCartItems((prev) =>
+  //     prev.map((item) =>
+  //       item.id === id && item.quantity > 1
+  //         ? { ...item, quantity: item.quantity - 1 }
+  //         : item
+  //     )
+  //   );
+  // };
 
-  const removeItem = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
+  // const removeItem = (id: string) => {
+  //   setCartItems((prev) => prev.filter((item) => item.id !== id));
+  // };
 
-  const moveToWishlist = (id: string) => {
-    console.log(`Moved item ${id} to wishlist`);
-    removeItem(id);
-  };
+  // const moveToWishlist = (id: string) => {
+  //   console.log(`Moved item ${id} to wishlist`);
+  //   removeItem(id);
+  // };
 
   const closeModal = () => {
     router.push(previousPath);
@@ -169,7 +110,7 @@ export default function CartModal() {
           {/* Cart + Summary Wrapper */}
           <div className="lg:flex lg:h-[60vh] lg:space-x-6">
             {/* Items Panel */}
-            <div className="h-[55vh] xs:h-[45vh] lg:h-[80vh] overflow-y-auto px-1 sm:px-2 lg:px-7 flex-1 pt-4">
+            <div className="h-[55vh] xs:h-[45vh] lg:h-[80vh] overflow-y-auto custom-scrollbar px-1 sm:px-2 lg:px-7 flex-1 pt-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {cartItems.length === 0 ? (
                   <p className="text-gray-500">Your cart is empty.</p>
@@ -178,10 +119,11 @@ export default function CartModal() {
                     <CartItem
                       key={item.id}
                       item={item}
-                      onIncrement={incrementQuantity}
-                      onDecrement={decrementQuantity}
-                      onRemove={removeItem}
-                      onWishlist={moveToWishlist}
+                      // 🚧 Redux actions to be connected later
+                      onIncrement={() => {}}
+                      onDecrement={() => {}}
+                      onRemove={() => {}}
+                      onWishlist={() => {}}
                     />
                   ))
                 )}
@@ -212,13 +154,11 @@ export default function CartModal() {
                     <span>${totalPrice.toFixed(2)}</span>
                   </div>
                 </div>
-                <Button
-                  size="small"
-                  shape="rectangle"
-                  color="var(--muted-red)"
-                >
-                  Proceed to Checkout
-                </Button>
+                <Link href="/checkout" className="mt-4">
+                  <Button size="small" shape="rectangle" color="var(--muted-red)">
+                    Proceed to Checkout
+                  </Button>
+                </Link>
                 <hr className="my-4" />
                 <p className="text-center text-sm text-gray-500">
                   Estimated Delivery by{' '}

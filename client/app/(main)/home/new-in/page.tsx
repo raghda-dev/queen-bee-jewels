@@ -1,9 +1,10 @@
 // app/(main)/home/new-in/page.tsx
 
-import Link from "next/link";
-import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify";
-import Card from "../../components/Card";
-import Button from "../../components/Button";
+import Link from 'next/link';
+import { fetchAllProducts, ShopifyProduct } from '../../lib/shopify';
+import Card from '../../components/Card';
+import Button from '../../components/Button';
+import AddToCartButton from 'app/(main)/components/AddToCartButton';
 
 export default async function NewIn() {
   const products: ShopifyProduct[] = await fetchAllProducts();
@@ -11,9 +12,7 @@ export default async function NewIn() {
   // Filter for "new-in" or "silver" tags
   const newInProducts = products.filter((product) => {
     const tags = product.tags?.map((tag) => tag.toLowerCase()) || [];
-    return tags.some(
-      (tag) => tag.includes("new-in") || tag.includes("silver")
-    );
+    return tags.some((tag) => tag.includes('new-in') || tag.includes('silver'));
   });
 
   return (
@@ -39,16 +38,7 @@ export default async function NewIn() {
                 productType={product.productType ?? undefined}
                 vendor={product.vendor ?? undefined}
                 tags={product.tags}
-                primaryButton={
-                  <Button
-                    size="small"
-                    variant="primary"
-                    color="var(--purple-light)"
-                    animation="bounce"
-                  >
-                    Add to Cart
-                  </Button>
-                }
+                primaryButton={<AddToCartButton product={product} />}
                 secondaryButton={
                   <Button
                     size="small"

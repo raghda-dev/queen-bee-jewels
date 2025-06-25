@@ -9,7 +9,8 @@ import Button from '../../../components/Button';
 import RelatedProductsScroller from './RelatedProductsScroller';
 import { ShopifyProduct } from '../../../lib/shopify/products/types';
 import { useRouter } from 'next/navigation';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../lib/redux/cartSlice'; // ✅ Add import
 
 interface ProductDetailsClientProps {
   product: ShopifyProduct;
@@ -23,18 +24,18 @@ export default function ProductDetailsClient({
   const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct>(product);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch(); // ✅ Redux hook
 
   const handleProductClick = async (clickedProduct: ShopifyProduct) => {
     setLoading(true);
     try {
-      // const res = await fetch(`/api/shopify/product/${clickedProduct.handle}`);
       const res = await fetch(`${window.location.origin}/api/shopify/product/${clickedProduct.handle}`);
       if (!res.ok) throw new Error('Failed to fetch product');
       const fullProduct = await res.json();
 
       if (fullProduct) {
         setSelectedProduct(fullProduct);
-          router.push(`/home/product/${clickedProduct.handle}`, { scroll: false });
+        router.push(`/home/product/${clickedProduct.handle}`, { scroll: false });
       } else {
         console.warn('No product found with handle:', clickedProduct.handle);
       }
@@ -45,6 +46,20 @@ export default function ProductDetailsClient({
     }
   };
 
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: selectedProduct.id,
+        name: selectedProduct.title,
+        price: parseFloat(selectedProduct.priceRange.minVariantPrice.amount),
+        imageUrl: selectedProduct.featuredImage?.url || '',
+        quantity: 1,
+        description: selectedProduct.description || 'No description',
+        type: selectedProduct.productType || 'General',
+      })
+    );
+  };
+
   const images =
     selectedProduct.images?.edges?.map((img) => img.node.url) ||
     (selectedProduct.featuredImage?.url ? [selectedProduct.featuredImage.url] : []);
@@ -53,14 +68,14 @@ export default function ProductDetailsClient({
     <div className="min-h-screen w-[80vw] xs:w-[70vw] px-4 py-8 flex flex-col items-center justify-center">
       <div className="w-[90%] bg-white rounded-2xl shadow-md overflow-hidden">
         {/* Top: Images */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 border-b border-gray-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 border-b border-gray-300">
           {images.length > 0 ? (
             images.map((imageSrc, index) => (
               <div
                 key={index}
-                    className={`w-full h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden rounded-xl
+                className={`w-full h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden rounded-xl
                   ${index === 2 ? 'col-span-1 sm:col-span-2 lg:col-span-1' : ''}`}
-                >
+              >
                 <Image
                   src={imageSrc}
                   alt={`Product view ${index + 1}`}
@@ -95,7 +110,13 @@ export default function ProductDetailsClient({
             </p>
 
             <div className="flex justify-center gap-6">
-              <Button variant="primary" size="medium" color="var(--purple-light)" animation="bounce">
+              <Button
+                variant="primary"
+                size="medium"
+                color="var(--purple-light)"
+                animation="bounce"
+                onClick={handleAddToCart} // ✅ onClick
+              >
                 Add to Cart
               </Button>
               <Button variant="primary" size="medium" color="var(--purple-light)" animation="bounce">

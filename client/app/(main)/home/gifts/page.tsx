@@ -1,9 +1,10 @@
 // app/(main)/home/gifts/page.tsx
 
-import Link from "next/link";
-import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify";
-import Card from "../../components/Card";
-import Button from "../../components/Button";
+import Link from 'next/link';
+import { fetchAllProducts, ShopifyProduct } from '../../lib/shopify';
+import Card from '../../components/Card';
+import Button from '../../components/Button';
+import AddToCartButton from 'app/(main)/components/AddToCartButton';
 
 export default async function GiftBoxes() {
   const products: ShopifyProduct[] = await fetchAllProducts();
@@ -11,14 +12,18 @@ export default async function GiftBoxes() {
   // Filter products tagged with "gifts" or "silver"
   const giftProducts = products.filter((product) => {
     const tags = product.tags?.map((tag) => tag.toLowerCase()) || [];
-    return tags.some((tag) => tag.includes("gifts") || tag.includes("silver"));
+    return tags.some((tag) => tag.includes('gifts') || tag.includes('silver'));
   });
 
   return (
     <div className="flex justify-evenly py-14">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {giftProducts.map((product) => (
-          <Link key={product.id} href={`/home/product/${product.handle}`} legacyBehavior>
+          <Link
+            key={product.id}
+            href={`/home/product/${product.handle}`}
+            legacyBehavior
+          >
             <a>
               <Card
                 size="small"
@@ -33,16 +38,7 @@ export default async function GiftBoxes() {
                 productType={product.productType ?? undefined}
                 vendor={product.vendor ?? undefined}
                 tags={product.tags}
-                primaryButton={
-                  <Button
-                    size="small"
-                    variant="primary"
-                    color="var(--purple-light)"
-                    animation="bounce"
-                  >
-                    Add to Cart
-                  </Button>
-                }
+                primaryButton={<AddToCartButton product={product} />}
                 secondaryButton={
                   <Button
                     size="small"

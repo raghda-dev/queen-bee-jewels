@@ -1,23 +1,26 @@
 // app/(main)/home/silver/page.tsx
 
-import Link from "next/link";
-import Card from "../../components/Card";
-import Button from "../../components/Button";
-import { shopifyQuery } from "../../lib/shopify/client";
-import { GET_PRODUCTS_QUERY } from "../../lib/shopify/products/queries";
+import Link from 'next/link';
+import Card from '../../components/Card';
+import Button from '../../components/Button';
+import { shopifyQuery } from '../../lib/shopify/client';
+import { GET_PRODUCTS_QUERY } from '../../lib/shopify/products/queries';
 import {
   ShopifyProductsResponse,
   ShopifyProduct,
-} from "../../lib/shopify/products/types";
+} from '../../lib/shopify/products/types';
+import AddToCartButton from 'app/(main)/components/AddToCartButton';
 
 export default async function SilverOnlyPage() {
   const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
-  const products: ShopifyProduct[] = data.products.edges.map((edge) => edge.node);
+  const products: ShopifyProduct[] = data.products.edges.map(
+    (edge) => edge.node
+  );
 
   const silverProducts = products.filter((product) => {
-    const productType = product.productType?.toLowerCase() || "";
+    const productType = product.productType?.toLowerCase() || '';
     const tags = product.tags?.map((tag) => tag.toLowerCase()) || [];
-    return productType.includes("silver") || tags.includes("silver");
+    return productType.includes('silver') || tags.includes('silver');
   });
 
   return (
@@ -38,16 +41,7 @@ export default async function SilverOnlyPage() {
               productType={product.productType ?? undefined}
               vendor={product.vendor ?? undefined}
               tags={product.tags}
-              primaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
-                  Add to Cart
-                </Button>
-              }
+              primaryButton={<AddToCartButton product={product} />}
               secondaryButton={
                 <Button
                   size="small"

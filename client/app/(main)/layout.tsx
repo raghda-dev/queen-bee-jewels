@@ -1,9 +1,6 @@
-
-
 // app/(main)/layout.tsx
 
-import '../styles/global.scss';
-import '../styles/tailwind.css';
+
 import Footer from './components/Footer';
 
 export const metadata = {

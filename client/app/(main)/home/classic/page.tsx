@@ -1,20 +1,18 @@
+import { fetchAllProducts, ShopifyProduct } from '../../lib/shopify'; // Barrel import
 
-import { fetchAllProducts, ShopifyProduct } from "../../lib/shopify"; // Barrel import
-
-import Link from "next/link";
-import Card from "../../components/Card";
-import Button from "../../components/Button";
-
+import Link from 'next/link';
+import Card from '../../components/Card';
+import Button from '../../components/Button';
+import AddToCartButton from 'app/(main)/components/AddToCartButton';
 
 export default async function Classic() {
-  
   const products: ShopifyProduct[] = await fetchAllProducts();
 
   // Filter by productType or tags
   const filteredClassics = products.filter(
     (product) =>
-      product.productType?.toLowerCase() === "classic" ||
-      product.tags?.map((t) => t.toLowerCase()).includes("classic")
+      product.productType?.toLowerCase() === 'classic' ||
+      product.tags?.map((t) => t.toLowerCase()).includes('classic')
   );
 
   return (
@@ -39,16 +37,7 @@ export default async function Classic() {
               productType={product.productType ?? undefined}
               vendor={product.vendor ?? undefined}
               tags={product.tags}
-              primaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
-                  Add to Cart
-                </Button>
-              }
+              primaryButton={<AddToCartButton product={product} />}
               secondaryButton={
                 <Button
                   size="small"

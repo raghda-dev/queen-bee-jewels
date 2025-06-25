@@ -10,12 +10,17 @@ import {
   ShopifyProduct,
 } from '../lib/shopify/products/types';
 import ProtectedRoute from '../components/ProtectedRoute';
+import AddToCartButton from '../components/AddToCartButton';
+
+
+
 
 export default async function HomePage() {
   const data: ShopifyProductsResponse = await shopifyQuery(GET_PRODUCTS_QUERY);
   const products: ShopifyProduct[] = data.products.edges.map(
     (edge) => edge.node
   );
+
 
   return (
     <ProtectedRoute>
@@ -43,17 +48,8 @@ export default async function HomePage() {
                 productType={product.productType ?? undefined}
                 vendor={product.vendor ?? undefined}
                 tags={product.tags}
-                primaryButton={
-                  <Button
-                    size="small"
-                    variant="primary"
-                    color="var(--purple-light)"
-                    animation="bounce"
-                  >
-                    Add to Cart
-                  </Button>
-                }
-                secondaryButton={
+                  primaryButton={<AddToCartButton product={product} />}
+                  secondaryButton={
                   <Button
                     size="small"
                     variant="primary"

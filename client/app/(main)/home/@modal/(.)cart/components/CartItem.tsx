@@ -1,3 +1,5 @@
+// client/app/(main)/home/@modal/(.)cart/components/CartItem.tsx
+
 'use client'
 
 import Image from 'next/image'
