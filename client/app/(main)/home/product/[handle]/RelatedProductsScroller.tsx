@@ -6,7 +6,7 @@
 import React from 'react';
 import "../../../../styles/global.scss";
 import CompactCard from '../../../components/CompactCard';
-import { ShopifyProduct } from '../../../lib/shopify/products/types';
+import { ShopifyProduct } from '../../../../../../lib/shopify/products/types';
 
 interface RelatedProductsScrollerProps {
   currentProduct: ShopifyProduct;

@@ -1,7 +1,7 @@
-// client/app/(main)/home/api/shopify/product/[handle]/route.ts
+// client/app/api/shopify/product/[handle]/route.ts
 
 import { NextResponse } from 'next/server';
-import { fetchShopifyProductByHandle } from '../../../../(main)/lib/shopify';
+import { fetchShopifyProductByHandle } from '../../../../../../lib/shopify';
 
 export async function GET(
   request: Request,

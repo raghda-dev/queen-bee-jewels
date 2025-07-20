@@ -1,4 +1,4 @@
-// client/app/(main)/home/api/test-shopify/route.ts
+// client/app/api/test-shopify/route.ts
 
 export async function GET() {
   try {

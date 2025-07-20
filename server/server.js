@@ -1,12 +1,17 @@
 // server/server.js
 
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables
+
+import express from 'express';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import cartRoutes from './routes/cart.js';
+import wishlistRoutes from './routes/wishlist.js';
 
-dotenv.config(); // Load environment variables
+
+
 connectDB(); // Connect to MongoDB
 
 const app = express();
@@ -22,6 +27,10 @@ app.use(express.json());
 
 // Route middleware for authentication
 app.use('/api/auth', authRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/wishlist', wishlistRoutes);
+
+
 
 // Default root route (optional)
 app.get('/', (req, res) => {

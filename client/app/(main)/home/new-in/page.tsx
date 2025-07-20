@@ -1,10 +1,11 @@
 // app/(main)/home/new-in/page.tsx
 
 import Link from 'next/link';
-import { fetchAllProducts, ShopifyProduct } from '../../lib/shopify';
+import { fetchAllProducts, ShopifyProduct } from "../../../../../lib/shopify";
 import Card from '../../components/Card';
-import Button from '../../components/Button';
 import AddToCartButton from 'app/(main)/components/AddToCartButton';
+import AddToWishlistButton from 'app/(main)/components/AddToWishlistButton';
+
 
 export default async function NewIn() {
   const products: ShopifyProduct[] = await fetchAllProducts();
@@ -24,7 +25,6 @@ export default async function NewIn() {
             href={`/home/product/${product.handle}`}
             legacyBehavior
           >
-            <a>
               <Card
                 size="small"
                 id={product.id}
@@ -40,17 +40,9 @@ export default async function NewIn() {
                 tags={product.tags}
                 primaryButton={<AddToCartButton product={product} />}
                 secondaryButton={
-                  <Button
-                    size="small"
-                    variant="primary"
-                    color="var(--purple-light)"
-                    animation="bounce"
-                  >
-                    Add to Wishlist
-                  </Button>
+                  <AddToWishlistButton product={product} />
                 }
               />
-            </a>
           </Link>
         ))}
       </div>

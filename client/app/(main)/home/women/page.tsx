@@ -1,10 +1,11 @@
 // client/app/(main)/home/women/page.tsx
 
 import Link from 'next/link';
-import { fetchAllProducts, ShopifyProduct } from '../../lib/shopify';
+import { fetchAllProducts, ShopifyProduct } from '../../../../../lib/shopify';
 import Card from '../../components/Card';
-import Button from '../../components/Button';
 import AddToCartButton from 'app/(main)/components/AddToCartButton';
+import AddToWishlistButton from 'app/(main)/components/AddToWishlistButton';
+
 
 export default async function WomenOnly() {
   const products: ShopifyProduct[] = await fetchAllProducts();
@@ -24,14 +25,13 @@ export default async function WomenOnly() {
             href={`/home/product/${product.handle}`}
             legacyBehavior
           >
-            <a>
               <Card
                 size="small"
                 id={product.id}
                 title={product.title}
                 handle={product.handle}
                 description={product.description ?? undefined}
-                img={product.featuredImage?.url ?? undefined} // consistent with other pages
+                img={product.featuredImage?.url ?? undefined}
                 price={product.priceRange.minVariantPrice.amount}
                 currencyCode={product.priceRange.minVariantPrice.currencyCode}
                 images={product.images?.edges?.map((img) => img.node.url) || []}
@@ -40,17 +40,9 @@ export default async function WomenOnly() {
                 tags={product.tags}
                 primaryButton={<AddToCartButton product={product} />}
                 secondaryButton={
-                  <Button
-                    size="small"
-                    variant="primary"
-                    color="var(--purple-light)"
-                    animation="bounce"
-                  >
-                    Add to Wishlist
-                  </Button>
+                  <AddToWishlistButton product={product} />
                 }
               />
-            </a>
           </Link>
         ))}
       </div>

@@ -1,4 +1,4 @@
-// app/(main)/utils/usePrevPath.ts
+// client/app/(main)/utils/usePrevPath.ts
 
 'use client';
 import { useEffect, useState } from 'react';

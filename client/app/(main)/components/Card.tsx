@@ -1,4 +1,9 @@
+// client/app/(main)/components/Card.tsx
+
+'use client';
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import Image, { StaticImageData } from 'next/image';
 import CompactCard from './CompactCard';
 
@@ -23,7 +28,6 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
-  id,
   handle,
   title,
   img,
@@ -32,18 +36,20 @@ const Card: React.FC<CardProps> = ({
   price,
   currencyCode,
   productType,
-  vendor,
-  tags,
-  images,
   primaryButton,
   secondaryButton,
   size = 'large',
   context,
   showHeart = false,
 }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    if (handle) router.push(`/home/product/${handle}`);
+  };
+
   const cardSize = {
-    small:
-      'w-[20rem] h-[50vh] md:min-h-[20rem] md:max-h-[33rem] min-w-[18rem] max-w-[20rem] md:min-w-[21rem]',
+    small: 'w-[20rem] h-[50vh] md:min-h-[20rem] md:max-h-[33rem] min-w-[18rem] max-w-[20rem] md:min-w-[21rem]',
     medium:
       'w-[20rem] h-[53vh] min-h-[50vh] min-w-[21rem] max-w-[20rem] xs:min-w-[23rem] xs:max-w-[24rem] lg:min-w-[26rem] lg:max-w-[70rem] lg:min-h-[40rem]',
     large:
@@ -63,6 +69,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
+      onClick={handleCardClick}
       className={`relative z-10 flex flex-col shadow-md ${cardSize[size]} cursor-pointer items-center justify-between overflow-hidden rounded-xl bg-grayLight bg-opacity-80 px-4 py-4 transition-all duration-700 hover:scale-105 hover:shadow-lg`}
     >
       <div className="relative mb-6 h-[18rem] w-full overflow-hidden rounded-t-xl bg-grayLight">
@@ -114,8 +121,22 @@ const Card: React.FC<CardProps> = ({
 
       {(primaryButton || secondaryButton) && (
         <div className="mt-4 flex w-full justify-center gap-2">
-          {primaryButton}
-          {secondaryButton}
+          {primaryButton && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              {primaryButton}
+            </div>
+          )}
+          {secondaryButton && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              {secondaryButton}
+            </div>
+          )}
         </div>
       )}
     </div>

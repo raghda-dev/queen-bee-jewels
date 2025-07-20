@@ -1,18 +1,9 @@
 
 // app/(main)/home/settings/chat/page.tsx
 
-'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
-export default function SettingsRefreshRedirect() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const prev = localStorage.getItem('previousPath') || '/home';
-    router.replace(prev);
-  }, [router]);
-  
-  return null;
+export default function RedirectWishlist() {
+  redirect('/home?modal=chat');
 }

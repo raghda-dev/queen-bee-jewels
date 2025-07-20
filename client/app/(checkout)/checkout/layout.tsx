@@ -21,7 +21,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
         </Link>
 
         {/* Back to Shop Button */}
-        <Link href="/home/cart">
+        <Link href="/home">
           <Button
             size="large"
             variant="textButton"

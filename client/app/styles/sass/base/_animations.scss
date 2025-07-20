@@ -61,13 +61,6 @@
   @include slideInFromLeft(0.1s); //no delay for the first child
 }
 
-// @media (min-width: 768px) {
-//   .card-item {
-//     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; // apply transition on the default state
 
-//     &:active {
-//       transform: translateY(-5px) scale(1.05);
-//       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-//     }
-//   }
-// }
+
+

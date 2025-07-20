@@ -7,10 +7,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Button from '../../../components/Button';
 import RelatedProductsScroller from './RelatedProductsScroller';
-import { ShopifyProduct } from '../../../lib/shopify/products/types';
+import { ShopifyProduct } from '../../../../../../lib/shopify/products/types';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../lib/redux/cartSlice'; // ✅ Add import
+// import { addToCart } from '../../../lib/redux/cart/cartSlice';
 
 interface ProductDetailsClientProps {
   product: ShopifyProduct;

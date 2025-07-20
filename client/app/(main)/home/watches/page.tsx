@@ -1,10 +1,11 @@
 // app/(main)/home/watches/page.tsx
 
-import { fetchAllProducts, ShopifyProduct } from '../../lib/shopify'; // Barrel import
+import { fetchAllProducts, ShopifyProduct } from '../../../../../lib/shopify'; // Barrel import
 import Card from '../../components/Card';
-import Button from '../../components/Button';
 import Link from 'next/link';
 import AddToCartButton from 'app/(main)/components/AddToCartButton';
+import AddToWishlistButton from 'app/(main)/components/AddToWishlistButton';
+
 
 export default async function Watches() {
   const products: ShopifyProduct[] = await fetchAllProducts();
@@ -37,14 +38,7 @@ export default async function Watches() {
               tags={product.tags}
               primaryButton={<AddToCartButton product={product} />}
               secondaryButton={
-                <Button
-                  size="small"
-                  variant="primary"
-                  color="var(--purple-light)"
-                  animation="bounce"
-                >
-                  Add to Wishlist
-                </Button>
+                <AddToWishlistButton product={product} />
               }
             />
           </Link>

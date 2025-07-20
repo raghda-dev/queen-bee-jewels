@@ -6,7 +6,7 @@ import ProductDetailsClient from './ProductDetailsClient';
 import {
   fetchShopifyProductByHandle,
   fetchRecommendedProducts,
-} from '../../../lib/shopify'; // ✅ updated barrel import
+} from "../../../../../../lib/shopify"; // ✅ updated barrel import
 
 export default async function ProductDetails({
   params,

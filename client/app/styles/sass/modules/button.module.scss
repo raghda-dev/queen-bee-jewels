@@ -1,166 +1,101 @@
-// styles/sass/modules/button.module.scss
-@use '../abstracts/mixins' as *; // Add this to use the mixin
+@use '../abstracts/mixins' as *;
+
+// -------------------------
+// BUTTON BASE STYLES
+// -------------------------
 
 .button {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  justify-items: center;
-  transition: all 0.3s ease-in-out;
+  justify-content: center;
   text-transform: capitalize;
-  // border: 2px solid currentColor;
-  box-sizing: border-box !important;
-
-    // Add these dynamic hover color changes
-    // &.hover-text-color {
-    //   &:hover {
-    //     color: var(--hover-text-color);
-    //   }
-    // }
-  
-    &.hover-bg-color {
-      &:hover {
-        background-color: var(--hover-bg-color);
-      }
-    }
-  
-  &.pulse {
-    animation: pulse .6s ease-in-out infinite;
-  }
-  &.none {
-    background-color: transparent;
-    border: none;
-    // color: currentColor;
-  }
-  
-  &.slide-in-bottom {
-    transform: translateY(0);
-    transition: all .3s ease;
-  }
-
-  &.shadow-expand {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
-
-    &:hover {
-      box-shadow: 0 10px 15px rgba(0, 0, 0, .2);
-    }
-  }
-
-  &.text-underline {
-    position: relative;
-
-    &::after {
-      content: " ";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: currentColor;
-      transition: width .3s ease-in-out;
-    }
-
-    &:hover::after {
-      width: 100%;
-    }
-  }
-
-  &.bounce {
-    animation: bounce .5s ease;
-  }
-
-  &.flip {
-    transform: rotateY(180deg);
-    transition: transform .5s ease;
-  }
-
-  &.wave {
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: " ";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: rgba(255, 255, 255, .2);
-      border-radius: 50%;
-      animation: wave .6s linear;
-      transform: translate(-50%, -50%);
-    }
-  }
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
 
   &:hover {
     transform: scale(1.01);
   }
-}
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
+  &.bounce {
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
   }
 }
 
-@keyframes bounce {
+// -------------------------
+// ICON WRAPPER + CART ICON
+// -------------------------
 
-  0% {
-    transform: scale(1);
-  }
-
-  25% {
-    transform: scale(1.1);
-  }
-
-  50% {
-    transform: scale(1);
-  }
-
-  75% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+.icon-wrapper {
+  display: inline-block;
 }
 
-
-@keyframes wave {
-  0% {
-    width: 30%;
-    height: 30%;
-    opacity: 1;
-  }
-
-  100% {
-    width: 300%;
-    height: 300%;
-    opacity: 0;
-  }
+.cart-icon {
+  display: inline-block;
 }
+
+.cart-icon.rotate-pop {
+  animation: iconRotatePop 0.5s ease;
+}
+
+@keyframes iconRotatePop {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(15deg) scale(1.2); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+// -------------------------
+// ARROW DOWN EXAMPLE
+// -------------------------
 
 .arrow-down {
   display: inline-block;
   opacity: 0;
   transform: translateY(-20px);
-  transition: all .7s ease;
+  transition: all 0.5s ease;
 }
 
 .button:hover .arrow-down {
   opacity: 1;
   transform: translateY(0);
-  padding-right: .1rem;
+  padding-right: 0.1rem;
 }
 
+// -------------------------
+// TEXT UNDERLINE HOVER EFFECT
+// -------------------------
+
+.text-underline {
+  position: relative;
+  display: inline-block;
+  color: inherit; // keep the text color
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: .4px;
+    background-color: currentColor;
+    transition: width 0.5s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+// -------------------------
+// COLOR VARIANTS
+// -------------------------
 
 .primary {
   background-color: var(--navy-dark);
@@ -173,7 +108,7 @@
 .gradient {
   background-color: transparent;
   color: var(--gradient-color, var(--gradient-start));
-  border: 2px solid transparent; // Ensures border is visible
+  border: 2px solid transparent;
   border-image-source: linear-gradient(
     to right,
     var(--gradient-color, var(--gradient-start)),
@@ -189,10 +124,9 @@
 
 .secondary {
   background-color: transparent;
-  border: .16rem solid var(--navy-dark);
+  border: 0.16rem solid var(--navy-dark);
   color: var(--navy-dark);
 }
-
 
 .textButton {
   background-color: transparent;
@@ -200,27 +134,26 @@
   border: none;
 }
 
-// Button Shapes
-.rounded {
-  border-radius: 12px;
-}
+// -------------------------
+// BUTTON SHAPES
+// -------------------------
 
-.pill {
-  border-radius: 50px;
-}
-
-.square {
-  border-radius: 2px;
-}
+.rounded { border-radius: 12px; }
+.pill { border-radius: 50px; }
+.square { border-radius: 2px; }
 
 .rectangle {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   height: 3.3rem;
 }
+
+// -------------------------
+// BUTTON SIZES
+// -------------------------
 
 .large {
   padding: 11px 15px;
@@ -242,34 +175,41 @@
   padding: 8px 8px;
   font-size: 1rem;
   font-weight: 500;
-  // border-radius: .7rem;'
 
   @include responsive($size: medium) {
     padding: 7px 7px;
     font-size: 1rem;
-    // line-height: 1.4rem;
   }
 
   @include responsive($size: small) {
     padding: 6.5px 7px;
-    font-size: .92rem;
-    // line-height: 2rem;
+    font-size: 0.92rem;
   }
-
 }
 
 .small {
   padding: 5.5px 6px;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 600;
-
 
   @include responsive($size: small) {
     padding: 2px 6px;
     font-weight: 400;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
-
 }
 
+// -------------------------
+// OPTIONAL EXAMPLE EFFECTS
+// -------------------------
 
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wave {
+  0% { width: 30%; height: 30%; opacity: 1; }
+  100% { width: 300%; height: 300%; opacity: 0; }
+}

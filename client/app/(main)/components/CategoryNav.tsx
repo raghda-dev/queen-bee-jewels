@@ -25,9 +25,9 @@ const CategoryNav = () => {
             key={category.path}
             href={category.path}
             className={`px-5 py-3 flex items-center text-md sm:text-lg md:text-xl lg:text-3xl
-              rounded-r-sm capitalize font-normal transition border-l 
+              rounded-r-sm capitalize font-normal transition-all hover:transition-all hover:duration-150 hover:ease-linear border-l 
               border-r border-t border-grayLight hover:bg-purpleLight hover:text-white ${
-              isActive ? "bg-purpleLight border-none text-white" : ""
+              isActive ? "bg-purpleLight border-none text-white duration-300 ease-in-out" : ""
             }`}
           >
             {category.name}

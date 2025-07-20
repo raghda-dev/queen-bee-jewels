@@ -15,8 +15,8 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('/auth/logout'); // ✅ Send logout request to clear cookie
-      router.push('/?mode=login'); // Redirect after logout
+      await axiosInstance.post('/auth/logout');
+      router.push('/?mode=login');
     } catch (err) {
       console.error('Logout failed', err);
     }
@@ -26,10 +26,7 @@ const Header = () => {
     <header className="__header min-w-[70vw] md:max-w-[100vw]">
       <div className="relative box-border flex h-80 w-full flex-col justify-normal bg-navyDark px-3 py-5">
         <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="relative z-50 cursor-pointer"
-          >
+          <Link href="/" className="relative z-50 cursor-pointer">
             <Image
               src="/staticAssets/images/logo.svg"
               alt="Logo"
@@ -72,6 +69,29 @@ const Header = () => {
           <ShoppingCart size={24} className="w-7 sm:w-9 md:w-11" />
         </button>
         <button
+          className="border-2 p-2 text-black transition hover:bg-grayLight"
+          onClick={() => router.push('/home/wishlist', { scroll: false })}
+        >
+          {/* <HeartIcon className='w-12 h-9 font-bold'/> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="h-9 w-10 text-black"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+       2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 
+       14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 
+       6.86-8.55 11.54L12 21.35z"
+            />
+          </svg>
+        </button>
+        <button
           className="border-r-2 p-2 text-black transition hover:bg-grayLight"
           onClick={() => router.push('/home/settings/', { scroll: false })}
         >
@@ -81,7 +101,7 @@ const Header = () => {
           className="border-r-2 p-2 text-black transition hover:bg-grayLight"
           onClick={handleLogout}
         >
-          <LogOut size={24} className="w-7 sm:w-9 md:w-11" />
+          <LogOut size={24} className="w-7 font-extrabold sm:w-9 md:w-11" />
         </button>
       </div>
     </header>

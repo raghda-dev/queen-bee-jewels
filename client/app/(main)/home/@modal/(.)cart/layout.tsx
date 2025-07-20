@@ -1,5 +1,5 @@
-// app/(main)/home/@modals/cart/layout.tsx
-//🛒 
+// client/app/(main)/home/@modal/(.)cart/layout.tsx
+
 
 'use client';
 

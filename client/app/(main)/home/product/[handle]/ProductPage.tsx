@@ -3,7 +3,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShopifyProduct } from '../../../lib/shopify/types';
+import { ShopifyProduct } from '../../../../../../lib/shopify/types';
 import ProductDetailsClient from './ProductDetailsClient';
 import RelatedProductsScroller from './RelatedProductsScroller';
 

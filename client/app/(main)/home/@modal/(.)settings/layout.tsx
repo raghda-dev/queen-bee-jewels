@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { X } from 'lucide-react';
 
 import SettingsIcon from '../../../../../public/staticAssets/icons/SettingsIcon.png';
-import CardsIcon from '../../../../../public/staticAssets/icons/CardsIcon.png';
+// import CardsIcon from '../../../../../public/staticAssets/icons/CardsIcon.png';
 import Notifications from '../../../../../public/staticAssets/icons/Notification.png';
 import ChatIcon from '../../../../../public/staticAssets/icons/ChatIcon.png';
 
@@ -53,7 +53,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
             <ul className="space-y-6">
               {[
                 { href: '/home/settings', icon: SettingsIcon, label: 'account' },
-                { href: '/home/settings/cards', icon: CardsIcon, label: 'cards' },
+                // { href: '/home/settings/cards', icon: CardsIcon, label: 'cards' },
                 { href: '/home/settings/notifications', icon: Notifications, label: 'notifications' },
                 { href: '/home/settings/chat', icon: ChatIcon, label: 'chat' },
               ].map(({ href, label, icon }) => (

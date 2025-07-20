@@ -6,7 +6,7 @@ import Button from "./Button";
 const Categories = () => {
   return (
     <div className="categories flex w-full cursor-pointer flex-col justify-center gap-6 bg-mutedRed p-6">
-      <h1 className="via-mainOrange slide-in-left delay-0.2s mb-9 mt-20 inline-block bg-gradient-to-r from-white to-grayDark bg-clip-text text-center font-josefin text-4xl xs:text-5xl font-bold text-transparent sm:ml-16 sm:text-left md:ml-16 lg:mt-60 lg:text-6xl lg:font-black">
+      <h1 className="via-mainOrange mb-9 mt-20 inline-block bg-gradient-to-r from-white to-grayDark bg-clip-text text-center font-josefin text-4xl xs:text-5xl font-bold text-transparent sm:ml-16 sm:text-left md:ml-16 lg:mt-60 lg:text-6xl lg:font-black">
         Check our main categories
       </h1>
 

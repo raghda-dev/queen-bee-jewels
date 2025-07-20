@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getProductByHandle } from "../utils/shopify";
+import { getProductByHandle } from "../../../../lib/shopify/products/queries";
 import type { ShopifyProductByHandle } from "../types/shopifyTypes";
 
 export default function useProductDetails(handle: string) {
