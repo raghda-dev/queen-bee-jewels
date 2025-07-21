@@ -5,12 +5,11 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Button from '../../../components/Button';
+import AddToCartButton from '../../../components/AddToCartButton';
+import AddToWishlistButton from '../../../components/AddToWishlistButton';
 import RelatedProductsScroller from './RelatedProductsScroller';
 import { ShopifyProduct } from '../../../../../../lib/shopify/products/types';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-// import { addToCart } from '../../../lib/redux/cart/cartSlice';
 
 interface ProductDetailsClientProps {
   product: ShopifyProduct;
@@ -24,7 +23,6 @@ export default function ProductDetailsClient({
   const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct>(product);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch(); // ✅ Redux hook
 
   const handleProductClick = async (clickedProduct: ShopifyProduct) => {
     setLoading(true);
@@ -44,20 +42,6 @@ export default function ProductDetailsClient({
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        id: selectedProduct.id,
-        name: selectedProduct.title,
-        price: parseFloat(selectedProduct.priceRange.minVariantPrice.amount),
-        imageUrl: selectedProduct.featuredImage?.url || '',
-        quantity: 1,
-        description: selectedProduct.description || 'No description',
-        type: selectedProduct.productType || 'General',
-      })
-    );
   };
 
   const images =
@@ -109,19 +93,10 @@ export default function ProductDetailsClient({
               {selectedProduct.description}
             </p>
 
+            {/* Buttons */}
             <div className="flex justify-center gap-6">
-              <Button
-                variant="primary"
-                size="medium"
-                color="var(--purple-light)"
-                animation="bounce"
-                onClick={handleAddToCart} // ✅ onClick
-              >
-                Add to Cart
-              </Button>
-              <Button variant="primary" size="medium" color="var(--purple-light)" animation="bounce">
-                Add to Wishlist
-              </Button>
+              <AddToCartButton product={selectedProduct} />
+              <AddToWishlistButton product={selectedProduct} />
             </div>
           </div>
 

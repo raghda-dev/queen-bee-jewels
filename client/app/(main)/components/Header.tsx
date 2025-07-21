@@ -53,7 +53,7 @@ const Header = () => {
               placeholder="Search..."
             />
             <Search
-              className="absolute right-3 min-h-9 w-9 -translate-y-10 text-white sm:w-16 md:min-h-11 md:-translate-y-11 lg:w-20 xl:-translate-y-11 xl:translate-x-5"
+              className="absolute right-1 max-h-8 w-9 -translate-y-8 text-white sm:w-16 md:min-h-11 md:-translate-y-11 lg:w-24 xl:-translate-y-11 xl:translate-x-5"
               size={25}
             />
           </div>
@@ -76,7 +76,7 @@ const Header = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="h-9 w-10 text-black"
+            className="h-[2.4rem] w-7 md:h-9 md:w-10 text-black"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.1"
