@@ -1,3 +1,5 @@
+//server/controllers/cartController.js
+
 import Cart from "../models/Cart.js";
 import Wishlist from "../models/Wishlist.js";
 
@@ -5,7 +7,8 @@ import Wishlist from "../models/Wishlist.js";
 // @route   GET /api/cart
 
 export const getCart = async (req, res) => {
-  const userId = "guest";
+  const userId = req.user._id.toString();
+
   try {
     const cart = await Cart.findOne({ userId });
 
@@ -26,7 +29,8 @@ export const getCart = async (req, res) => {
 // ✅ Better: Upsert + increment if item exists
 export const addToCart = async (req, res) => {
   const { productId, quantity } = req.body;
-  const userId = "guest";
+  const userId = req.user._id.toString();
+
 
   try {
     const cart = await Cart.findOne({ userId });
@@ -41,8 +45,8 @@ export const addToCart = async (req, res) => {
     }
 
     // Check if item exists
-    const itemIndex = cart.items.findIndex(
-      (item) => item.productId === productId
+    const itemIndex = cart.items.findIndex((item) =>
+        item.productId.toString() === productId
     );
 
     if (itemIndex > -1) {
@@ -63,7 +67,8 @@ export const addToCart = async (req, res) => {
 
 
 export const moveToWishlist = async (req, res) => {
-  const userId = 'guest';
+  const userId = req.user._id.toString();
+
 
   const fullId = req.params.productId;
   if (!fullId) {
@@ -102,7 +107,7 @@ export const moveToWishlist = async (req, res) => {
 
 
 export const removeFromCart = async (req, res) => {
-  const userId = "guest"; // Replace with real user later
+  const userId = req.user._id.toString();
   const { productId } = req.params;
 
   try {

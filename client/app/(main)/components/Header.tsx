@@ -61,7 +61,7 @@ const Header = () => {
       </div>
 
       {/* Bottom Section - Buttons on the Right */}
-      <div className="box-border flex h-14 w-full items-center justify-end border-b-2 border-grayLight bg-grayMedium pr-6">
+      <div className="box-border flex h-14 w-full items-center justify-end border-b-2 border-grayLight bg-grayMedium ">
         <button
           className="border-2 p-2 text-black transition hover:bg-grayLight"
           onClick={() => router.push('/home/cart', { scroll: false })}

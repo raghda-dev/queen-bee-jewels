@@ -3,7 +3,7 @@
 'use client';
 
 import React from "react";
-import { useRouter } from "next/navigation"; // ✅ Add this
+import { useRouter } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import AuthForm from "./AuthForm";
 import axiosInstance from "../lib/axios/axios";

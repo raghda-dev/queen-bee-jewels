@@ -1,7 +1,7 @@
 // client/app/(main)/lib/redux/wishlist/wishlistSlice.ts
 
 import { createSlice } from '@reduxjs/toolkit';
-import { WishlistItemType } from '../wishlist/wishlistTypes';
+import { WishlistItem } from '../wishlist/wishlistTypes';
 import {
   getWishlistAsync,
   addToWishlistAsync,
@@ -10,7 +10,7 @@ import {
 } from './wishlistActions';
 
 type WishlistState = {
-  items: WishlistItemType[];
+  items: WishlistItem[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 };
