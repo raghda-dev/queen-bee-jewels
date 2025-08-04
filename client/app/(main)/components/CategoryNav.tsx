@@ -16,7 +16,7 @@ const CategoryNav = () => {
   const pathname = usePathname(); // Get the current URL path
 
   return (
-    <nav className="flex border-b border-grayLight m-14 md:m-20 xl:m-28 hover:transition-all hover:duration-300 hover:ease-in">
+    <nav className="flex border-b border-grayLight m-9 mb-3 md:m-14 xl:m-20 hover:transition-all hover:duration-300 hover:ease-in-out">
       {categories.map((category) => {
         const isActive = pathname === category.path;
 

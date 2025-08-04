@@ -1,4 +1,4 @@
-// app/(main)/home/@modals/settings/layout.tsx
+// app/(main)/home/@modals/(.)settings/layout.tsx
 
 'use client';
 
@@ -35,12 +35,12 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
     router.push(previousPath);
   };
 
-  if (!shouldRenderModal) return null; // 👈 don't render if route has already changed
+  if (!shouldRenderModal) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm transition-all" />
-      <div className="relative z-50 flex h-[98vh] sm:min-h-[79vh] md:min-h-[80vh] md:h-[87vh] lg:h-[93vh] w-[85vw] md:w-[80vw] lg:w-[76vw] flex-col rounded-xl bg-white shadow-xl">
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm transition-all"/>
+      <div className="relative z-50 flex h-[98vh] sm:min-h-[79vh] md:min-h-[92vh] md:h-[87vh] lg:h-[94vh] w-[85vw] md:w-[80vw] lg:w-[76vw] flex-col rounded-xl bg-white shadow-xl">
         <div className="flex items-center justify-between border-b px-6 py-4 text-grayDark">
           <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold">Settings</h3>
           <button className="text-gray-500 text-xl font-light" onClick={closeModal}>

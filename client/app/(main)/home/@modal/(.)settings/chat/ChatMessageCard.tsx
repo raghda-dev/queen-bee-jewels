@@ -21,15 +21,16 @@ export default function ChatMessageCard({
 }: ChatMessageCardProps) {
   return (
     <div className='w-[98%]'>
-    <div className="relative flex w-full items-start gap-4 rounded-lg border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
+    <div className="p-2 relative flex w-full items-center gap-4 rounded-lg border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
       {/* Avatar */}
-      <div className="mt-1 flex-shrink-0">
+        <div className="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center rounded-full overflow-hidden">
+
         <Image
           src={avatar || Avatar}
           alt="Sender Avatar"
-          width={40}
-          height={40}
-          className="rounded-full object-cover"
+          width={60}
+          height={60}
+          className="w-full h-full object-cover"
         />
       </div>
 

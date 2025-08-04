@@ -1,7 +1,7 @@
 // components/CompactCard.tsx
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
-import fallbackImage from '../../../public/staticAssets/images/fallback.jpeg';
+import fallbackImage from '../../../public/staticAssets/images/fallback.png';
 
 export type CompactCardProps = {
   img?: string | StaticImageData;

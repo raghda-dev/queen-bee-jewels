@@ -5,39 +5,35 @@
 import { useState } from 'react';
 import ChatMessageCard from './ChatMessageCard';
 import Button from '../../../../components/Button';
-import '../../../../../styles/global.scss'
-
-
-const mockMessages = [
-  {
-    subject: 'Thanks for the feature',
-    body: 'I really appreciate the latest update! The store feels faster.',
-    sender: 'QueenBee Jewels Team',
-  },
-  {
-    subject: 'More product filter options?',
-    body: 'It would be great to filter by brand or collection in the future.',
-    sender: 'Raghda Mazhar',
-  },
-  {
-    subject: 'Loyalty Program?',
-    body: 'Do you plan to launch a rewards system soon?',
-    sender: 'Raghda Mazhar',
-  },
-  {
-    subject: 'Dark mode request',
-    body: 'A dark mode would be helpful for night browsing.',
-    sender: 'QueenBee Jewels Team',
-  },
-];
+import '../../../../../styles/global.scss';
+import { useAppDispatch, useAppSelector } from '../../../../lib/redux/hooks';
+import {
+  addMessage,
+  deleteMessage,
+  selectMessages,
+} from '../../../../lib/redux/chat/chatSlice';
 
 export default function ChatSettings() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [showAll, setShowAll] = useState(false);
 
+  const dispatch = useAppDispatch();
+  const messages = useAppSelector(selectMessages);
+  const user = useAppSelector((state) => state.user.user);
+
   const handleSend = () => {
-    // TODO: Send message to API
+    if (!subject.trim() || !message.trim()) return;
+
+    dispatch(
+      addMessage({
+        subject,
+        body: message,
+        sender: user?.full_name || 'Anonymous',
+        avatar: user?.avatar || '',
+      })
+    );
+
     setSubject('');
     setMessage('');
   };
@@ -51,7 +47,7 @@ export default function ChatSettings() {
     setShowAll((prev) => !prev);
   };
 
-  const displayedMessages = showAll ? mockMessages : mockMessages.slice(0, 2);
+  const displayedMessages = showAll ? messages : messages.slice(0, 2);
 
   return (
     <div className="space-y-10 px-10 md:px-14 pt-11 relative">
@@ -66,13 +62,13 @@ export default function ChatSettings() {
             <input
               type="text"
               placeholder="Subject"
-              className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-1 focus:ring-queenGold"
+              className="w-full border border-gray-300 rounded-md p-2 text-xl font-medium focus:outline-none focus:ring-1 focus:ring-queenGold"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
             />
             <textarea
               placeholder="Your message..."
-              className="w-full h-32 border border-gray-300 rounded-md p-2 text-sm resize-none focus:outline-none focus:ring-1 focus:ring-queenGold"
+              className="w-full h-32 border border-gray-300 rounded-md p-2 text-xl font-normal resize-none focus:outline-none focus:ring-1 focus:ring-queenGold"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -90,12 +86,14 @@ export default function ChatSettings() {
 
       {/* Messages List */}
       <div className={`space-y-3 ${showAll ? 'scrollable-messages' : ''}`}>
-        {displayedMessages.map((msg, index) => (
+        {displayedMessages.map((msg) => (
           <ChatMessageCard
-            key={index}
+            key={msg.id}
             subject={msg.subject}
             body={msg.body}
             sender={msg.sender}
+            avatar={msg.avatar}
+            onDelete={() => dispatch(deleteMessage(msg.id))}
           />
         ))}
       </div>

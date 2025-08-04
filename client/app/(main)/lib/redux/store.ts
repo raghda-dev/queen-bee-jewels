@@ -2,15 +2,19 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './cart/cartSlice';
-import wishlistReducer from './wishlist/wishlistSlice'
+import wishlistReducer from './wishlist/wishlistSlice';
+import userReducer from './user/userSlice';
+import chatReducer from './chat/chatSlice';
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
     wishlist: wishlistReducer,
+    user: userReducer,
+        chat: chatReducer,
   },
-  devTools: process.env.NODE_ENV !== 'production', // ✅ Enables DevTools
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch; // ✅ Capital A
+export type AppDispatch = typeof store.dispatch;

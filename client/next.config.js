@@ -1,3 +1,5 @@
+// client/next.config.js
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
@@ -5,10 +7,22 @@ const nextConfig = {
     SHOPIFY_STOREFRONT_ACCESS_TOKEN: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,
   },
   images: {
-    domains: ['cdn.shopify.com'],
+    domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '5000',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.shopify.com',
+        pathname: '/**',
+      },
+    ],
   },
   webpack(config) {
-    // 1️⃣ Find Next.js image loader and exclude .svg
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test instanceof RegExp && rule.test.test('.svg')
     );
@@ -17,7 +31,6 @@ const nextConfig = {
       fileLoaderRule.exclude = /\.svg$/i;
     }
 
-    // 2️⃣ Add SVGR for .svg
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,

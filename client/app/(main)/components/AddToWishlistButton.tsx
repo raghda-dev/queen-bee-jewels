@@ -1,7 +1,5 @@
 //client/app/(main)/components/AddToWishlistButton.tsx
 
-// client/app/(main)/components/AddToWishlistButton.tsx
-
 'use client'
 
 import React from 'react'

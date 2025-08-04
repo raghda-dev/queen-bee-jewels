@@ -9,9 +9,11 @@ import { useRouter } from 'next/navigation';
 import { Search, ShoppingCart, Settings, LogOut } from 'lucide-react';
 import axiosInstance from '../lib/axios/axios';
 import Link from 'next/link';
+import { useAppSelector } from '../lib/redux/hooks';
 
 const Header = () => {
   const router = useRouter();
+  const user = useAppSelector((state) => state.user.user);
 
   const handleLogout = async () => {
     try {
@@ -24,24 +26,27 @@ const Header = () => {
 
   return (
     <header className="__header min-w-[70vw] md:max-w-[100vw]">
-      <div className="relative box-border flex h-80 w-full flex-col justify-normal bg-navyDark px-3 py-5">
+      <div className="relative box-border flex h-80 w-full flex-col justify-normal bg-navyDark px-6 py-6">
         <div className="flex items-center justify-between">
-          <Link href="/" className="relative z-50 cursor-pointer">
+          <Link href="/home" className="relative z-50 cursor-pointer">
             <Image
               src="/staticAssets/images/logo.svg"
               alt="Logo"
-              width={100}
-              height={70}
+              width={70}
+              height={50}
+              className="md:w-32 lg:w-36 xl:w-40"
             />
           </Link>
 
-          <Image
-            src="/staticAssets/images/avatar.svg"
-            height={50}
-            width={70}
-            alt="avatar"
-            className="w-24 rounded-full object-cover"
-          />
+          <div className="w-[60px] h-[60px] md:w-[70px] md:h-[70px] overflow-hidden rounded-full border border-white">
+            <Image
+              src={user?.avatar || '/staticAssets/images/fallback.png'}
+              alt="User Avatar"
+              width={60}
+              height={60}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* search input centered */}
@@ -61,7 +66,7 @@ const Header = () => {
       </div>
 
       {/* Bottom Section - Buttons on the Right */}
-      <div className="box-border flex h-14 w-full items-center justify-end border-b-2 border-grayLight bg-grayMedium ">
+      <div className="box-border px-5 flex h-14 w-full items-center justify-end border-b-2 border-grayLight bg-grayMedium">
         <button
           className="border-2 p-2 text-black transition hover:bg-grayLight"
           onClick={() => router.push('/home/cart', { scroll: false })}
@@ -72,11 +77,10 @@ const Header = () => {
           className="border-2 p-2 text-black transition hover:bg-grayLight"
           onClick={() => router.push('/home/wishlist', { scroll: false })}
         >
-          {/* <HeartIcon className='w-12 h-9 font-bold'/> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="h-[2.4rem] w-7 md:h-9 md:w-10 text-black"
+            className="h-[2.4rem] w-7 sm:w-8 md:h-9 md:w-10 text-black"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.1"
@@ -109,3 +113,4 @@ const Header = () => {
 };
 
 export default Header;
+
