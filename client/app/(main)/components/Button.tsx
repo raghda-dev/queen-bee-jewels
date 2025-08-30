@@ -1,3 +1,5 @@
+// client/app/(main)/components/Button.tsx
+
 'use client';
 
 import React, { ReactNode } from 'react';
@@ -27,6 +29,7 @@ type ButtonProps = {
     | 'wave'
     | 'none'
     | 'silver-flash';
+  underlineDirection?: 'from-left' | 'from-right';
   hoverTextColor?: string;
   hoverBgColor?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -46,6 +49,7 @@ const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   color,
   animation,
+  underlineDirection,
   hoverTextColor,
   hoverBgColor,
 }) => {
@@ -73,9 +77,10 @@ const Button: React.FC<ButtonProps> = ({
         styles[variant],
         styles[shape],
         styles[size],
-        animation && styles[animation], // Add animation class dynamically
-        hoverTextColor && styles[hoverTextColor], // Add hover text color class dynamically
-        hoverBgColor && styles[hoverBgColor], // Add hover background color class dynamically
+        animation && styles[animation],
+        underlineDirection && styles[underlineDirection], 
+        hoverTextColor && styles[hoverTextColor],
+        hoverBgColor && styles[hoverBgColor],
         {
           'cursor-not-allowed opacity-50': disabled || isLoading,
         },

@@ -1,29 +1,6 @@
-//client/app/(main)/utils/RoutereTracker.tsx
-
-// 'use client';
-
-// import { usePathname } from 'next/navigation';
-// import { useEffect } from 'react';
-// import { previousPageRef } from '../utils/previousPageRef';
-
-// export function RouteTracker() {
-//   const pathname = usePathname();
-
-//   useEffect(() => {
-
-//   const isCartOrWishlist = pathname.startsWith('/home/cart') || pathname.startsWith('/home/wishlist');
-
-//     if (!pathname.startsWith('/home/settings') && !isCartOrWishlist) {
-//       previousPageRef.current = pathname;
-//     }
-//   }, [pathname]);
-
-//   return null;
-// }
-
-
-
 // client/app/(main)/utils/RouteTracker.tsx
+
+
 'use client';
 
 import { usePathname } from 'next/navigation';

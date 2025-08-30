@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Button from '../../(main)/components/Button';
 import Image from 'next/image';
+import ProtectedRoute from '../../(main)/components/ProtectedRoute';
 
 export default function CheckoutLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -26,6 +27,8 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
             size="large"
             variant="textButton"
             color="var(--pinkish)"
+            animation='text-underline'
+            underlineDirection="from-right"
             rightIcon={<span>←</span>}
           >
             Back to Shop
@@ -34,7 +37,8 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
       </div>
 
       {/* Main content */}
-      <main>{children}</main>
+      {/* <main>{children}</main> */}
+      <main><ProtectedRoute><>{children}</></ProtectedRoute></main>
     </div>
   );
 }

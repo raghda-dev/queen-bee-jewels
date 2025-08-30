@@ -1,4 +1,6 @@
-// components/CompactCard.tsx
+// client/app/(main)/components/CompactCard.tsx
+
+
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
 import fallbackImage from '../../../public/staticAssets/images/fallback.png';

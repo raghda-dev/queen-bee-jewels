@@ -1,64 +1,157 @@
-import React from "react";
-import Card from "./Card";
-import "../../styles/global.scss";
-import Button from "./Button";
+// // client/app/(main)/components/Categories.tsx
+
+// 'use client';
+
+// import React, { useEffect, useState } from 'react';
+// import Card from './Card';
+// import Button from './Button';
+// import { fetchCollections, Collection } from 'data/collections';
+// import { useRouter } from 'next/navigation';
+// import { useAppSelector } from '../lib/redux/hooks'; // ✅ import selector
+
+// const Categories = () => {
+//   const [collections, setCollections] = useState<Collection[]>([]);
+//   const router = useRouter();
+//   const user = useAppSelector((state) => state.user.user); // ✅ get user
+
+//   useEffect(() => {
+//     const loadCollections = async () => {
+//       try {
+//         const data = await fetchCollections();
+//         setCollections(data);
+//       } catch (error) {
+//         console.error('Error loading collections:', error);
+//       }
+//     };
+
+//     loadCollections();
+//   }, []);
+
+//   return (
+//     <div className="categories flex w-full flex-col justify-center gap-6 bg-mutedRed p-3">
+//       <div className="w-full max-w-[1400px] mx-auto">
+//         <h1 className="z-50 via-mainOrange inline-block bg-gradient-to-r from-white to-grayDark bg-clip-text text-center font-josefin text-4xl xs:text-5xl font-bold text-transparent sm:ml-16 sm:text-left mt-7 lg:mt-28 lg:text-6xl lg:font-black mb-7">
+//           Check our main categories
+//         </h1>
+//         <div className="space-y-6 category_cards mx-auto lg:mt-[-8rem] grid min-h-screen w-full max-w-[130rem] place-items-center px-3 pr-0 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+//           {collections.map((collection) => (
+//             <div className="card-item" key={collection.id}>
+//               <Card
+//                 img={collection.image?.src}
+//                 collectionName={collection.title}
+//                 title={collection.title}
+//                 description={collection.description}
+//                 size="medium"
+//                 showHeart
+//                 primaryButton={
+//                   <Button
+//                     size="medium"
+//                     variant="textButton"
+//                     color="var(--deep-brown)"
+//                     animation="text-underline"
+//                     underlineDirection="from-left"
+//                     rightIcon={<span>→</span>}
+//                     onClick={() =>
+//                       user
+//                         ? router.push('/home') // ✅ logged in → go home
+//                         : router.push(`/collections/${collection.slug}`) // ✅ not logged in → go to collection
+//                     }
+//                   >
+//                     See More
+//                   </Button>
+//                 }
+//               />
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Categories;
+
+
+
+
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import Card from './Card';
+import Button from './Button';
+import { fetchCollections, Collection } from 'data/collections';
+import { useRouter } from 'next/navigation';
+import { useAppSelector } from '../lib/redux/hooks';
 
 const Categories = () => {
-  return (
-    <div className="categories flex w-full cursor-pointer flex-col justify-center gap-6 bg-mutedRed p-6">
-      <h1 className="via-mainOrange mb-9 mt-20 inline-block bg-gradient-to-r from-white to-grayDark bg-clip-text text-center font-josefin text-4xl xs:text-5xl font-bold text-transparent sm:ml-16 sm:text-left md:ml-16 lg:mt-60 lg:text-6xl lg:font-black">
-        Check our main categories
-      </h1>
+  const [collections, setCollections] = useState<Collection[]>([]);
+  const [loading, setLoading] = useState(true);
+  const user = useAppSelector((state) => state.user.user);
+  const router = useRouter();
 
-      <div className="category_cards mx-auto grid min-h-screen w-full max-w-[130rem] place-items-center px-6 pr-0 gap-y-3 sm:grid-cols-2 sm:gap-y-7 md:grid-cols-2 md:gap-x-4 md:gap-y-6 lg:mt-[-15rem] lg:grid-cols-4 lg:gap-6 xl:grid-cols-4 xl:gap-[10rem]">
-        {[
-          {
-            image: "/staticAssets/images/category_img-1.svg",
-            collectionName: "Watches collection",
-            title: "Our Watches collection",
-            description: "special watch for a complete look.",
-          },
-          {
-            image: "/staticAssets/images/category_img-2.svg",
-            collectionName: "Bridal collection",
-            title: "Our Bridal collection",
-            description: "everything a bride might need.",
-          },
-          {
-            image: "/staticAssets/images/category_img-3.svg",
-            collectionName: "Silver collection",
-            title: "Our Silver collection",
-            description: "silver only for silver lovers.",
-          },
-          {
-            image: "/staticAssets/images/category_img-4.svg",
-            collectionName: "Classic collection",
-            title: "Our Classic collection",
-            description: "find more in our classic collection.",
-          },
-        ].map((item, index) => (
-          <div className="card-item" key={index}>
-            <Card
-              img={item.image}
-              collectionName={item.collectionName}
-              title={item.title}
-              description={item.description}
-              showHeart
-              size="medium"
-              primaryButton={
-                <Button
-                  size="medium"
-                  variant="textButton"
-                  color="var(--deep-brown)"
-                  animation="text-underline"
-                  rightIcon={<span>→</span>}
-                >
-                  See More
-                </Button>
-              }
-            />
-          </div>
-        ))}
+  useEffect(() => {
+    const loadCollections = async () => {
+      try {
+        const data = await fetchCollections();
+        setCollections(data);
+      } catch (error) {
+        console.error('Error loading collections:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadCollections();
+  }, []);
+
+  // ✅ Trick: prevent broken layout if still loading or user state isn't resolved
+  if (loading || user === undefined) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading categories...
+      </div>
+    );
+  }
+
+  return (
+    <div className="categories flex w-full flex-col justify-center gap-6 bg-mutedRed p-3">
+      <div className="w-full max-w-[1400px] mx-auto">
+        <h1 className="z-50 via-mainOrange inline-block bg-gradient-to-r from-white to-grayDark bg-clip-text text-center font-josefin text-4xl xs:text-5xl font-bold text-transparent sm:ml-16 sm:text-left mt-7 lg:mt-28 lg:text-6xl lg:font-black mb-7">
+          Check our main categories
+        </h1>
+        <div className="space-y-6 category_cards mx-auto lg:mt-[-8rem] grid min-h-screen w-full max-w-[130rem] place-items-center px-3 pr-0 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+          {collections.map((collection) => (
+            <div className="card-item" key={collection.id}>
+              <Card
+                img={collection.image?.src}
+                collectionName={collection.title}
+                title={collection.title}
+                description={collection.description}
+                size="medium"
+                showHeart
+                primaryButton={
+                  <Button
+                    size="medium"
+                    variant="textButton"
+                    color="var(--deep-brown)"
+                    animation="text-underline"
+                    underlineDirection="from-left"
+                    rightIcon={<span>→</span>}
+                    onClick={() => {
+                      if (user) {
+                        router.push('/home');
+                        window.location.href = '/home';
+                      } else {
+                        router.push(`/collections/${collection.slug}`);
+                      }
+                    }}
+                  >
+                    See More
+                  </Button>
+                }
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

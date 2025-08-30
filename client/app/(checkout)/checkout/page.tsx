@@ -3,7 +3,7 @@
 'use client';
 
 import { useState } from 'react';
-import Button from '../../(main)/components/Button';
+import OrderSummary from '../../(main)/components/OrderSummary';
 
 export default function CheckoutPage() {
   const [formData, setFormData] = useState({
@@ -19,7 +19,9 @@ export default function CheckoutPage() {
   const shipping = 10;
   const totalPrice = subtotal - discount + shipping;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -31,14 +33,19 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-white px-4 py-8 sm:px-8 lg:px-24 xl:px-40">
-      <h1 className="text-3xl font-bold mb-6 text-purpleDark">Checkout</h1>
+      <h1 className="mb-6 text-3xl font-bold text-purpleDark">Checkout</h1>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 gap-8 lg:grid-cols-3"
+      >
         {/* Left: Shipping & Payment */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="space-y-8 lg:col-span-2">
           {/* Shipping Info */}
-          <div className="border border-grayLight p-6 rounded-xl shadow-sm">
-            <h2 className="text-xl font-semibold mb-4 text-grayDark">Shipping Information</h2>
+          <div className="rounded-xl border border-grayLight p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-semibold text-grayDark">
+              Shipping Information
+            </h2>
 
             <div className="space-y-4">
               <input
@@ -47,7 +54,7 @@ export default function CheckoutPage() {
                 placeholder="Full Name"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="w-full border border-grayLight rounded-md p-3 outline-none focus:ring-2 focus:ring-purpleDark"
+                className="w-full rounded-md border border-grayLight p-3 outline-none focus:ring-2 focus:ring-purpleDark"
               />
               <input
                 type="text"
@@ -55,7 +62,7 @@ export default function CheckoutPage() {
                 placeholder="Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full border border-grayLight rounded-md p-3 outline-none focus:ring-2 focus:ring-purpleDark"
+                className="w-full rounded-md border border-grayLight p-3 outline-none focus:ring-2 focus:ring-purpleDark"
               />
               <input
                 type="text"
@@ -63,13 +70,13 @@ export default function CheckoutPage() {
                 placeholder="Shipping Address"
                 value={formData.address}
                 onChange={handleChange}
-                className="w-full border border-grayLight rounded-md p-3 outline-none focus:ring-2 focus:ring-purpleDark"
+                className="w-full rounded-md border border-grayLight p-3 outline-none focus:ring-2 focus:ring-purpleDark"
               />
               <select
                 name="deliveryType"
                 value={formData.deliveryType}
                 onChange={handleChange}
-                className="w-full border border-grayLight rounded-md p-3 outline-none focus:ring-2 focus:ring-purpleDark"
+                className="w-full rounded-md border border-grayLight p-3 outline-none focus:ring-2 focus:ring-purpleDark"
               >
                 <option value="delivery">Delivery</option>
                 <option value="pickup">Pickup</option>
@@ -78,8 +85,10 @@ export default function CheckoutPage() {
           </div>
 
           {/* Payment Method */}
-          <div className="border border-grayLight p-6 rounded-xl shadow-sm">
-            <h2 className="text-xl font-semibold mb-4 text-grayDark">Payment Method</h2>
+          <div className="rounded-xl border border-grayLight p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-semibold text-grayDark">
+              Payment Method
+            </h2>
 
             <div className="space-y-4">
               <label className="flex items-center gap-2">
@@ -117,31 +126,14 @@ export default function CheckoutPage() {
         </div>
 
         {/* Right: Order Summary */}
-        <div className="border border-orangeMedium p-6 rounded-xl bg-white shadow-md">
-          <h2 className="text-xl font-semibold mb-4 text-grayDark">Order Summary</h2>
-          <div className="space-y-2 text-grayDark font-medium">
-            <div className="flex justify-between">
-              <span>Subtotal:</span>
-              <span>${subtotal.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Discount:</span>
-              <span className="text-pinkish">-${discount.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Shipping:</span>
-              <span>${shipping.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between border-t pt-4 font-semibold">
-              <span>Total:</span>
-              <span>${totalPrice.toFixed(2)}</span>
-            </div>
-          </div>
-
-          <Button shape="rectangle" size="small" color="var(--muted-red)" className="mt-6 w-full">
-            Place Order
-          </Button>
-        </div>
+        <OrderSummary
+          subtotal={subtotal}
+          discount={discount}
+          shipping={shipping}
+          totalPrice={totalPrice}
+          buttonType="placeOrder"
+          onPlaceOrder={() => console.log('Order placed!')}
+        />
       </form>
     </div>
   );

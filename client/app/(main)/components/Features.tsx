@@ -1,3 +1,5 @@
+// client/app/(main)/components/Features.tsx
+
 import React from "react";
 import FeatureCard from "./FeatureCard";
 

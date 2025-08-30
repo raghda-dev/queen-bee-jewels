@@ -8,6 +8,7 @@ import { updateUser } from './userSlice';
 // ───────────────────────
 // GET USER PROFILE
 // ───────────────────────
+
 export const getUserProfile = createAsyncThunk<User, void, { rejectValue: string }>(
   'user/getUserProfile',
   async (_, { rejectWithValue }) => {
@@ -16,6 +17,11 @@ export const getUserProfile = createAsyncThunk<User, void, { rejectValue: string
         credentials: 'include',
       });
 
+      if (res.status === 401) {
+        // Not logged in — silently return rejection (no toast)
+        return rejectWithValue('Unauthorized');
+      }
+
       if (!res.ok) {
         const error = await res.json();
         throw new Error(error.message || 'Failed to fetch user.');
@@ -23,13 +29,20 @@ export const getUserProfile = createAsyncThunk<User, void, { rejectValue: string
 
       const data: User = await res.json();
       return data;
+
     } catch (err) {
       const message = (err as Error).message || 'Failed to fetch user.';
-      toast(message, { className: 'toast-error' });
+
+      // ✅ Only show toast for errors other than "Unauthorized"
+      if (message !== 'Unauthorized') {
+        toast(message, { className: 'toast-error' });
+      }
+
       return rejectWithValue(message);
     }
   }
 );
+
 
 // ───────────────────────
 // UPDATE USER PROFILE

@@ -1,3 +1,5 @@
+// client/app/styles/sass/modules/button.module.scss
+
 @use '../abstracts/mixins' as *;
 
 // -------------------------
@@ -67,31 +69,87 @@
   padding-right: 0.1rem;
 }
 
+.arrow-right {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
+}
+
+.button:hover .arrow-right {
+  opacity: 1;
+  transform: translateX(0);
+  padding-left: 0.1rem;
+}
+
+
 // -------------------------
 // TEXT UNDERLINE HOVER EFFECT
 // -------------------------
 
+
+// -------------------------
+// TEXT UNDERLINE HOVER EFFECT
+// -------------------------
+
+// client/app/styles/sass/modules/button.module.scss
+
 .text-underline {
   position: relative;
   display: inline-block;
-  color: inherit; // keep the text color
+  color: inherit;
   text-decoration: none;
 
   &::after {
     content: '';
     position: absolute;
-    left: 0;
     bottom: -2px;
     width: 0%;
-    height: .4px;
+    height: 0.4px;
     background-color: currentColor;
     transition: width 0.5s ease-in-out;
   }
 
-  &:hover::after {
+  // Default: line grows left → right
+  &.from-left::after {
+    left: 0;
+  }
+
+  // For right arrow: line grows right → left
+  &.from-right::after {
+    right: 0;
+  }
+
+  &:hover.from-left::after {
+    width: 100%;
+  }
+
+  &:hover.from-right::after {
     width: 100%;
   }
 }
+
+// .text-underline {
+//   position: relative;
+//   display: inline-block;
+//   color: inherit; // keep the text color
+//   text-decoration: none;
+
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     left: 0;
+//     bottom: -2px;
+//     width: 0%;
+//     height: .4px;
+//     background-color: currentColor;
+//     transition: width 0.5s ease-in-out;
+//   }
+
+//   &:hover::after {
+//     width: 100%;
+//   }
+// }
 
 // -------------------------
 // COLOR VARIANTS

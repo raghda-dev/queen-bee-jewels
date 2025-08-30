@@ -12,8 +12,11 @@ export type User = {
 export type UserState = {
   user: User | null;
   loading: boolean;
+  token: string | null;    
+  isLoggedIn: boolean;
   error: string | null;
 };
+
 
 export type UserUpdatePayload = {
   full_name?: string;
@@ -23,4 +26,5 @@ export type UserUpdatePayload = {
   address?: string;
   avatar?: string;
 };
+
 

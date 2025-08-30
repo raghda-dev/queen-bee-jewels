@@ -9,11 +9,14 @@ import CartItem from './components/CartItem';
 import Button from '../../../components/Button';
 import '../../../../styles/global.scss';
 import usePreviousPath from '../../../utils/usePrevPath';
-import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from 'app/(main)/lib/redux/store';
-import { removeFromCartAsync, moveToWishlistAsync } from '../../../lib/redux/cart/cartActions';
+import {
+  removeFromCartAsync,
+  moveToWishlistAsync,
+} from '../../../lib/redux/cart/cartActions';
 import { AnimatePresence } from 'framer-motion';
+import OrderSummary from '../../../components/OrderSummary';
 import {
   incrementQuantity,
   decrementQuantity,
@@ -34,11 +37,9 @@ export default function CartModal() {
   const shipping = 10;
   const totalPrice = subtotal - discount + shipping;
 
-
-
   const closeModal = () => {
-  router.push(previousPath || '/home');
-};
+    router.push(previousPath || '/home');
+  };
 
   return (
     <>
@@ -51,8 +52,8 @@ export default function CartModal() {
         }}
       />
       <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
-        <div className="relative bottom-2 md:bottom-1 h-[100vh] w-[76vw] rounded-t-2xl bg-white p-6 pb-10 md:pb-12 shadow-lg xs:h-[90vh] sm:h-[89vh] md:h-[88vh] sm:rounded-2xl lg:bottom-0 xl:h-[64rem]">
-          <div className="mb-4 flex items-center justify-between border-b pb-6 md:mb-0">
+        <div className="relative bottom-2 h-[96vh] w-[76vw] rounded-t-2xl bg-white p-5 pb-6 shadow-lg xs:h-[90vh] sm:h-[89vh] sm:rounded-2xl md:bottom-1 md:h-[88vh] md:pb-12 lg:bottom-0 xl:h-[60rem]">
+          <div className="flex items-center justify-between border-b sm:mb-4 md:mb-0 md:pb-6">
             <h2 className="text-xl font-semibold sm:text-2xl md:text-3xl">
               Cart
             </h2>
@@ -64,6 +65,7 @@ export default function CartModal() {
                   color="var(--muted-red)"
                   shape="rectangle"
                   animation="text-underline"
+                  underlineDirection="from-right"
                   leftIcon={<span>←</span>}
                   rightIcon={
                     <svg
@@ -114,7 +116,6 @@ export default function CartModal() {
                         onDecrement={(id) => dispatch(decrementQuantity(id))}
                         onRemove={(id) => dispatch(removeFromCartAsync(id))}
                         onWishlist={(id) => dispatch(moveToWishlistAsync(id))}
-
                       />
                     ))}
                   </AnimatePresence>
@@ -123,46 +124,15 @@ export default function CartModal() {
             </div>
 
             {/* Summary Panel */}
-            <div className="flex-shrink-0 p-4 lg:w-96">
-              <div className="flex h-[30vh] flex-col justify-between rounded-xl border-2 border-orangeMedium bg-white p-6 shadow-md lg:h-[45vh]">
-                <h3 className="mb-4 text-lg font-semibold text-grayDark">
-                  Order Summary
-                </h3>
-                <div className="text-md space-y-2 font-medium text-grayDark md:text-lg">
-                  <div className="flex justify-between">
-                    <span>Subtotal:</span>
-                    <span>${subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Discount:</span>
-                    <span className="text-pinkish">
-                      -${discount.toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Shipping:</span>
-                    <span>${shipping.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between border-t pt-4 text-base font-semibold lg:text-lg">
-                    <span>Total:</span>
-                    <span>${totalPrice.toFixed(2)}</span>
-                  </div>
-                </div>
-                <Link href="/checkout" className="mt-4">
-                  <Button
-                    size="small"
-                    shape="rectangle"
-                    color="var(--muted-red)"
-                  >
-                    Proceed to Checkout
-                  </Button>
-                </Link>
-                <hr className="my-4" />
-                <p className="text-center text-sm text-gray-500">
-                  Estimated Delivery by{' '}
-                  <span className="font-medium text-black">20-05-2025</span>
-                </p>
-              </div>
+            <div className="lg:h-full lg:p-7">
+              <OrderSummary
+                subtotal={subtotal}
+                discount={discount}
+                shipping={shipping}
+                totalPrice={totalPrice}
+                buttonType="checkout"
+                estimatedDelivery="20-05-2025"
+              />
             </div>
           </div>
         </div>

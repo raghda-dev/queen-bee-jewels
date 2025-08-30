@@ -27,7 +27,9 @@ export default function AccountSettings() {
   const user = useAppSelector(selectUser);
   const isLoading = useAppSelector(selectUserLoading);
 
-  const [avatarAction, setAvatarAction] = useState<'edit' | 'add' | 'remove' | null>(null);
+  const [avatarAction, setAvatarAction] = useState<
+    'edit' | 'add' | 'remove' | null
+  >(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const [formData, setFormData] = useState({
@@ -61,11 +63,14 @@ export default function AccountSettings() {
     formData.append('avatar', selectedImage);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/avatar`, {
-        method: 'PATCH',
-        body: formData,
-        credentials: 'include',
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/avatar`,
+        {
+          method: 'PATCH',
+          body: formData,
+          credentials: 'include',
+        }
+      );
 
       if (!res.ok) throw new Error('Upload failed');
 
@@ -111,7 +116,9 @@ export default function AccountSettings() {
     e.preventDefault();
 
     if (!newPassword || !confirmPassword || !currentPassword) {
-      toast('Please fill in all password fields.', { className: 'toast-error' });
+      toast('Please fill in all password fields.', {
+        className: 'toast-error',
+      });
       return;
     }
 
@@ -121,7 +128,9 @@ export default function AccountSettings() {
     }
 
     try {
-      await dispatch(updateUserPassword({ currentPassword, newPassword })).unwrap();
+      await dispatch(
+        updateUserPassword({ currentPassword, newPassword })
+      ).unwrap();
       toast('Password updated successfully', { className: 'toast-success' });
       setNewPassword('');
       setConfirmPassword('');
@@ -134,11 +143,15 @@ export default function AccountSettings() {
   };
 
   if (isLoading || !user) {
-    return <div className="p-6 text-center text-gray-500 border">Loading user profile...</div>;
+    return (
+      <div className="border p-6 text-center text-gray-500">
+        Loading user profile...
+      </div>
+    );
   }
 
   return (
-    <div className="mt-[-1rem] grid max-h-[100%] w-[90%] grid-cols-1 p-4 transition-all xs:w-[90%] sm:w-[80%] md:w-[90%]">
+    <div className="mt-[-1rem] grid max-h-[100%] w-[90%] grid-cols-1 p-4 pb-6 transition-all xs:w-[90%] sm:w-[80%] md:w-[90%]">
       <UserHeader
         user={user}
         onAvatarAction={(action) => {
@@ -171,7 +184,10 @@ export default function AccountSettings() {
         {/* ... Name, Email, etc. inputs ... */}
 
         <div>
-          <label htmlFor="full_name" className="block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+          <label
+            htmlFor="full_name"
+            className="sm:text-md block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+          >
             Name
           </label>
           <input
@@ -179,12 +195,15 @@ export default function AccountSettings() {
             type="text"
             value={formData.full_name}
             onChange={handleInfoChange}
-            className="w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+            className="sm:text-md w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+          <label
+            htmlFor="email"
+            className="sm:text-md block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+          >
             Email
           </label>
           <input
@@ -192,12 +211,15 @@ export default function AccountSettings() {
             type="email"
             value={formData.email}
             onChange={handleInfoChange}
-            className="w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+            className="sm:text-md w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
           />
         </div>
 
         <div>
-          <label htmlFor="username" className="block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+          <label
+            htmlFor="username"
+            className="sm:text-md block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+          >
             Username
           </label>
           <input
@@ -205,12 +227,15 @@ export default function AccountSettings() {
             type="text"
             value={formData.username}
             onChange={handleInfoChange}
-            className="w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+            className="sm:text-md w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
           />
         </div>
 
         <div>
-          <label htmlFor="address" className="block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+          <label
+            htmlFor="address"
+            className="sm:text-md block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+          >
             Address
           </label>
           <input
@@ -219,22 +244,41 @@ export default function AccountSettings() {
             placeholder="123 Street, Ramallah"
             value={formData.address}
             onChange={handleInfoChange}
-            className="w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+            className="sm:text-md w-[90%] rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
           />
         </div>
 
-        <div className="flex w-[70%] justify-center">
+        {/* <div className="flex w-[70%] justify-center">
           <Button shape="rectangle" size="medium" type="submit" color="var(--purple-medium)">
             Update my information
+          </Button>
+        </div> */}
+        <div className="flex w-[70%] justify-center">
+          <Button
+            shape="rectangle"
+            size="medium"
+            type="submit"
+            color="var(--purple-medium)"
+          >
+            {/* Mobile text */}
+            <span className="sm:hidden">Update</span>
+            {/* Tablet+ text */}
+            <span className="hidden sm:inline">Update my information</span>
           </Button>
         </div>
       </form>
 
       {/* Password Form */}
-      <form onSubmit={handlePasswordSubmit} className="w-[80%] max-w-3xl px-4 pb-10 md:max-w-2xl">
+      <form
+        onSubmit={handlePasswordSubmit}
+        className="w-[80%] max-w-3xl px-4 pb-10 md:max-w-2xl"
+      >
         <div className="flex flex-col gap-6">
           <div>
-            <label htmlFor="newPassword" className="mb-1 block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+            <label
+              htmlFor="newPassword"
+              className="sm:text-md mb-1 block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+            >
               New Password
             </label>
             <div className="relative w-[90%]">
@@ -243,7 +287,7 @@ export default function AccountSettings() {
                 type={showNewPassword ? 'text' : 'password'}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+                className="sm:text-md w-full rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
               />
               <button
                 type="button"
@@ -256,9 +300,12 @@ export default function AccountSettings() {
           </div>
 
           {showPasswordFields && (
-            <div className="flex gap-4 flex-row justify-between w-[126%]">
+            <div className="flex w-[126%] flex-row justify-between gap-4">
               <div className="flex-1">
-                <label htmlFor="confirmPassword" className="mb-1 block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+                <label
+                  htmlFor="confirmPassword"
+                  className="sm:text-md mb-1 block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+                >
                   Confirm Password
                 </label>
                 <div className="relative w-[70%] sm:w-[90%]">
@@ -267,20 +314,27 @@ export default function AccountSettings() {
                     type={showConfirmPassword ? 'text' : 'password'}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+                    className="sm:text-md w-full rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
                   />
                   <button
                     type="button"
                     className="absolute right-[-6%] top-1/2 -translate-y-1/2 text-gray-500"
                     onClick={() => setShowConfirmPassword((prev) => !prev)}
                   >
-                    {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {showConfirmPassword ? (
+                      <EyeOff size={16} />
+                    ) : (
+                      <Eye size={16} />
+                    )}
                   </button>
                 </div>
               </div>
 
               <div className="flex-1">
-                <label htmlFor="currentPassword" className="mb-1 block text-sm font-semibold text-grayDark sm:text-md md:text-lg lg:text-xl">
+                <label
+                  htmlFor="currentPassword"
+                  className="sm:text-md mb-1 block text-sm font-semibold text-grayDark md:text-lg lg:text-xl"
+                >
                   Current Password
                 </label>
                 <div className="relative w-[70%] sm:w-[90%]">
@@ -289,22 +343,31 @@ export default function AccountSettings() {
                     type={showCurrentPassword ? 'text' : 'password'}
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="w-full rounded-md border border-gray-300 px-4 py-2 text-sm sm:text-md md:text-lg lg:text-xl"
+                    className="sm:text-md w-full rounded-md border border-gray-300 px-4 py-2 text-sm md:text-lg lg:text-xl"
                   />
                   <button
                     type="button"
                     className="absolute right-[-6%] top-1/2 -translate-y-1/2 text-gray-500"
                     onClick={() => setShowCurrentPassword((prev) => !prev)}
                   >
-                    {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {showCurrentPassword ? (
+                      <EyeOff size={16} />
+                    ) : (
+                      <Eye size={16} />
+                    )}
                   </button>
                 </div>
               </div>
             </div>
           )}
 
-          <div className="mt-6 flex w-[70%] justify-center">
-            <Button shape="rectangle" size="medium" type="submit" color="var(--purple-medium)">
+          <div className="flex w-[70%] justify-center">
+            <Button
+              shape="rectangle"
+              size="medium"
+              type="submit"
+              color="var(--purple-medium)"
+            >
               Set my password
             </Button>
           </div>

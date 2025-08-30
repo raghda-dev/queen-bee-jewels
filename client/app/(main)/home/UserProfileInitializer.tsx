@@ -1,4 +1,5 @@
 // client/app/(main)/home/UserProfileInitializer.tsx
+
 'use client';
 
 import { useEffect } from 'react';

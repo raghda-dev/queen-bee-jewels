@@ -1,3 +1,5 @@
+//client/app/(main)/components/CategoryNav.tsx
+
 "use client";
 
 import React from "react";
@@ -13,7 +15,7 @@ const categories = [
 ];
 
 const CategoryNav = () => {
-  const pathname = usePathname(); // Get the current URL path
+  const pathname = usePathname();
 
   return (
     <nav className="flex border-b border-grayLight m-9 mb-3 md:m-14 xl:m-20 hover:transition-all hover:duration-300 hover:ease-in-out">

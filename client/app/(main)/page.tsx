@@ -1,3 +1,4 @@
+
 // client/app/(main)/page.tsx
 
 import Head from 'next/head';
@@ -9,6 +10,9 @@ import OnePiece from '../(main)/components/OnePiece';
 import Features from '../(main)/components/Features';
 import BestSellingScroller from '../(main)/components/BestSellingScroller';
 import SignUpIn from '../(main)/components/SignUpIn';
+
+
+
 
 export default function LandingPage() {
   return (
@@ -22,21 +26,26 @@ export default function LandingPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <main className="main__container mx-auto w-full max-w-[1200px] px-4">
-        <Hero></Hero>
-        <section className="__categories">
-          <Categories></Categories>
+        <Hero />
+
+        <section className="__categories overflow-hidden">
+          <Categories />
         </section>
-        <section className="__one__piece">
-          <OnePiece></OnePiece>
+
+        <section className="__one__piece overflow-hidden">
+          <OnePiece />
         </section>
-        <section className="__features">
-          <Features></Features>
+
+        <section className="__features overflow-hidden">
+          <Features />
         </section>
-        <section className="__best__selling">
-          <BestSellingScroller></BestSellingScroller>
+
+        <section className="__best__selling overflow-hidden">
+          <BestSellingScroller />
         </section>
-        <section className="__sign_Up_In">
-            <SignUpIn />
+
+        <section className="__sign_Up_In overflow-hidden">
+          <SignUpIn />
         </section>
       </main>
     </>

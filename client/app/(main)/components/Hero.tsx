@@ -1,61 +1,105 @@
- "use client"
+//client/app/(main)/components/Hero.tsx
 
-import React from "react";
-import "../../styles/global.scss";
-import "../../styles/tailwind.css";
-import { Mail, Phone, Globe } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-// import Bee from '../../public/staticAssets/images/Bee.svg';
-import Button from "./Button";
+'use client';
 
-// import Logo from '../../public/staticAssets/images/logo.svg';
-
-
-import styles from '../../styles/sass/modules/Hero.module.scss';
+import React from 'react';
+import '../../styles/global.scss';
+import '../../styles/tailwind.css';
+import { Mail, Phone, Globe } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Button from './Button';
 import btnStyles from '../../styles/sass/modules/button.module.scss';
+import { useAppSelector } from '../lib/redux/hooks';
 
 const Hero = () => {
+  const user = useAppSelector((state) => state.user.user);
 
   const handleScrollerToSignUpIn = (mode: 'signup' | 'login') => {
-
     const section = document.getElementById('signupin');
 
-    if(section) {
-      window.history.pushState(null, ' ',`#signupin?mode=${mode}`); //update url
-      section.scrollIntoView({behavior: "smooth"})
+    if (section) {
+      window.history.pushState(null, ' ', `#signupin?mode=${mode}`); //update url
+      section.scrollIntoView({ behavior: 'smooth' });
     }
-  }
+  };
+
+  const handleLoginClick = () => {
+    if (user) {
+      // Redirect to home
+      window.location.href = '/home';
+    } else {
+      // Scroll to SignUpIn
+      const section = document.getElementById('signupin');
+      if (section) {
+        window.history.pushState(null, ' ', `#signupin?mode=login`);
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
-    <div className="__hero h-[65vh] flex flex-col px-5 md:px-7 lg:px-10 py-4 overflow-visible">
+    <div className="__hero flex h-[70vh] flex-col w-full py-3 px-4 md:px-3 overflow-visible">
       {/* Top Navigation  */}
-      <nav className="__hero nav top__nav w-full flex items-center justify-between">
+      <nav className="__hero nav top__nav flex w-full items-center justify-between">
         <Link href="/" id="logo">
-          <Image alt="Logo" src='/staticAssets/images/logo.svg' width={100} height={50} className="w-32 h-16 md:h-20 lg:w-44 lg:h-24 transition-all"/>
+          <Image
+            alt="Logo"
+            src="/staticAssets/images/logo.svg"
+            width={100}
+            height={50}
+            className="h-16 w-32 transition-all md:h-20 lg:h-24 lg:w-44"
+          />
         </Link>
-        <div className="flex gap-1 md:gap-2 sm:gap-1 ">
-            <Button  onClick={() => {handleScrollerToSignUpIn('signup')}} rightIcon={<span className={`${btnStyles["arrow-down"]}`}>↓</span>} shape="square">register</Button>
-            <Button  onClick={() => {handleScrollerToSignUpIn('login')}} variant='gradient' rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>} shape="square">login</Button>
+        <div className="flex gap-1 sm:gap-1 md:gap-2">
+          <Button
+            onClick={() => {
+              handleScrollerToSignUpIn('signup');
+            }}
+            rightIcon={<span className={`${btnStyles['arrow-down']}`}>↓</span>}
+            shape="square"
+          >
+            register
+          </Button>
+          <Button
+            onClick={handleLoginClick}
+            variant="gradient"
+            // rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>}
+            rightIcon={
+              <span
+                className={`${btnStyles[user ? 'arrow-right' : 'arrow-down']}`}
+              >
+                {user ? '→' : '↓'}
+              </span>
+            }
+            shape="square"
+          >
+            login
+          </Button>
         </div>
       </nav>
 
       {/* Main Content */}
-      <div className="text-center flex-grow flex flex-col justify-center items-center overflow-visible">
-        <h2 className={`queen__bee__jewels font-bold text-center ${styles.hero}`}>
-          <span>Queen<Image alt="Bee"
-           src='/staticAssets/images/Bee.svg'
-            className={`inline w-[4rem] h-auto sm:w-[5rem] md:w-[6rem] lg:w-[6.5rem]
-           mr-2 transition-all duration-300 ease-in-out -translate-y-3 ${styles["bee-jump"]}`} 
-           width={50} height={50} />
-           Jewels</span>
+      <div className="flex flex-grow flex-col items-center justify-center overflow-visible text-center">
+        <h2 className={`queen__bee__jewels text-center font-bold`}>
+          <span>
+            Queen
+            <Image
+              alt="Bee"
+              src="/staticAssets/images/Bee.svg"
+              className={`mr-2 inline h-auto w-[4rem] -translate-y-3 transition-all duration-300 ease-in-out sm:w-[5rem] md:w-[6rem] lg:w-[6.5rem]`}
+              width={50}
+              height={50}
+            />
+            Jewels
+          </span>
         </h2>
-        <h1 className="elegancy text-2xl font-medium xl:font-semibold mt-2 mb-2 text-center w-full z-100 border-solid">
+        <h1 className="elegancy z-100 mb-2 mt-2 w-full border-solid text-center text-2xl font-medium xl:font-semibold">
           <span>Let pieces you choose talk about your elegancy</span>
         </h1>
       </div>
       {/* Bottom Navigation */}
-      <nav className="nav bottom__nav w-full flex justify-between items-center">
+      <nav className="nav bottom__nav flex w-full items-center justify-between">
         {/* Left Side: Contact Icons  */}
         <ul className="nav bottom__nav contact__btns flex">
           <li className="icon_wrapper">
@@ -82,15 +126,15 @@ const Hero = () => {
                 >
                   <stop
                     offset="0%"
-                    style={{ stopColor: "#feda75", stopOpacity: 1 }}
+                    style={{ stopColor: '#feda75', stopOpacity: 1 }}
                   />
                   <stop
                     offset="50%"
-                    style={{ stopColor: "#d62976", stopOpacity: 1 }}
+                    style={{ stopColor: '#d62976', stopOpacity: 1 }}
                   />
                   <stop
                     offset="100%"
-                    style={{ stopColor: "#4f5bd5", stopOpacity: 1 }}
+                    style={{ stopColor: '#4f5bd5', stopOpacity: 1 }}
                   />
                 </linearGradient>
               </defs>
@@ -102,15 +146,15 @@ const Hero = () => {
           </li>
 
           <li className="icon_wrapper icon--facebook">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="blue"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M9 8H7V11H9V21H12V11H14.8L15 8H12V7C12 6.5 12.5 6 13 6H15V3H12C10 3 9 4.5 9 6V8Z" />
-              </svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="blue"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M9 8H7V11H9V21H12V11H14.8L15 8H12V7C12 6.5 12.5 6 13 6H15V3H12C10 3 9 4.5 9 6V8Z" />
+            </svg>
           </li>
         </ul>
         {/* Right Side: Language Switcher  */}

@@ -22,7 +22,7 @@ export type CardProps = {
   images?: string[];
   primaryButton?: React.ReactNode;
   secondaryButton?: React.ReactNode;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large' | 'sm_md';
   context?: string;
   showHeart?: boolean;
 };
@@ -49,9 +49,10 @@ const Card: React.FC<CardProps> = ({
   };
 
   const cardSize = {
-    small: 'w-[18rem] h-[45vh] xs:w-[19rem] xs:h-[48vh] sm:w-[20rem] sm:h-[50vh]  md:min-h-[22rem] md:max-h-[33rem] min-w-[18rem] max-w-[20rem] md:min-w-[21rem]',
+    small: 'w-[18rem] h-[45vh] xs:w-[19rem] xs:h-[48vh] sm:w-[20rem] sm:h-[50vh] md:min-h-[22rem] md:max-h-[33rem] min-w-[18rem] max-w-[20rem] md:min-w-[21rem]',
     medium:
-      'w-[20rem] h-[53vh] min-h-[50vh] min-w-[21rem] max-w-[20rem] xs:min-w-[23rem] xs:max-w-[24rem] lg:min-w-[26rem] lg:max-w-[70rem] lg:min-h-[40rem]',
+      'w-[20rem] h-[53vh] min-h-[50vh] min-w-[21rem] max-w-[20rem] xs:min-w-[23rem] xs:max-w-[24rem] lg:min-w-[24rem] lg:max-w-[70rem] lg:min-h-[38rem] xl:min-h-[41rem] xl:min-w-[26rem]',
+      sm_md: 'w-[23rem] h-[49vh] min-w-[20rem] max-w-[22rem] xs:w-[20rem] xs:h-[50vh] sm:w-[28rem] sm:h-[54vh] md:min-h-[23rem] md:max-h-[34rem] md:min-w-[22rem]',
     large:
       'w-[60vw] min-w-[8rem] max-w-[20rem] h-[49vh] text-center xs:w-[57vw] xs:min-w-[10rem] xs:max-w-[22rem] xs:h-[53vh] gap-y-4 md:max-w-[23rem] md:h-[56vh] md:max-h-[60vh] lg:w-[23vw] lg:max-w-[23.5rem] xl:max-w-[25rem] xl:h-[53vh]',
   };

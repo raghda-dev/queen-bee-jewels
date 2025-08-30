@@ -1,3 +1,5 @@
+// client/app/(main)/component/FeatureCard.tsx
+
 import React, { ReactNode } from "react";
 import Image, { StaticImageData } from "next/image";
 

@@ -1,19 +1,32 @@
+// client/app/(main)/components/Footer.tsx
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Mail, Phone, Locate } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useAppSelector } from '../lib/redux/hooks';
 import Link from 'next/link';
 
 const Footer: React.FC = () => {
   const [year, setYear] = useState<number | null>(null);
+  const user = useAppSelector((state) => state.user.user);
+  const router = useRouter();
 
   useEffect(() => {
     setYear(new Date().getFullYear());
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (user) {
+      router.push('/'); // guest → landing page
+      router.refresh();
+    }
+  };
+
   if (year === null) {
-    // Render a fallback until the year is set
     return <footer className="__Footer">Loading...</footer>;
   }
 
@@ -22,8 +35,14 @@ const Footer: React.FC = () => {
       <div className="__Footer __Footer__item Footer__item--logo mx-auto flex max-w-7xl flex-col items-center justify-between gap-y-12 md:gap-y-0">
         {/* Logo */}
         <div className="my-7 flex items-center space-x-3">
-          <Link href="/">
-            <Image src="/staticAssets/images/logo.svg" alt="Logo" width={100} height={70} className="w-32 sm:w-40" />
+          <Link href="/" onClick={handleLogoClick}>
+            <Image
+              src="/staticAssets/images/logo.svg"
+              alt="Logo"
+              width={100}
+              height={70}
+              className="w-32 sm:w-40"
+            />
           </Link>
         </div>
 
@@ -48,6 +67,7 @@ const Footer: React.FC = () => {
 
             {/* Social Icons */}
             <div className="flex justify-center pt-6">
+              {/* Instagram */}
               <li className="icon_wrapper icon--instagram">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
@@ -64,6 +84,7 @@ const Footer: React.FC = () => {
                 </svg>
               </li>
 
+              {/* Facebook */}
               <li className="icon_wrapper icon--facebook">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="blue" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 8H7V11H9V21H12V11H14.8L15 8H12V7C12 6.5 12.5 6 13 6H15V3H12C10 3 9 4.5 9 6V8Z" />

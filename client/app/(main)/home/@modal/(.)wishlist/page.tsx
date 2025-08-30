@@ -39,12 +39,13 @@ export default function WishlistModal() {
 
       {/* Modal container */}
       <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
-        <div className="relative bottom-5 h-[100vh] w-[76vw] rounded-t-2xl bg-white p-6 pb-6 shadow-lg sm:rounded-2xl sm:h-[89vh] lg:bottom-0 xl:h-[64rem]">
-          
+        {/* <div className="relative bottom-2 md:bottom-1 h-[95vh] w-[76vw] rounded-t-2xl bg-white p-5 pb-6 md:pb-12 shadow-lg sm:rounded-2xl sm:h-[89vh] lg:bottom-0 xl:h-[60rem]"> */}
+         <div className="relative bottom-2 md:bottom-1 h-[96vh] w-[76vw] rounded-t-2xl bg-white p-5 pb-6 md:pb-12 shadow-lg xs:h-[90vh] sm:h-[89vh] md:h-[88vh] sm:rounded-2xl lg:bottom-0 xl:h-[60rem]">
+
           {/* Header */}
-          <div className="mb-4 flex items-center justify-between border-b pb-6">
+          <div className="sm:mb-4 flex items-center justify-between border-b md:pb-6 md:mb-0 ">
             <h2 className="text-xl font-semibold sm:text-2xl md:text-3xl">Wishlist</h2>
-            <div className="flex gap-7">
+             <div className="flex gap-7">
               <Button
                 variant="textButton"
                 size="medium"
@@ -53,6 +54,7 @@ export default function WishlistModal() {
                 onClick={() => router.push('/home/cart', { scroll: false })}
                 leftIcon={<ShoppingCart size={14} />}
                 animation="text-underline"
+                underlineDirection="from-left"
                 rightIcon={<span>→</span>}
               >
                 Go to Cart

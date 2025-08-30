@@ -1,27 +1,71 @@
-//client/app/(main)/components/Header.tsx
+// client/app/(main)/components/Header.tsx
 
 'use client';
 
 import React from 'react';
 import '../../styles/global.scss';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Search, ShoppingCart, Settings, LogOut } from 'lucide-react';
 import axiosInstance from '../lib/axios/axios';
 import Link from 'next/link';
-import { useAppSelector } from '../lib/redux/hooks';
+import { useAppSelector, useAppDispatch } from '../lib/redux/hooks';
+import { setSearchQueryForPage } from "../lib/redux/sidebar/sidebarSlice";
+import { logout as logoutAction } from "../lib/redux/user/userSlice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
+
+  const segments = pathname?.split('/').filter(Boolean) ?? [];
+  const pageKey = segments[1] ?? 'home';
 
   const handleLogout = async () => {
     try {
+      // call backend to clear server session/cookies
       await axiosInstance.post('/auth/logout');
-      router.push('/?mode=login');
+
+      // clear any client-only tokens / guest storage you keep
+      try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('rememberedEmail');
+        // (optional) clear guest-specific storage that shouldn't persist across sessions
+        // localStorage.removeItem('guestCart');
+        // localStorage.removeItem('guestWishlist');
+      } catch (e) {
+        // ignore localStorage errors
+        // eslint-disable-next-line no-console
+        console.warn('localStorage cleanup failed', e);
+      }
+
+      // clear user slice (keeps reducer logic simple)
+      dispatch(logoutAction());
+
+      // Force a full page navigation (replace history so back doesn't return to logged-in state)
+      // This avoids partial client rehydration that causes layout glitches.
+      // We use replace() so the back button won't go back into the logged-in session.
+      window.location.replace('/?mode=login');
     } catch (err) {
-      console.error('Logout failed', err);
+      // if logout call fails, still try to reset client state and do a hard reload
+      // eslint-disable-next-line no-console
+      console.error('Logout failed (backend). Falling back to client-side reset.', err);
+
+      try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('rememberedEmail');
+      } catch (e) {
+        // ignore
+      }
+
+      dispatch(logoutAction());
+      window.location.replace('/?mode=login');
     }
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchQueryForPage({ page: pageKey, query: e.target.value }));
   };
 
   return (
@@ -54,6 +98,7 @@ const Header = () => {
           <div className="relative h-10 w-full max-w-[25rem] sm:max-w-[35rem] md:max-w-[55rem]">
             <input
               type="text"
+              onChange={handleSearch}
               className="placeholder-grayLight/60 focus:ring-grayLight/30 smooth text-md mt-4 w-full rounded-full bg-grayLight py-1 text-black opacity-55 outline-none transition-all focus:bg-white focus:ring-2 md:px-5 md:py-2 md:text-lg lg:text-2xl"
               placeholder="Search..."
             />
@@ -87,11 +132,11 @@ const Header = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-       2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 
-       14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 
-       6.86-8.55 11.54L12 21.35z"
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 
+              2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
+              4.5 2.09C13.09 3.81 14.76 3 16.5 3 
+              19.58 3 22 5.42 22 8.5c0 3.78-3.4 
+              6.86-8.55 11.54L12 21.35z"
             />
           </svg>
         </button>
@@ -113,4 +158,3 @@ const Header = () => {
 };
 
 export default Header;
-

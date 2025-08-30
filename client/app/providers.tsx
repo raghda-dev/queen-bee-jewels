@@ -1,4 +1,4 @@
-//client/app/providers.tsx
+// client/app/providers.tsx
 
 'use client';
 

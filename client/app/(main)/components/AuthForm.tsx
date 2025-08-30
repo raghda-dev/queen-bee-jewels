@@ -1,4 +1,4 @@
-// client/app/(main)/components/AuthForm.tsx
+//client/app/(main)/components/AuthForm.tsx
 
 'use client';
 
@@ -6,8 +6,8 @@ import React, { ReactNode, useState } from 'react';
 import styles from '../../styles/sass/modules/authform.module.scss';
 import Button from '../components/Button';
 import Image from 'next/image';
-import { FaCheckCircle } from 'react-icons/fa';
 import { Eye, EyeOff } from 'lucide-react';
+import Link from 'next/link';
 
 type FormField = {
   name: string;
@@ -21,8 +21,15 @@ type AuthFormProps = {
   fields: FormField[];
   buttonText: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onInputBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  formValues?: { [key: string]: string };
+  errors?: { [key: string]: string };
   topLeftIcon?: ReactNode;
   topRightIcon?: ReactNode;
+  showRememberMe?: boolean;
+  rememberMe?: boolean;
+  onToggleRememberMe?: () => void;
 };
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -30,8 +37,15 @@ const AuthForm: React.FC<AuthFormProps> = ({
   fields,
   buttonText,
   onSubmit,
+  onInputChange,
+  onInputBlur,
+  formValues = {},
+  errors = {},
   topLeftIcon,
   topRightIcon,
+  showRememberMe = false,
+  rememberMe = false,
+  onToggleRememberMe,
 }) => {
   const isLogin =
     (typeof title === 'string' && title.toLowerCase().includes('log in')) ||
@@ -60,15 +74,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
       <form onSubmit={onSubmit}>
         {fields.map((field, index) => (
           <div key={index} className={styles.formGroup}>
-            <label>{field.label}</label>
+            <label htmlFor={field.name}>{field.label}</label>
 
             {field.type === 'password' ? (
               <div className="relative">
                 <input
+                  id={field.name}
                   type={visiblePasswords[field.name] ? 'text' : 'password'}
                   name={field.name}
                   placeholder={field.placeholder}
-                  required
+                  value={formValues[field.name] || ''}
+                  onChange={onInputChange}
+                  onBlur={onInputBlur}
                   className={styles.input}
                 />
                 <button
@@ -86,31 +103,42 @@ const AuthForm: React.FC<AuthFormProps> = ({
               </div>
             ) : (
               <input
+                id={field.name}
                 type={field.type}
                 name={field.name}
                 placeholder={field.placeholder}
-                required
+                value={formValues[field.name] || ''}
+                onChange={onInputChange}
+                onBlur={onInputBlur}
                 className={styles.input}
               />
+            )}
+
+            {errors[field.name] && (
+              <p className="mt-1 text-sm text-orangeMain">{errors[field.name]}</p>
             )}
           </div>
         ))}
 
         {isLogin && (
-          <div className="my-3 flex justify-between">
-            <div className="flex items-center gap-2">
-              <Button
-                variant="textButton"
-                leftIcon={<FaCheckCircle />}
-                color="var(--purple-medium)"
-              >
+          <div className="my-3 flex justify-between items-center">
+            {showRememberMe && (
+              <label className="flex items-center rounded-full gap-2 cursor-pointer text-lg text-gray-700">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={onToggleRememberMe}
+                  className="accent-purpleMedium w-4 h-4"
+                />
                 Remember Me
-              </Button>
-            </div>
+              </label>
+            )}
             <div className="text-right">
+              <Link href="/forgot-password">
               <Button variant="textButton" color="var(--purple-medium)">
                 <span className="underline">Forget Password?</span>
               </Button>
+              </Link>
             </div>
           </div>
         )}
@@ -129,7 +157,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
             shape="rectangle"
             size="medium"
             rightIcon={
-              <Image src="/staticAssets/icons/Google.svg" alt="google icon" width={11} height={10} />
+              <Image
+                src="/staticAssets/icons/Google.svg"
+                alt="google icon"
+                width={11}
+                height={10}
+              />
             }
           >
             {isLogin ? 'Log in with' : 'Sign up with'}
@@ -139,7 +172,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
             shape="rectangle"
             size="medium"
             rightIcon={
-              <Image src="/staticAssets/icons/Facebook.svg" alt="facebook icon" width={7} height={10} />
+              <Image
+                src="/staticAssets/icons/Facebook.svg"
+                alt="facebook icon"
+                width={7}
+                height={10}
+              />
             }
           >
             {isLogin ? 'Log in with' : 'Sign up with'}

@@ -26,14 +26,13 @@ export default function UserHeader({ user, onAvatarAction }: Props) {
 
   const hasImage = Boolean(user.avatar);
 
-
   const avatarUrl = user?.avatar?.startsWith('http')
     ? user.avatar
     : `${process.env.NEXT_PUBLIC_API_URL}${user?.avatar}`;
 
   return (
     <div className="mb-6 mt-[-1rem] flex w-full flex-col items-center gap-0 border-b pb-5">
-      <div className="relative h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 xl:h-40 xl:w-40 overflow-hidden rounded-full transition-all">
+      <div className="relative h-28 w-28 overflow-hidden rounded-full transition-all sm:h-32 sm:w-32 lg:h-36 lg:w-36 xl:h-40 xl:w-40">
         {hasImage ? (
           <Image
             src={`${avatarUrl}?t=${Date.now()}`}
@@ -71,25 +70,27 @@ export default function UserHeader({ user, onAvatarAction }: Props) {
       >
         {hasImage ? (
           <>
-            <Button
-              onClick={() => onAvatarAction('edit')}
-              rightIcon={<Pen width={14} height={14} />}
-              color="var(--black)"
-              shape="rectangle"
-              size="small"
-            >
-              edit my photo
-            </Button>
-            <Button
-              onClick={() => onAvatarAction('remove')}
-              rightIcon={<Trash width={14} height={14} />}
-              color="var(--black)"
-              variant="secondary"
-              shape="rectangle"
-              size="small"
-            >
-              remove photo
-            </Button>
+            <div className="flex gap-2 min-w-[19rem] w-[20rem]">
+              <Button
+                onClick={() => onAvatarAction('edit')}
+                rightIcon={<Pen width={12} height={12} />}
+                color="var(--black)"
+                shape="rectangle"
+                size="small"
+              >
+                edit my photo
+              </Button>
+              <Button
+                onClick={() => onAvatarAction('remove')}
+                rightIcon={<Trash width={12} height={12} />}
+                color="var(--black)"
+                variant="secondary"
+                shape="rectangle"
+                size="small"
+              >
+                remove photo
+              </Button>
+            </div>
           </>
         ) : (
           <Button
