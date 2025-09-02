@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
     e.preventDefault();
     if (user) {
       router.push('/'); // guest → landing page
-      router.refresh();
+      window.location.href = '/';
     }
   };
 

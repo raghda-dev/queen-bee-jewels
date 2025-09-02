@@ -1,0 +1,9 @@
+// client/app/hooks/useHydrated.tsx
+
+import { useEffect, useState } from 'react';
+
+export default function useHydrated(): boolean {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  return hydrated;
+}

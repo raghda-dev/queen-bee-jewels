@@ -11,25 +11,29 @@ import Image from 'next/image';
 import Button from './Button';
 import btnStyles from '../../styles/sass/modules/button.module.scss';
 import { useAppSelector } from '../lib/redux/hooks';
+import useHydrated from '../hooks/useHydrated';
 
 const Hero = () => {
   const user = useAppSelector((state) => state.user.user);
+  
+  const hydrated = useHydrated();
+  const isClientLoggedIn = hydrated && Boolean(user);
+
+    if (!hydrated) return null;
+
 
   const handleScrollerToSignUpIn = (mode: 'signup' | 'login') => {
     const section = document.getElementById('signupin');
-
     if (section) {
-      window.history.pushState(null, ' ', `#signupin?mode=${mode}`); //update url
+      window.history.pushState(null, ' ', `#signupin?mode=${mode}`);
       section.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   const handleLoginClick = () => {
     if (user) {
-      // Redirect to home
       window.location.href = '/home';
     } else {
-      // Scroll to SignUpIn
       const section = document.getElementById('signupin');
       if (section) {
         window.history.pushState(null, ' ', `#signupin?mode=login`);
@@ -53,9 +57,7 @@ const Hero = () => {
         </Link>
         <div className="flex gap-1 sm:gap-1 md:gap-2">
           <Button
-            onClick={() => {
-              handleScrollerToSignUpIn('signup');
-            }}
+            onClick={() => handleScrollerToSignUpIn('signup')}
             rightIcon={<span className={`${btnStyles['arrow-down']}`}>↓</span>}
             shape="square"
           >
@@ -64,11 +66,8 @@ const Hero = () => {
           <Button
             onClick={handleLoginClick}
             variant="gradient"
-            // rightIcon={<span className={btnStyles["arrow-down"]}>↓</span>}
             rightIcon={
-              <span
-                className={`${btnStyles[user ? 'arrow-right' : 'arrow-down']}`}
-              >
+              <span className={`${btnStyles[isClientLoggedIn ? 'arrow-right' : 'arrow-down']}`}>
                 {user ? '→' : '↓'}
               </span>
             }
@@ -98,6 +97,7 @@ const Hero = () => {
           <span>Let pieces you choose talk about your elegancy</span>
         </h1>
       </div>
+
       {/* Bottom Navigation */}
       <nav className="nav bottom__nav flex w-full items-center justify-between">
         {/* Left Side: Contact Icons  */}
@@ -124,18 +124,9 @@ const Hero = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop
-                    offset="0%"
-                    style={{ stopColor: '#feda75', stopOpacity: 1 }}
-                  />
-                  <stop
-                    offset="50%"
-                    style={{ stopColor: '#d62976', stopOpacity: 1 }}
-                  />
-                  <stop
-                    offset="100%"
-                    style={{ stopColor: '#4f5bd5', stopOpacity: 1 }}
-                  />
+                  <stop offset="0%" style={{ stopColor: '#feda75', stopOpacity: 1 }} />
+                  <stop offset="50%" style={{ stopColor: '#d62976', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#4f5bd5', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
               <path
@@ -144,7 +135,6 @@ const Hero = () => {
               />
             </svg>
           </li>
-
           <li className="icon_wrapper icon--facebook">
             <svg
               width="24"
@@ -157,7 +147,8 @@ const Hero = () => {
             </svg>
           </li>
         </ul>
-        {/* Right Side: Language Switcher  */}
+
+        {/* Right Side: Language Switcher */}
         <ul className="nav bottom__nav lang__btns flex items-center">
           <li className="botton__nav__btns--lang text-1xl icon_wrapper font-semibold">
             En

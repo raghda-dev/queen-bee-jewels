@@ -1,4 +1,3 @@
-
 //client/app/(main)/home/product/[handle]/ProductDetailsClient.tsx
 
 'use client';
@@ -49,8 +48,8 @@ export default function ProductDetailsClient({
     (selectedProduct.featuredImage?.url ? [selectedProduct.featuredImage.url] : []);
 
   return (
-    <div className="min-h-screen w-[80vw] xs:w-[70vw] px-4 py-8 flex flex-col items-center justify-center">
-      <div className="w-[90%] bg-white rounded-2xl shadow-md overflow-hidden">
+    <div className="relative right-3 sm:right-14 lg:right-20 w-full flex flex-col items-center justify-center">
+      <div className="w-full bg-white rounded-2xl shadow-md overflow-hidden">
         {/* Top: Images */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 border-b border-gray-300">
           {images.length > 0 ? (
@@ -130,3 +129,5 @@ export default function ProductDetailsClient({
     </div>
   );
 }
+
+

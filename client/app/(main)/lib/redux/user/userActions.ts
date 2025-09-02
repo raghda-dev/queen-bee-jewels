@@ -150,6 +150,7 @@ export const updateUserInfo = createAsyncThunk<
 // UPDATE USER PASSWORD (Form 2)
 // ───────────────────────
 
+
 export const updateUserPassword = createAsyncThunk<
   void,
   { currentPassword: string; newPassword: string },
@@ -170,10 +171,10 @@ export const updateUserPassword = createAsyncThunk<
         throw new Error(error.message || 'Failed to update password');
       }
 
-      toast('Password updated successfully', { className: 'toast-success' });
+      // ✅ No toast here
+      return;
     } catch (err) {
       const message = (err as Error).message || 'Failed to update password';
-      toast(message, { className: 'toast-error' });
       return rejectWithValue(message);
     }
   }

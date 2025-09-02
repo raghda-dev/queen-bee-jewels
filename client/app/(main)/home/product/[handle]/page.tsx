@@ -24,7 +24,7 @@ export default async function ProductDetails({
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="w-[70vw] flex items-center justify-center">
       <ProductDetailsClient
        product={product}
        recommendedProducts={recommendedProducts}
