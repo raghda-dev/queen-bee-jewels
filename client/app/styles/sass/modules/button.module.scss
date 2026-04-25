@@ -1,0 +1,273 @@
+// client/app/styles/sass/modules/button.module.scss
+
+@use '../abstracts/mixins' as *;
+
+// -------------------------
+// BUTTON BASE STYLES
+// -------------------------
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  &.bounce {
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+}
+
+// -------------------------
+// ICON WRAPPER + CART ICON
+// -------------------------
+
+.icon-wrapper {
+  display: inline-block;
+}
+
+.cart-icon {
+  display: inline-block;
+}
+
+.cart-icon.rotate-pop {
+  animation: iconRotatePop 0.5s ease;
+}
+
+@keyframes iconRotatePop {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(15deg) scale(1.2); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+// -------------------------
+// ARROW DOWN EXAMPLE
+// -------------------------
+
+.arrow-down {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease;
+}
+
+.button:hover .arrow-down {
+  opacity: 1;
+  transform: translateY(0);
+  padding-right: 0.1rem;
+}
+
+.arrow-right {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
+}
+
+.button:hover .arrow-right {
+  opacity: 1;
+  transform: translateX(0);
+  padding-left: 0.1rem;
+}
+
+
+// -------------------------
+// TEXT UNDERLINE HOVER EFFECT
+// -------------------------
+
+
+// -------------------------
+// TEXT UNDERLINE HOVER EFFECT
+// -------------------------
+
+// client/app/styles/sass/modules/button.module.scss
+
+.text-underline {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0%;
+    height: 0.4px;
+    background-color: currentColor;
+    transition: width 0.5s ease-in-out;
+  }
+
+  // Default: line grows left → right
+  &.from-left::after {
+    left: 0;
+  }
+
+  // For right arrow: line grows right → left
+  &.from-right::after {
+    right: 0;
+  }
+
+  &:hover.from-left::after {
+    width: 100%;
+  }
+
+  &:hover.from-right::after {
+    width: 100%;
+  }
+}
+
+// .text-underline {
+//   position: relative;
+//   display: inline-block;
+//   color: inherit; // keep the text color
+//   text-decoration: none;
+
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     left: 0;
+//     bottom: -2px;
+//     width: 0%;
+//     height: .4px;
+//     background-color: currentColor;
+//     transition: width 0.5s ease-in-out;
+//   }
+
+//   &:hover::after {
+//     width: 100%;
+//   }
+// }
+
+// -------------------------
+// COLOR VARIANTS
+// -------------------------
+
+.primary {
+  background-color: var(--navy-dark);
+  color: var(--white);
+  &:hover {
+    background-color: var(--navy-medium);
+  }
+}
+
+.gradient {
+  background-color: transparent;
+  color: var(--gradient-color, var(--gradient-start));
+  border: 2px solid transparent;
+  border-image-source: linear-gradient(
+    to right,
+    var(--gradient-color, var(--gradient-start)),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+  border-image-slice: 1;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  border: 0.16rem solid var(--navy-dark);
+  color: var(--navy-dark);
+}
+
+.textButton {
+  background-color: transparent;
+  color: var(--black);
+  border: none;
+}
+
+// -------------------------
+// BUTTON SHAPES
+// -------------------------
+
+.rounded { border-radius: 12px; }
+.pill { border-radius: 50px; }
+.square { border-radius: 2px; }
+
+.rectangle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 0.5rem;
+  height: 2.9rem;
+}
+
+// -------------------------
+// BUTTON SIZES
+// -------------------------
+
+.large {
+  padding: 11px 15px;
+  font-weight: 500;
+  font-size: 1.2rem;
+
+  @include responsive($size: medium) {
+    padding: 9px 12px;
+    font-size: 1.1rem;
+  }
+
+  @include responsive($size: small) {
+    padding: 8px 10px;
+    font-size: 1rem;
+  }
+}
+
+.medium {
+  padding: 8px 8px;
+  font-size: 1rem;
+  font-weight: 500;
+
+  @include responsive($size: medium) {
+    padding: 7px 7px;
+    font-size: 1rem;
+  }
+
+  @include responsive($size: small) {
+    padding: 6.5px 7px;
+    font-size: 0.92rem;
+  }
+}
+
+.small {
+  padding: 5.5px 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  @include responsive($size: small) {
+    padding: 2px 6px;
+    font-weight: 400;
+    font-size: 0.8rem;
+  }
+}
+
+// -------------------------
+// OPTIONAL EXAMPLE EFFECTS
+// -------------------------
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wave {
+  0% { width: 30%; height: 30%; opacity: 1; }
+  100% { width: 300%; height: 300%; opacity: 0; }
+}

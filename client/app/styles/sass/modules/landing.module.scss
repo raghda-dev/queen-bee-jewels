@@ -1,0 +1,105 @@
+/* client/app/(main)/styles/landing.module.scss
+   Scoped, landing-only defensive styles to prevent layout shifts
+*/
+
+.landingMain {
+  /* keep the same max width you had in page.tsx, center horizontally */
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px; /* match your existing max-w */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+
+  /* Prevent accidental horizontal overflow from landing decorations */
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* top / bottom decorative strips are absolutely positioned but with
+   fixed height and full width and pointer-events none so they don't
+   affect layout when they re-render */
+.topDecoration,
+.bottomDecoration {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Left-side decorative column (the columns images) is absolutely positioned
+   and given a reserved width so it cannot push the auth column when it changes */
+.leftDecoration {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 18rem; /* reserve 288px on desktop for the decorations */
+  display: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .leftDecoration {
+    display: block;
+  }
+}
+
+/* Content wrapper that lives above decorations */
+.contentWrapper {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero: keep nav layout stable — anchor logo and avatar blocks */
+.heroInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* The main content area (below hero). This keeps left decorations out of flow
+   and constrains the auth column to a fixed max-width. */
+.mainArea {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* The part that contains the auth forms; constrained so it cannot grow
+   and can't be pushed by other elements. */
+.authColumnWrapper {
+  margin-left: auto; /* push to the right */
+  width: 100%;
+  max-width: 36rem; /* 576px — tweak to taste */
+  box-sizing: border-box;
+  padding: 1rem;
+  z-index: 6;
+}
+
+/* Additional defensive: lock min & max dimensions to avoid sudden growth */
+.authColumnWrapper > * {
+  width: 100%;
+  max-width: 36rem;
+  box-sizing: border-box;
+}
+
+/* Categories section: left-aligned and not using 100vw */
+.categoriesSection {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4rem 0;
+}
+
+/* Product grid helper (optional, safe) */
+.productsGridLanding {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  width: 100%;
+  box-sizing: border-box;
+}

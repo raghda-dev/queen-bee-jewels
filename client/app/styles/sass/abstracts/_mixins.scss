@@ -1,0 +1,32 @@
+// styles/sass/abstracts/_mixins.scss
+
+@use '../abstracts/variables' as *;
+
+@use 'sass:map'; // Import the map module
+
+
+@mixin responsive($size){
+  @each $label, $value in $breakpoints { // Now directly access $breakpoints
+    @if $size == $label {
+      @media (max-width: $value){
+        @content;
+      }
+    }
+  }
+}
+
+
+@mixin slideInFromLeft($delay) {
+  animation: slideInLeft $duration ease-out $delay forwards;
+}
+
+@mixin jumpAndScale($delay) {
+  animation: jumpAndScale $duration ease-out $delay forwards;
+}
+
+@mixin hoverEffect {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition-delay: 0.2s; // Delay for the box-shadow to appear after scaling
+}

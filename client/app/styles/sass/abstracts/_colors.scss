@@ -1,0 +1,77 @@
+// styles/abstracts/_colors.scss
+
+:root {
+    /* Warm / Orange-Brown shades */
+    --orange-lighter: #ECDFCC;
+    --orange-light: #D6A181;
+    --orange-medium: #D09C7B;
+    --orange-dark: #C75E1D;
+    --orange-deep: #BF741F;
+    --orange-rich: #B36C1D;
+    --orange-brown: #995D19;
+    --deep-brown: #612E0E;
+    --orange-main: #944616;
+
+  
+    /* Purple / Pink shades */
+    --purple-light: #AA93A4;
+    --purple-medium: #704264;
+    --purple-dark: #754560;
+    --pinkish: #BB8493;
+    --pink-tint: #D09C7B;
+    --pink-light: #E4CED4;
+  
+    /* Neutral / Gray & White shades */
+    --white: #FFFFFF;
+    --gray-light: #E5E5E5;
+    --gray-medium: #D9D9D9;
+    --gray-dark: #333333;
+    --black: #1C1C1C;
+    --lighter-cyan: #f3fcfc;
+    --light-cyan: #ecfeff;
+    --cyan-medium: #cffafe;
+    --cyan-dark:  #164e63;
+
+  
+    /* Navy / Blue shades */
+    --navy-dark: #2B404B;
+    --navy-medium: #2D3648;
+  
+    /* Deep Red / Brown Tones */
+    --brownish-red: #7A3A12;
+    --dark-burgundy: #683839;
+    --muted-red: #6C3D4F;
+    --deep-purple-red: #6E3F59;
+  
+    /* Gradient Colors */
+    --gradient-start: #C75E1D;
+    --gradient-mid: #704264;
+    --gradient-end: #D6A181;
+
+
+
+
+    /* === New Notification Colors === */
+
+/* ERROR */
+--error-color: #7B1E1E;         // Deep muted red
+--error-bgcolor: #FCE8E8;       // Soft, elegant blush red background
+--error-border: #DA5C5C;        // Warm brick red
+
+/* SUCCESS */
+--success-color: #22543D;       // Deep moss green (elegant + reliable)
+--success-bgcolor: #E6F4F1;     // Soft mint-teal background
+--success-border: #6FCF97;      // Soft balanced green
+
+/* INFO */
+--info-color: #1C3D5A;          // Deep elegant navy
+--info-bgcolor: #EAF3FA;        // Subtle blue-gray background
+--info-border: #7CA6C2;         // Muted steel blue
+
+/* WARNING */
+--warning-color: #9A5B00;       // Toasted amber (not neon)
+--warning-bgcolor: #FFF5E6;     // Pale warm cream
+--warning-border: #E0A955;      // Muted orange-gold
+
+  }
+  

@@ -1,0 +1,30 @@
+/* styles/sass/components/_toast.scss */
+
+
+.toast-success {
+  background-color: var(--success-bgcolor) !important;
+  color: var(--success-color) !important;
+  border: 1px solid var(--success-border) !important;
+  font-weight: 600 !important;
+}
+
+.toast-info {
+  background-color: var(--info-bgcolor) !important;
+  color: var(--info-color) !important;
+  border: 1px solid var(--info-border) !important;
+  font-weight: 600 !important;
+}
+
+.toast-error {
+  background-color: var(--error-bgcolor) !important;
+  color: var(--error-color) !important;
+  border: 1px solid var(--error-border) !important;
+  font-weight: 600 !important;
+}
+
+.toast-warning {
+  background-color: var(--warning-bgcolor) !important;
+  color: var(--warning-color) !important;
+  border: .5px solid var(--warning-border) !important;
+  font-weight: 600 !important;
+}

@@ -1,3 +1,9 @@
+# QueenBee Systems
+
+This is a full-stack ecommerce app built with:
+- **Client**: Next.js (frontend)
+- **Server**: Express.js (backend)
+- **Storefront**: Shopify API
 # 🐝 Queen Bee Jewels 💎
 
 **Queen Bee Jewels** is a luxurious full-stack e-commerce platform crafted to deliver an elegant and seamless online shopping experience for jewelry lovers.  

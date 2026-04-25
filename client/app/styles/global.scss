@@ -1,0 +1,19 @@
+// styles/global.scss
+
+
+@use 'sass/abstracts/colors' as colors;
+@use 'sass/abstracts/variables' as *;
+@use 'sass/abstracts/functions' as *;
+@use 'sass/abstracts/mixins' as *;
+
+@use 'sass/base/base' as *;
+
+@use 'sass/base/animations' as *;
+@use 'sass/base/typography' as *;
+@use 'sass/base/utilities' as *;
+
+
+@use 'sass/components/icons' as *;
+@use 'sass/components/BSScrollbar' as *;
+@use 'sass/components/toast' as *;
+

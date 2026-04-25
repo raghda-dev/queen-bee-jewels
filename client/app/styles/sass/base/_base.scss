@@ -1,0 +1,229 @@
+//styles/sass/base.scss
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600&display=swap');
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+
+html {
+  
+  font-size: 62.5%;
+  overflow-x: hidden;
+  overflow-y: auto; 
+}
+
+body {
+ 
+font-family: 'Poppins', sans-serif;
+font-weight: 400;
+line-height: 1.7;
+overflow-x: hidden;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+body .main__container {
+  display: grid;
+  grid-template-rows: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100vw;
+  padding:0;
+}
+
+// body .main__container .__hero {
+//   // background-color: bisque;
+// }
+
+
+body .main__container .__categories {
+ display: flex; //Ensures that it rounds aroud the content
+ align-items: center; //centers the items vertically
+ justify-content: center;
+ height: auto; /* Let it expand dynamically */
+ width: 100vw;  // Use viewport width to eliminate extra margins
+ max-width: 100%;  // Prevents any max-width constraints
+ min-height: 100vh; // Ensure the background covers enough space
+ overflow: hidden;
+ padding: 5rem auto;
+ /* Adjust height for larger screens */
+ @media (min-width: 1024px) { /* For lg and larger screens */
+   max-height: 70vh; /* Reduce the height on larger screens */
+ }
+}
+
+
+body .main__container .__one__piece {
+ display: flex;
+ justify-content: space-evenly;
+ width: 100vw;
+//  min-height: 60vh;
+
+ border-top: .5px solid var(--gray-light);
+}
+
+// body .main__container .__features {
+// }
+
+// body .main__container .__best__selling {
+//   background-color: rgb(235, 155, 155);
+// }
+
+// body .main__container .__signin__signup__form {
+//   background-color: rgb(233, 221, 221);
+// }
+
+body .main__container > section {
+  width: 100%;
+}
+
+
+.__Footer {
+ &__item--list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+ }
+
+ &--item {
+  font-size: 1.3rem;
+ }
+
+ &--item:hover {
+  color: var(--pinkish);
+  transition: ease-in all 0.2s;
+  cursor: pointer;
+}
+}
+
+
+
+
+
+/* styles/sass/base.scss — STABLE / DEFENSIVE globals */
+
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600&display=swap');
+
+// *,
+// *::before,
+// *::after {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+// }
+
+// /* Reserve vertical scrollbar area to prevent layout shifts when it appears/disappears */
+// html {
+//   font-size: 62.5%;
+//   overflow-y: scroll;
+//   overflow-x: hidden;
+// }
+
+// body {
+//   font-family: 'Poppins', sans-serif;
+//   font-weight: 400;
+//   line-height: 1.7;
+//   min-height: 100%;
+//   margin: 0;
+//   padding: 0;
+//   overflow-x: hidden; /* keep horizontal scroll off */
+// }
+
+// /* Defensive: neutralize any inline padding-right (scroll lock libs) */
+// body[style] {
+//   padding-right: 0 !important;
+// }
+
+// /* Page container — let Tailwind / page-level classes control max-width.
+//    Don't force 100vw here. */
+// body .main__container {
+//   display: grid;
+//   grid-template-rows: auto;
+//   margin: 0 auto;
+//   width: 100%;
+//   padding: 0;
+//   box-sizing: border-box;
+// }
+
+// /* Each main section uses container width (not viewport width) */
+// body .main__container > section {
+//   width: 100%;
+//   box-sizing: border-box;
+// }
+
+// /* Categories (don't force viewport width; keep content left-aligned) */
+// body .main__container .__categories {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   justify-content: flex-start;
+//   width: 100%;
+//   max-width: 100%;
+//   height: auto;
+//   min-height: auto;
+//   overflow: visible;
+//   padding: 5rem 0;
+//   box-sizing: border-box;
+// }
+
+// /* One-piece section */
+// body .main__container .__one__piece {
+//   display: flex;
+//   justify-content: space-evenly;
+//   width: 100%;
+//   border-top: 0.5px solid var(--gray-light);
+//   box-sizing: border-box;
+// }
+
+// /* ---------- Product grid defensive styles ----------
+//    These stabilize the product cards and prevent column collapse on re-render */
+// .products-grid {
+//   display: grid;
+//   gap: 2rem;
+//   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* stable min card width */
+//   align-items: start;
+//   width: 100%;
+//   box-sizing: border-box;
+// }
+
+// .product-card {
+//   min-height: 260px; /* baseline card height to prevent collapse during reflow */
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   box-sizing: border-box;
+// }
+
+// /* Footer utilities unchanged */
+// .__Footer {
+//   &__item--list {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 10px;
+//   }
+
+//   &--item {
+//     font-size: 1.3rem;
+//   }
+
+//   &--item:hover {
+//     color: var(--pinkish);
+//     transition: ease-in all 0.2s;
+//     cursor: pointer;
+//   }
+// }

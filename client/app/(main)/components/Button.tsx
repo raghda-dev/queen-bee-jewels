@@ -1,0 +1,108 @@
+// client/app/(main)/components/Button.tsx
+
+'use client';
+
+import React, { ReactNode } from 'react';
+import { cn } from '../utils/helpers';
+import styles from '../../styles/sass/modules/button.module.scss';
+
+type ButtonProps = {
+  variant?: 'primary' | 'secondary' | 'textButton' | 'gradient';
+  shape?: 'square' | 'pill' | 'rounded' | 'rectangle';
+  size?: 'small' | 'medium' | 'large';
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  children?: ReactNode;
+  onClick?: () => void;
+  className?: string;
+  disabled?: boolean;
+  isLoading?: boolean;
+  color?: string;
+  animation?:
+    | 'pulse'
+    | 'slide-in-bottom'
+    | 'shadow-expand'
+    | 'silver-glow'
+    | 'text-underline'
+    | 'bounce'
+    | 'flip'
+    | 'wave'
+    | 'none'
+    | 'silver-flash';
+  underlineDirection?: 'from-left' | 'from-right';
+  hoverTextColor?: string;
+  hoverBgColor?: string;
+  type?: 'button' | 'submit' | 'reset';
+};
+
+const Button: React.FC<ButtonProps> = ({
+  type = 'button',
+  variant = 'primary',
+  shape = 'square',
+  size = 'large',
+  leftIcon,
+  rightIcon,
+  children,
+  onClick,
+  className,
+  disabled = false,
+  isLoading = false,
+  color,
+  animation,
+  underlineDirection,
+  hoverTextColor,
+  hoverBgColor,
+}) => {
+  // Set CSS variables dynamically
+  const dynamicStyles: React.CSSProperties = {
+    backgroundColor: variant === 'primary' ? color || undefined : 'transparent',
+    color: variant === 'primary' ? 'white' : color,
+    borderColor: variant === 'secondary' ? color : undefined,
+    '--gradient-color': color, // Pass color to CSS
+    '--hover-text-color': hoverTextColor || 'inherit', // Pass hoverTextColor to CSS as a variable
+    '--hover-bg-color': hoverBgColor || 'transparent', // Pass hoverBgColor to CSS as a variable
+  } as React.CSSProperties;
+
+  // Icon styles (for secondary and textButton)
+  const iconStyles: React.CSSProperties = {
+    color:
+      variant === 'secondary' || variant === 'textButton' ? color : undefined,
+  };
+
+  return (
+    <button
+      type={type}
+      className={cn(
+        styles.button,
+        styles[variant],
+        styles[shape],
+        styles[size],
+        animation && styles[animation],
+        underlineDirection && styles[underlineDirection], 
+        hoverTextColor && styles[hoverTextColor],
+        hoverBgColor && styles[hoverBgColor],
+        {
+          'cursor-not-allowed opacity-50': disabled || isLoading,
+        },
+        className
+      )}
+      onClick={!disabled && !isLoading ? onClick : undefined}
+      disabled={disabled || isLoading}
+      style={dynamicStyles}
+    >
+      {leftIcon && (
+        <span className="mr-2" style={iconStyles}>
+          {leftIcon}
+        </span>
+      )}
+      {isLoading ? <span>...Loading</span> : children}
+      {rightIcon && (
+        <span className="icon-wrapper ml-2" style={iconStyles}>
+          {rightIcon}
+        </span>
+      )}
+    </button>
+  );
+};
+
+export default Button;
