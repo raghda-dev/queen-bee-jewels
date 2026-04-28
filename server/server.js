@@ -24,7 +24,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://queen-bee-jewels.onrender.com'],
   credentials: true,
 }));
 
