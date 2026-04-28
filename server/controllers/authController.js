@@ -12,7 +12,7 @@ const generateToken = (id) => {
 const cookieOptions = {
   httpOnly: true,
   secure: true, // always true in production with HTTPS
-  sameSite: 'strict',
+  sameSite: 'none', // ✅ required for cross-origin
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
 
